@@ -13,6 +13,7 @@ in
   imports = [
     ./modules/gui
     ./modules/git
+    ./modules/hyprland
   ];
 
   home = {

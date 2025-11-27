@@ -4,6 +4,9 @@
   config = {
     vim.utility.oil-nvim = {
       enable = true;
+      setupOpts = {
+        use_default_keymaps = false;
+      };
     };
     vim.keymaps = [
       {
