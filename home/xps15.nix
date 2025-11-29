@@ -9,7 +9,7 @@ let
   };
 
 in
-{
+  {
   imports = [
     ./modules/gui
     ./modules/git
@@ -23,20 +23,25 @@ in
     packages = [customNeovim.neovim];
   };
 
-  programs.fish = {
-    enable = true;
-    loginShellInit = ''
-      if uwsm check may-start
-        exec uwsm start hyprland-uwsm.desktop 
-      end
-    '';
+  programs = {
+    fish = {
+      enable = true;
+      loginShellInit = ''
+        if uwsm check may-start
+          exec uwsm start hyprland-uwsm.desktop 
+        end
+      '';
+    };
+
+    git = {
+      enable = true;
+      settings = {
+        user.name = "kbnopro";
+        user.email = "tuankhanhb00@gmail.com";
+      };
+    };
+
+    edge.enable = true;
   };
 
-  programs.git = {
-    enable = true;
-    settings = {
-      user.name = "kbnopro";
-      user.email = "tuankhanhb00@gmail.com";
-    };
-  };
 }

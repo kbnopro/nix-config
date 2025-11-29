@@ -27,8 +27,6 @@
 
   services.getty.autologinUser = "khanhbui";
 
-  programs.fish.enable = true;
-  
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -94,6 +92,8 @@
     shell = pkgs.fish;
   };
 
+  programs.fish.enable = true;
+
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.
@@ -109,6 +109,7 @@
     nodejs
     gcc
     gh
+    libsecret
   ];
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
