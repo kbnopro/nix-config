@@ -4,14 +4,14 @@ let
   customNeovim = inputs.nvf.lib.neovimConfiguration {
     inherit pkgs;
     modules = [
-      ./modules/nvf/xps15.nix
+      ../nvf/xps15.nix
     ];
   };
 
 in
   {
   imports = [
-    ./modules/gui
+    ./modules/programs
     ./modules/git
     ./modules/hyprland
   ];
@@ -42,6 +42,10 @@ in
     };
 
     edge.enable = true;
+  };
+
+  wayland.windowManager.hyprland = {
+    enable = true;
   };
 
 }

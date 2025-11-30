@@ -8,7 +8,6 @@ let
   cfg = config.programs.edge;
 
   edgeFlags = [
-    # until i setup gnome
     "--password-store=gnome-libsecret"
     "--ozone-platform=wayland"
     "--gtk-version=4"
