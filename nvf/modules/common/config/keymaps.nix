@@ -1,6 +1,7 @@
-{ ... }:
+{ mylib, ... }:
+
 {
-  config.vim.keymaps = builtins.concatLists [
+  config.vim.keymaps = mylib.flatten [
     # Better up down
     (map(
       key: {

@@ -1,5 +1,17 @@
 { lib, ... }:
-{
+let
+  flatten = list:
+    builtins.concatMap
+    (x:
+      if builtins.isList x then
+        flatten x
+      else
+        [ x ]
+    )
+    list;
+in {
+  inherit flatten;
+
 	scanPaths = path:
 		builtins.map
 		(f: (path + "/${f}"))
