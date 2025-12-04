@@ -10,11 +10,7 @@ let
 
 in
   {
-  imports = [
-    ./modules/programs
-    ./modules/git
-    ./modules/hyprland
-  ];
+  imports = [ ./modules ];
 
   home = {
     username = "khanhbui";
@@ -42,6 +38,10 @@ in
     };
 
     edge.enable = true;
+
+    discord.enable = true;
+
+    fuzzel.enable = true;
   };
 
   wayland.windowManager.hyprland = {

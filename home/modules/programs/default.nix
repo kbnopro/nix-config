@@ -1,11 +1,7 @@
 {
-  pkgs, ...
+  mylib, ...
 }:
 
 {
-  imports = [
-    ./microsoft-edge.nix
-  ];
-
-  home.packages = [ pkgs.discord ];
+  imports = mylib.scanPaths ./.;
 }
