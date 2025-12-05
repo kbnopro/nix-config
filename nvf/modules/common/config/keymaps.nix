@@ -1,9 +1,27 @@
-{ mylib, ... }:
-
-{
+{mylib, ...}: let
+  vimKeys = [
+    {
+      key = "h";
+      direction = "Left";
+    }
+    {
+      key = "j";
+      direction = "Down";
+    }
+    {
+      key = "k";
+      direction = "Up";
+    }
+    {
+      key = "l";
+      direction = "Right";
+    }
+  ];
+in {
+  # This looks so bad but can be worse (I mean long) if I don't use map
   config.vim.keymaps = mylib.flatten [
-    # Better up down
-    (map(
+    # Better up down (I don't use Up Down but bruh why not)
+    (map (
       key: {
         inherit key;
         mode = ["n" "x"];
@@ -14,7 +32,7 @@
       }
     ) ["j" "<Down>"])
 
-    (map(
+    (map (
       key: {
         inherit key;
         mode = ["n" "x"];
@@ -25,33 +43,47 @@
       }
     ) ["k" "<Up>"])
 
-    # Move to window 
-    (map (
-      {key, posName}: {
+    # Move to window
+    (
+      map
+      ({
+        key,
+        direction,
+      }: {
         key = "<C-${key}>";
         mode = ["n"];
         action = "<C-w>${key}";
-        desc = "Go to ${posName} Window";
-      }
-    ) [
-        {
-          key = "h";
-          posName = "Left";
-        }
-        {
-          key = "j";
-          posName = "Down";
-        }
-        {
-          key = "k";
-          posName = "Up";
-        }
-        {
-          key = "l";
-          posName = "Right";
-        }
-      ]
+        desc = "Go to ${direction} Window";
+      })
+      vimKeys
     )
-  ];
 
+    # Resize window (idk I have never used this). Can be useful now that I know it
+    # I don't use arrow anyway? so yeah???
+    # TODO: https://github.com/0xm4n/resize.nvim/blob/main/lua/resize.lua the logic here looks good, but it's too short for a plugin so maybe just rewrite it
+    {
+      mode = "n";
+      key = "<C-Up>";
+      action = "<cmd>resize +2<cr>";
+      desc = "Increase Window Height";
+    }
+    {
+      mode = "n";
+      key = "<C-Down>";
+      action = "<cmd>resize -2<cr>";
+      desc = "Decrease Window Height";
+    }
+    {
+      mode = "n";
+      key = "<C-Left>";
+      action = "<cmd>vertical resize -2<cr>";
+      desc = "Decrease Window Height";
+    }
+    {
+      mode = "n";
+      key = "<C-Right>";
+      action = "<cmd>vertical resize +2<cr>";
+      desc = "Decrease Window Height";
+    }
+  ];
 }
