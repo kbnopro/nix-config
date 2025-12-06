@@ -2,7 +2,6 @@
   ...
 }: {
   config.vim.languages.nix = {
-    enable = true;
     format = {
       enable = true;
     };

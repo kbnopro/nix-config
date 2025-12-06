@@ -3,7 +3,11 @@
 }: {
   imports = [
     ./modules/common
-
-    ./modules/lang/nix.nix
+    ./modules/lang
   ];
+
+
+  config.vim.languages = {
+    nix.enable = true;
+  };
 }
