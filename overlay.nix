@@ -1,4 +1,4 @@
-{ nixpkgs, ... }@inputs:
+{ nixpkgs, ... }:
 
 let
   overlay-versioning = final: prev: {

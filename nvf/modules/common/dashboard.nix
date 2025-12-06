@@ -43,7 +43,7 @@ let
       val = txt;
       on_press = mkLuaInline ''
         function () 
-          local key = vim.api.nvim_replace_termcodes("${keybind}" or "${sc_}" .. "<Ignore>", true, false, true)
+          local key = vim.api.nvim_replace_termcodes(${keybind} or ${sc_} .. "<Ignore>", true, false, true)
           vim.api.nvim_feedkeys(key, "t", false)
         end
       '';
@@ -53,12 +53,17 @@ let
   buttons = {
     type = "group";
     opts.spacing = 1;
-    val = [
-      (button {
+    val = map button [
+      {
+        sc = "s";
+        txt = "  Restore Session";
+        keybind = ''[[<cmd> lua require("persistence").load() <cr>]]'';
+      }
+      {
         sc = "q";
-        txt = "   Quit";
-        keybind = "<cmd> qa <cr>";
-      })
+        txt = "  Quit";
+        keybind = ''"<cmd> qa <cr>"'';
+      }
     ];
   };
 in
