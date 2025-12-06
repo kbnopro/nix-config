@@ -1,4 +1,5 @@
-{ mylib, ...}: let
+{ mylib, ... }:
+let
   vimKeys = [
     {
       key = "h";
@@ -17,46 +18,60 @@
       direction = "Right";
     }
   ];
-in {
+in
+{
   # This looks so bad but can be worse (I mean long) if I don't use map
   config.vim.keymaps = mylib.flatten [
     # Better up down (I don't use Up Down but bruh why not)
-    (map (
-      key: {
+    (map
+      (key: {
         inherit key;
-        mode = ["n" "x"];
+        mode = [
+          "n"
+          "x"
+        ];
         action = "v:count == 0 ? 'gj' : 'j'";
         expr = true;
         desc = "Down";
         silent = true;
-      }
-    ) ["j" "<Down>"])
+      })
+      [
+        "j"
+        "<Down>"
+      ]
+    )
 
-    (map (
-      key: {
+    (map
+      (key: {
         inherit key;
-        mode = ["n" "x"];
+        mode = [
+          "n"
+          "x"
+        ];
         action = "v:count == 0 ? 'gk' : 'k'";
         expr = true;
         desc = "Up";
         silent = true;
-      }
-    ) ["k" "<Up>"])
+      })
+      [
+        "k"
+        "<Up>"
+      ]
+    )
 
     # Move to window
-    (
-      map
-      ({
+    (map (
+      {
         key,
         direction,
-      }: {
+      }:
+      {
         key = "<C-${key}>";
-        mode = ["n"];
+        mode = [ "n" ];
         action = "<C-w>${key}";
         desc = "Go to ${direction} Window";
-      })
-      vimKeys
-    )
+      }
+    ) vimKeys)
 
     # Resize window (idk I have never used this). Can be useful now that I know it
     # I don't use arrow anyway? so yeah???

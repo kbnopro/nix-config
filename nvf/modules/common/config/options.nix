@@ -20,7 +20,7 @@
     termguicolors = true; # true color
 
     timeoutlen = 1000; # wait to finish sequence
-    ttimeoutlen = 1000; # wait to finish sequence
+    ttimeoutlen = 0;
 
     wrap = true;
     linebreak = true;
