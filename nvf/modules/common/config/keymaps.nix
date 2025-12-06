@@ -1,4 +1,4 @@
-{mylib, ...}: let
+{ mylib, ...}: let
   vimKeys = [
     {
       key = "h";
@@ -61,6 +61,7 @@ in {
     # Resize window (idk I have never used this). Can be useful now that I know it
     # I don't use arrow anyway? so yeah???
     # TODO: https://github.com/0xm4n/resize.nvim/blob/main/lua/resize.lua the logic here looks good, but it's too short for a plugin so maybe just rewrite it
+    # Or maybe this one for integration with Zellij? https://github.com/mrjones2014/smart-splits.nvim
     {
       mode = "n";
       key = "<C-Up>";

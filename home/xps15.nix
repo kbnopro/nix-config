@@ -1,16 +1,15 @@
 { pkgs, inputs, mylib, ...}:
 let 
+
   # nvf stuffs
   customNeovim = inputs.nvf.lib.neovimConfiguration {
     inherit pkgs;
     modules = [
       ../nvf/xps15.nix
-      {
-        _module.args = {
-          inherit mylib;
-        };
-      }
     ];
+    extraSpecialArgs = {
+      inherit mylib;
+    };
   };
 
 in

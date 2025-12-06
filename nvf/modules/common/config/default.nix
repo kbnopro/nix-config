@@ -1,7 +1,4 @@
-{ ... }:
+{ mylib, ... }:
 {
-  imports = [
-    ./options.nix
-    ./keymaps.nix
-  ];
+  imports = mylib.scanPaths ./.;
 }
