@@ -1,4 +1,4 @@
-{ mylib, ... }:
+{ lib, ... }:
 let
   vimKeys = [
     {
@@ -21,7 +21,7 @@ let
 in
 {
   # This looks so bad but can be worse (I mean long) if I don't use map
-  config.vim.keymaps = mylib.flatten [
+  config.vim.keymaps = lib.flatten [
     # Better up down (I don't use Up Down but bruh why not)
     (map
       (key: {
