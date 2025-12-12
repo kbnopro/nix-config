@@ -36,6 +36,8 @@ let
           keybind
           keybind_opts
         ];
+        hl = "AplhaButton";
+        hl_shortcut = "AlphaShortcut";
       };
     in
     {
@@ -52,8 +54,23 @@ let
 
   buttons = {
     type = "group";
-    opts.spacing = 1;
+    opts.spacing = 2;
     val = map button [
+      {
+        sc = "n";
+        txt = "  New file";
+        keybind = "<cmd> ene <BAR> startinsert <cr>";
+      }
+      {
+        sc = "f";
+        txt = "  Find file";
+        keybind = "<cmd> lua Snacks.picker.files() <cr>";
+      }
+      {
+        sc = "g";
+        txt = "  Find text";
+        keybind = "<cmd> lua Snacks.picker.grep() <cr>";
+      }
       {
         sc = "s";
         txt = "  Restore Session";
