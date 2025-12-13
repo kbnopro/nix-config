@@ -1,5 +1,10 @@
-{ pkgs, inputs, mylib, ...}:
-let 
+{
+  pkgs,
+  inputs,
+  mylib,
+  ...
+}:
+let
 
   # nvf stuffs
   customNeovim = inputs.nvf.lib.neovimConfiguration {
@@ -13,14 +18,14 @@ let
   };
 
 in
-  {
+{
   imports = [ ./modules ];
 
   home = {
     username = "khanhbui";
     homeDirectory = "/home/khanhbui";
     stateVersion = "25.05";
-    packages = [customNeovim.neovim];
+    packages = [ customNeovim.neovim ];
   };
 
   programs = {
@@ -50,6 +55,10 @@ in
 
   wayland.windowManager.hyprland = {
     enable = true;
+  };
+
+  services = {
+    swww.enable = true;
   };
 
 }
