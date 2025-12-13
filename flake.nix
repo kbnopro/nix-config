@@ -15,10 +15,11 @@
 
     let
       inherit (nixpkgs) lib;
+      mylib = import ./lib { inherit lib; };
 
       specialArgs = {
         inherit inputs;
-        mylib = import ./lib { inherit lib; };
+        inherit mylib;
       };
 
       overlays = import ./overlay.nix inputs;

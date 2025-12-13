@@ -1,6 +1,8 @@
 { lib, ... }:
 let
-  header = [
+  inherit (lib.generators) mkLuaInline;
+
+  headerText = [
     "██╗  ██╗██████╗     ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗"
     "██║ ██╔╝██╔══██╗    ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║"
     "█████╔╝ ██████╔╝    ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║"
@@ -8,7 +10,6 @@ let
     "██║  ██╗██████╔╝    ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║"
     "╚═╝  ╚═╝╚═════╝     ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝"
   ];
-  inherit (lib.generators) mkLuaInline;
 
   button =
     {
@@ -52,9 +53,17 @@ let
       opts = opts;
     };
 
+  spacing = val: {
+    type = "padding";
+    inherit val;
+  };
+
   buttons = {
     type = "group";
-    opts.spacing = 2;
+    opts = {
+      hl = "AlphaButtons";
+      spacing = 2;
+    };
     val = map button [
       {
         sc = "n";
@@ -83,6 +92,24 @@ let
       }
     ];
   };
+
+  header = {
+    type = "text";
+    val = headerText;
+    opts = {
+      position = "center";
+      hl = "AlphaHeader";
+    };
+  };
+
+  footer = {
+    type = "text";
+    val = "To config, or not to config";
+    opts = {
+      position = "center";
+    };
+    hl = "AlphaFooter";
+  };
 in
 {
   config = {
@@ -90,25 +117,12 @@ in
       enable = true;
       theme = null;
       layout = [
-        {
-          type = "padding";
-          val = 8;
-        }
-
-        {
-          type = "text";
-          val = header;
-          opts = {
-            position = "center";
-          };
-        }
-
-        {
-          type = "padding";
-          val = 3;
-        }
-
+        (spacing 8)
+        header
+        (spacing 3)
         buttons
+        (spacing 5)
+        footer
       ];
     };
   };
