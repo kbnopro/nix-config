@@ -10,7 +10,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SUPER, T, exec, kitty" # Temporary terminal
+      "SUPER, T, exec, foot" # Temporary terminal
 
     ];
 

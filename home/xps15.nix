@@ -25,7 +25,11 @@ in
     username = "khanhbui";
     homeDirectory = "/home/khanhbui";
     stateVersion = "25.05";
-    packages = [ customNeovim.neovim ];
+    packages = [
+      customNeovim.neovim
+      pkgs.nerd-fonts.space-mono
+
+    ];
   };
 
   programs = {
@@ -44,6 +48,22 @@ in
         user.name = "kbnopro";
         user.email = "tuankhanhb00@gmail.com";
       };
+    };
+
+    foot = {
+      enable = true;
+      settings = {
+        main = {
+          term = "xterm-256color";
+          font = "SpaceMono Nerd Font:size=7";
+          dpi-aware = "yes";
+        };
+
+        colors = {
+          alpha = 0.90;
+        };
+      };
+
     };
 
     edge.enable = true;

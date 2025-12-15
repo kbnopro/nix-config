@@ -2,13 +2,18 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -20,7 +25,7 @@
   networking.hostName = "kb-xps15"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Ho_Chi_Minh";
@@ -34,7 +39,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-
   services.keyd = {
 
     enable = true;
@@ -42,7 +46,7 @@
     keyboards = {
 
       default = {
-        ids = ["*"];
+        ids = [ "*" ];
         settings = {
           main = {
             capslock = "overload(control,esc)";
@@ -52,9 +56,6 @@
 
     };
   };
-
-
-
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -83,7 +84,7 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.khanhbui= {
+  users.users.khanhbui = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
@@ -104,7 +105,6 @@
     git
     fish
     uwsm
-    kitty
     fastfetch
     nodejs
     gcc
@@ -112,7 +112,11 @@
     libsecret
   ];
 
-  nix.settings.experimental-features = ["nix-command" "flakes" "pipe-operators"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+    "pipe-operators"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -158,4 +162,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-
