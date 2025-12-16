@@ -56,18 +56,18 @@ parser.add_argument(
     help="JSON file containg the terminal scheme for generating term colors",
 )
 parser.add_argument(
-    "--harmony", type=float, default=0.8, help="(0-1) Color hue shift towards accent"
+    "--harmony", type=float, default=0.5, help="(0-1) Color hue shift towards accent"
 )
 parser.add_argument(
     "--harmonize_threshold",
     type=float,
-    default=100,
+    default=15,
     help="(0-180) Max threshold angle to limit color hue shift",
 )
 parser.add_argument(
     "--term_fg_boost",
     type=float,
-    default=0.35,
+    default=0.5,
     help="Make terminal foreground more different from the background",
 )
 parser.add_argument(
