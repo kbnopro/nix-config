@@ -66,6 +66,11 @@ in
 
     };
 
+    starship = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
     edge.enable = true;
 
     discord.enable = true;
