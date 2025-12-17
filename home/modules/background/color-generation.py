@@ -12,11 +12,15 @@ from materialyoucolor.utils.color_utils import (
     argb_from_rgb,
     argb_from_rgba,
 )
+from materialyoucolor.dislike.dislike_analyzer import DislikeAnalyzer
 from materialyoucolor.utils.math_utils import (
     sanitize_degrees_double,
     difference_degrees,
     rotation_direction,
 )
+from materialyoucolor.blend import Blend
+from materialyoucolor.palettes.core_palette import CorePalette
+
 
 parser = argparse.ArgumentParser(description="Color generation script")
 parser.add_argument(
@@ -136,6 +140,32 @@ def boost_chroma_tone(argb: int, chroma: float = 1, tone: float = 1) -> int:
     return Hct.from_hct(hct.hue, hct.chroma * chroma, hct.tone * tone).to_int()
 
 
+def custom_color(custom_color: int, source_color=None, blend=False):
+    value = DislikeAnalyzer.fix_if_disliked(Hct.from_int(custom_color)).to_int()
+    if blend:
+        value = Blend.harmonize(custom_color, source_color)
+    # use content of and a1 to preserve chroma
+    palette = CorePalette.content_of(value)
+    tones = palette.a1
+    return {
+        "color": custom_color,
+        "theme_color": source_color,
+        "blended": blend,
+        "light": {
+            "color": tones.tone(40),
+            "onColor": tones.tone(100),
+            "colorContainer": tones.tone(90),
+            "onColorContainer": tones.tone(10),
+        },
+        "dark": {
+            "color": tones.tone(80),
+            "onColor": tones.tone(20),
+            "colorContainer": tones.tone(30),
+            "onColorContainer": tones.tone(90),
+        },
+    }
+
+
 darkmode = args.mode == "dark"
 transparent = args.transparency == "transparent"
 
@@ -198,17 +228,18 @@ for color in vars(MaterialDynamicColors).keys():
         rgba = color_name.get_hct(scheme).to_rgba()
         material_colors[color] = rgba_to_hex(rgba)
 
-# Extended material
-if darkmode:
-    material_colors["success"] = "#B5CCBA"
-    material_colors["onSuccess"] = "#213528"
-    material_colors["successContainer"] = "#374B3E"
-    material_colors["onSuccessContainer"] = "#D1E9D6"
-else:
-    material_colors["success"] = "#4F6354"
-    material_colors["onSuccess"] = "#FFFFFF"
-    material_colors["successContainer"] = "#D1E8D5"
-    material_colors["onSuccessContainer"] = "#0C1F13"
+# Extended material (these should not be harmonized and should only be used on banners / pop up for consistency)
+# The tone should not matter (we only cares about hue and chroma)
+# We already have error in material_colors so no need for error ones
+extended_colors = [("success", "#213528"), ("warning", "#E6C449"), ("info", "#BDC7DC")]
+for name, _color in extended_colors:
+    cap_name = name.capitalize()
+    color = hex_to_argb(_color)
+    palette = custom_color(color)["dark" if darkmode else "light"]
+    material_colors[f"{name}"] = rgba_to_hex(palette["color"])
+    material_colors[f"on{cap_name}"] = rgba_to_hex(palette["onColor"])
+    material_colors[f"{name}Container"] = rgba_to_hex(palette["colorContainer"])
+    material_colors[f"on{cap_name}Container"] = rgba_to_hex(palette["onColorContainer"])
 
 # Terminal Colors
 if args.termscheme is not None:
