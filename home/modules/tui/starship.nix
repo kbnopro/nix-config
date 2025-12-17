@@ -29,6 +29,7 @@ in
 
     add_newline = false;
 
+    # Note that not all config and use, and only the ones in use works with the color system
     format = ''
       $cmd_duration$directory $git_branch
       $character
