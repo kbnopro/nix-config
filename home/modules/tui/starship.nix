@@ -24,7 +24,7 @@ let
 in
 {
   programs.starship.settings = {
-    palettes.custom = builtins.trace color color;
+    palettes.custom = color;
     palette = "custom";
 
     add_newline = false;
