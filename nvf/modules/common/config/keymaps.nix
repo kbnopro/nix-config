@@ -18,12 +18,9 @@ let
       direction = "Right";
     }
   ];
-in
-{
-  # This looks so bad but can be worse (I mean long) if I don't use map
-  config.vim.keymaps = lib.flatten [
-    # Better up down (I don't use Up Down but bruh why not)
-    (map
+
+  betterUp =
+    map
       (key: {
         inherit key;
         mode = [
@@ -38,10 +35,10 @@ in
       [
         "j"
         "<Down>"
-      ]
-    )
+      ];
 
-    (map
+  betterDown =
+    map
       (key: {
         inherit key;
         mode = [
@@ -56,22 +53,58 @@ in
       [
         "k"
         "<Up>"
-      ]
-    )
+      ];
 
-    # Move to window
-    (map (
-      {
-        key,
-        direction,
-      }:
-      {
-        key = "<C-${key}>";
-        mode = [ "n" ];
-        action = "<C-w>${key}";
-        desc = "Go to ${direction} Window";
-      }
-    ) vimKeys)
+  betterIndent =
+    map
+      (key: {
+        inherit key;
+        mode = "x";
+        action = "${key}gv";
+      })
+      [
+        "<"
+        ">"
+      ];
+
+  moveToWindow = map (
+    {
+      key,
+      direction,
+    }:
+    {
+      key = "<C-${key}>";
+      mode = [ "n" ];
+      action = "<C-w>${key}";
+      desc = "Go to ${direction} Window";
+    }
+  ) vimKeys;
+
+  clearSearch = {
+    mode = [
+      "i"
+      "n"
+      "s"
+    ];
+    key = "<esc>";
+    action = ''
+      function()
+        vim.cmd("noh")
+        return "<esc>"
+      end
+    '';
+    lua = true;
+    expr = true;
+    desc = "Escape and Clear hlsearch";
+  };
+in
+{
+  config.vim.keymaps = lib.flatten [
+    betterUp
+    betterDown
+    betterIndent
+    moveToWindow
+    clearSearch
 
     # Resize window (idk I have never used this). Can be useful now that I know it
     # I don't use arrow anyway? so yeah???
@@ -102,4 +135,5 @@ in
       desc = "Decrease Window Height";
     }
   ];
+
 }
