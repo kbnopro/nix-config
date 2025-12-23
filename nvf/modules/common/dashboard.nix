@@ -121,7 +121,7 @@ in
         header
         (spacing 3)
         buttons
-        (spacing 5)
+        (spacing 3)
         footer
       ];
     };
