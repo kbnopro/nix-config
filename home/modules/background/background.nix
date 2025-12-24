@@ -19,7 +19,7 @@ let
         buildInputs = [ pythonEnv ];
       }
       ''
-        python ${./color-generation.py} --path "${bgPath}" --termscheme "${./terminal/scheme-base.json}" --blend_bg_fg --transparency "opaque" --mode "dark" > $out
+        python ${./color-generation.py} --path "${bgPath}" --termscheme "${./terminal/scheme-base.json}" --blend_bg_fg --transparency "opaque" --mode "dark" --term_fg_boost 0.4 > $out
       '';
 
   content = builtins.trace (builtins.readFile generated) (builtins.readFile generated);
