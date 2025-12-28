@@ -36,8 +36,8 @@ in
     '';
 
     character = {
-      success_symbol = "[• ](bold fg:term2) ";
-      error_symbol = "[• 󰅙](bold fg:term1) ";
+      success_symbol = "[• ](bold fg:green) ";
+      error_symbol = "[• 󰅙](bold fg:red) ";
     };
 
     package = {
