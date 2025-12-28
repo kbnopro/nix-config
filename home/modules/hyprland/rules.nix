@@ -1,0 +1,55 @@
+{
+  ...
+}:
+
+{
+  wayland.windowManager.hyprland.settings = {
+    windowrule = [
+      "noblur,title:.*"
+      "float, title:^(blueberry.py)$"
+      "float, title:^(steam)$"
+      "float, title:^(guifetch)$"
+      "float, class:(dev.warp.Warp)"
+      "float, title:^([Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture)(.*)$"
+      "center, title:^(Open File)(.*)$"
+      "center, title:^(Select a File)(.*)$"
+      "center, title:^(Choose wallpaper)(.*)$"
+      "center, title:^(Open Folder)(.*)$"
+      "center, title:^(Save As)(.*)$"
+      "center, title:^(Library)(.*)$"
+      "center, title:^(File Upload)(.*)$"
+      "keepaspectratio, title:^(Picture(-| )in(-| )[Pp]icture)$"
+      "move 73% 72%,title:^(Picture(-| )in(-| )[Pp]icture)$"
+      "size 25%, title:^(Picture(-| )in(-| )[Pp]icture)$"
+      "float, title:^(Picture(-| )in(-| )[Pp]icture)$"
+      "pin, title:^(Picture(-| )in(-| )[Pp]icture)$"
+      "float,title:^(Open File)(.*)$"
+      "float,title:^(Select a File)(.*)$"
+      "float,title:^(Choose wallpaper)(.*)$"
+      "float,title:^(Open Folder)(.*)$"
+      "float,title:^(Save As)(.*)$"
+      "float,title:^(Library)(.*)$"
+      "float,title:^(File Upload)(.*)$"
+      "rounding 10, title:^(TPM-FIDO)(.*)$"
+      "immediate,class:(steam_app)"
+      "noshadow,floating:0"
+      # "xray 1, .*"
+      # "noanim, walker"
+      # "noanim, selection"
+      # "noanim, overview"
+      # "noanim, anyrun"
+      # "noanim, indicator.*"
+      # "noanim, osk"
+      # "noanim, hyprpicker"
+      # "blur, shell:*"
+      # "ignorealpha 0.6, shell:*"
+      # "noanim, noanim"
+      # "blur, gtk-layer-shell"
+      # "ignorezero, gtk-layer-shell"
+      # "blur, launcher"
+      # "ignorealpha 0.5, launcher"
+      # "blur, notifications"
+      # "ignorealpha 0.69, notifications"
+    ];
+  };
+}

@@ -11,7 +11,7 @@
       local util = require("tokyonight.util")
       require("tokyonight").setup({
         on_colors = function(colors)
-          colors.bg = "${color.surface}";
+          colors.bg = "${color.surfaceContainerLow}";
           colors.bg_float = "${color.surfaceContainer}";
           colors.bg_dark = "${color.surfaceContainer}";
           colors.bg_dark1 = "${color.surfaceContainerLowest}";

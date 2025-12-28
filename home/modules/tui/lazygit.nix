@@ -15,6 +15,9 @@ in
           "${color.primary}"
           "bold"
         ];
+        inactiveBorderColor = [
+          "${color.onSurface}"
+        ];
         selectedLineBgColor = [
           "${color.secondaryContainer}"
         ];

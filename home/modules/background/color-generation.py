@@ -254,11 +254,11 @@ if args.termscheme is not None:
             continue
         if args.blend_bg_fg and color == "term0":
             harmonized = boost_chroma_tone(
-                hex_to_argb(material_colors["surfaceContainerLow"]), 1.2, 0.95
+                hex_to_argb(material_colors["surface"]), 1, 1
             )
         elif args.blend_bg_fg and color == "term15":
             harmonized = boost_chroma_tone(
-                hex_to_argb(material_colors["onSurface"]), 3, 1
+                hex_to_argb(material_colors["onSurface"]), 1, 1
             )
         else:
             harmonized = harmonize(

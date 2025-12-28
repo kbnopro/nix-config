@@ -35,7 +35,7 @@ let
     text = ''
       for file in /dev/pts/*; do
         if [[ $file =~ ^/dev/pts/[0-9]+$ ]]; then
-          printf '%s' '${controlSeq}' > "$file" || true
+          printf '${controlSeq}' > "$file" || true
         fi
       done
 

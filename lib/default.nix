@@ -16,4 +16,11 @@
         ) (builtins.readDir path)
       )
     );
+
+  trimHash =
+    string:
+    if builtins.substring 0 1 string == "#" then
+      builtins.substring 1 (builtins.stringLength string) string
+    else
+      string;
 }

@@ -18,8 +18,7 @@
       mylib = import ./lib { inherit lib; };
 
       specialArgs = {
-        inherit inputs;
-        inherit mylib;
+        inherit inputs mylib;
       };
 
       overlays = import ./overlay.nix inputs;

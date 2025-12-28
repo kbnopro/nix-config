@@ -10,8 +10,7 @@
 {
   wayland.windowManager.hyprland.settings = {
     bind = [
-      "SUPER, T, exec, foot" # Temporary terminal
-
+      "SUPER, Q, killactive"
     ];
 
     bindle = [
