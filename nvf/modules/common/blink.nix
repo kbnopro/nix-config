@@ -20,7 +20,6 @@ in
           default = [
             "lsp"
             "path"
-            "snippets"
             "buffer"
           ];
         };
