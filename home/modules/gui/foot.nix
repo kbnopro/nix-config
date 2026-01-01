@@ -22,8 +22,8 @@ in
       settings = {
         main = {
           term = "xterm-256color";
-          font = "SpaceMono Nerd Font:size=7";
-          dpi-aware = "yes";
+          font = "SpaceMono Nerd Font:size=10";
+          dpi-aware = "no";
           pad = "25x25 center";
         };
 

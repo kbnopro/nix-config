@@ -65,6 +65,7 @@
       new_window_takes_over_fullscreen = 2;
       allow_session_lock_restore = true;
       initial_workspace_tracking = false;
+      focus_on_activate = true;
     };
 
     dwindle = {
