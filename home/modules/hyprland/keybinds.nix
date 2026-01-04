@@ -77,6 +77,8 @@
       "Super+Alt, 8, movetoworkspacesilent, 8" # [hidden]
       "Super+Alt, 9, movetoworkspacesilent, 9" # [hidden]
       "Super+Alt, 0, movetoworkspacesilent, 10" # [hidden]
+      "Super+Shift, S, exec, sleep 0.2 && grimblast copy area"
+
     ];
 
     bindle = [

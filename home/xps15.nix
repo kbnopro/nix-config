@@ -27,10 +27,10 @@ in
     username = "khanhbui";
     homeDirectory = "/home/khanhbui";
     stateVersion = "25.05";
-    packages = [
+    packages = with pkgs; [
       customNeovim.neovim
-      pkgs.nerd-fonts.space-mono
-
+      nerd-fonts.space-mono
+      gnome-control-center
     ];
   };
 

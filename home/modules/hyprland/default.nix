@@ -1,12 +1,17 @@
 {
-  mylib, config, lib, pkgs,  ... 
+  mylib,
+  config,
+  lib,
+  pkgs,
+  ...
 }:
 
 with lib;
 
 let
   cfg = config.wayland.windowManager.hyprland;
-in {
+in
+{
   imports = mylib.scanPaths ./.;
 
   config = mkIf cfg.enable {
@@ -16,7 +21,7 @@ in {
     };
     home.packages = with pkgs; [
       brightnessctl
+      grimblast
     ];
   };
 }
-
