@@ -35,6 +35,7 @@ in
   };
 
   programs = {
+    # Temporary programs (ideally, all configs should be moved to designated folder)
     fish = {
       enable = true;
       loginShellInit = ''
@@ -52,20 +53,22 @@ in
       };
     };
 
-    foot = {
-      enable = true;
-    };
+    # GUI programs
+    foot.enable = true;
+    fuzzel.enable = true;
 
+    # Apps programs
+    edge.enable = true;
+    discord.enable = true;
+    zathura.enable = true;
+
+    # TUI programs
     starship = {
       enable = true;
       enableFishIntegration = true;
     };
 
-    edge.enable = true;
-
-    discord.enable = true;
-
-    fuzzel.enable = true;
+    lazygit.enable = true;
   };
 
   wayland.windowManager.hyprland = {

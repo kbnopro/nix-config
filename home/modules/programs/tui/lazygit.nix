@@ -8,7 +8,6 @@ let
 in
 {
   programs.lazygit = {
-    enable = true;
     settings = {
       gui.theme = {
         activeBorderColor = [
