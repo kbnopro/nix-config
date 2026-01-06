@@ -27,6 +27,11 @@ in
           pad = "25x25 center";
         };
 
+        key-bindings = {
+          clipboard-copy = "Control+c";
+          clipboard-paste = "Control+v";
+        };
+
         colors = {
           background = trimHash color.surface;
           foreground = trimHash color.onSurface;

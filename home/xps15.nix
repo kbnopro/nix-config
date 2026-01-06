@@ -69,6 +69,12 @@ in
     };
 
     lazygit.enable = true;
+
+    # Shell programs
+    zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
   };
 
   wayland.windowManager.hyprland = {
