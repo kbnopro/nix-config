@@ -87,7 +87,10 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.khanhbui = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel" # Enable ‘sudo’ for the user.
+      "networkmanager" # Allow managing network
+    ];
     packages = with pkgs; [
       tree
     ];
