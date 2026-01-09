@@ -54,7 +54,8 @@ in
     };
 
     # GUI programs
-    foot.enable = true;
+    # foot.enable = true;
+    ghostty.enable = true;
     fuzzel.enable = true;
 
     # Apps programs
@@ -72,6 +73,11 @@ in
 
     # Shell programs
     zoxide = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    zellij = {
       enable = true;
       enableFishIntegration = true;
     };
