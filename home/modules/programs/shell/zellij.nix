@@ -1,7 +1,24 @@
 {
+  pkgs,
   ...
 }:
 let
+  wasm = pkgs.stdenv.mkDerivation rec {
+    pname = "vim-zellij-navigator-wasm";
+    version = "0.3.0";
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/hiasr/vim-zellij-navigator/releases/download/${version}/vim-zellij-navigator.wasm";
+      hash = "sha256-wpIxPkmVpoAgOsdQKYuipSlDAbsD3/n6tTuOEriJHn0";
+    };
+
+    dontUnpack = true;
+
+    installPhase = ''
+      cp -v "$src" "$out"
+    '';
+  };
+
   paneBinds = [
     {
       bind = {
@@ -185,27 +202,6 @@ let
   ];
 
   sharedBinds = [
-    # shared_among "normal" "locked" {
-    #     bind "Alt left" { MoveFocusOrTab "left"; }
-    #     bind "Alt down" { MoveFocus "down"; }
-    #     bind "Alt up" { MoveFocus "up"; }
-    #     bind "Alt right" { MoveFocusOrTab "right"; }
-    #     bind "Alt +" { Resize "Increase"; }
-    #     bind "Alt -" { Resize "Decrease"; }
-    #     bind "Alt =" { Resize "Increase"; }
-    #     bind "Alt [" { PreviousSwapLayout; }
-    #     bind "Alt ]" { NextSwapLayout; }
-    #     bind "Alt f" { ToggleFloatingPanes; }
-    #     bind "Alt h" { MoveFocusOrTab "left"; }
-    #     bind "Alt i" { MoveTab "left"; }
-    #     bind "Alt j" { MoveFocus "down"; }
-    #     bind "Alt k" { MoveFocus "up"; }
-    #     bind "Alt l" { MoveFocusOrTab "right"; }
-    #     bind "Alt n" { NewPane; }
-    #     bind "Alt o" { MoveTab "right"; }
-    #     bind "Alt p" { TogglePaneInGroup; }
-    #     bind "Alt Shift p" { ToggleGroupMarking; }
-    # }
     {
       shared_among = {
         _args = [
@@ -213,6 +209,86 @@ let
           "locked"
         ];
         _children = [
+          {
+            bind = {
+              _args = [ "Ctrl h" ];
+              _children = [
+                {
+                  MessagePlugin = {
+                    _args = [
+                      "file:${wasm}"
+                    ];
+                    _children = [
+                      {
+                        name = [ "move_focus" ];
+                        payload = [ "left" ];
+                      }
+                    ];
+                  };
+                }
+              ];
+            };
+          }
+          {
+            bind = {
+              _args = [ "Ctrl j" ];
+              _children = [
+                {
+                  MessagePlugin = {
+                    _args = [
+                      "file:${wasm}"
+                    ];
+                    _children = [
+                      {
+                        name = [ "move_focus" ];
+                        payload = [ "down" ];
+                      }
+                    ];
+                  };
+                }
+              ];
+            };
+          }
+          {
+            bind = {
+              _args = [ "Ctrl k" ];
+              _children = [
+                {
+                  MessagePlugin = {
+                    _args = [
+                      "file:${wasm}"
+                    ];
+                    _children = [
+                      {
+                        name = [ "move_focus" ];
+                        payload = [ "up" ];
+                      }
+                    ];
+                  };
+                }
+              ];
+            };
+          }
+          {
+            bind = {
+              _args = [ "Ctrl l" ];
+              _children = [
+                {
+                  MessagePlugin = {
+                    _args = [
+                      "file:${wasm}"
+                    ];
+                    _children = [
+                      {
+                        name = [ "move_focus" ];
+                        payload = [ "right" ];
+                      }
+                    ];
+                  };
+                }
+              ];
+            };
+          }
           {
             bind = {
               _args = [ "Alt f" ];
@@ -242,6 +318,22 @@ let
               _args = [ "Alt Shift p" ];
               _children = [
                 { ToggleGroupMarking = { }; }
+              ];
+            };
+          }
+          {
+            bind = {
+              _args = [ "Alt [" ];
+              _children = [
+                { PreviousSwapLayout = { }; }
+              ];
+            };
+          }
+          {
+            bind = {
+              _args = [ "Alt ]" ];
+              _children = [
+                { NextSwapLayout = { }; }
               ];
             };
           }

@@ -67,19 +67,6 @@ let
         ">"
       ];
 
-  moveToWindow = map (
-    {
-      key,
-      direction,
-    }:
-    {
-      key = "<C-${key}>";
-      mode = [ "n" ];
-      action = "<C-w>${key}";
-      desc = "Go to ${direction} Window";
-    }
-  ) vimKeys;
-
   clearSearch = {
     mode = [
       "i"
@@ -103,37 +90,7 @@ in
     betterUp
     betterDown
     betterIndent
-    moveToWindow
     clearSearch
-
-    # Resize window (idk I have never used this). Can be useful now that I know it
-    # I don't use arrow anyway? so yeah???
-    # TODO: https://github.com/0xm4n/resize.nvim/blob/main/lua/resize.lua the logic here looks good, but it's too short for a plugin so maybe just rewrite it
-    # Or maybe this one for integration with Zellij? https://github.com/mrjones2014/smart-splits.nvim
-    {
-      mode = "n";
-      key = "<C-Up>";
-      action = "<cmd>resize +2<cr>";
-      desc = "Increase Window Height";
-    }
-    {
-      mode = "n";
-      key = "<C-Down>";
-      action = "<cmd>resize -2<cr>";
-      desc = "Decrease Window Height";
-    }
-    {
-      mode = "n";
-      key = "<C-Left>";
-      action = "<cmd>vertical resize -2<cr>";
-      desc = "Decrease Window Height";
-    }
-    {
-      mode = "n";
-      key = "<C-Right>";
-      action = "<cmd>vertical resize +2<cr>";
-      desc = "Decrease Window Height";
-    }
   ];
 
 }
