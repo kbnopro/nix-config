@@ -27,6 +27,10 @@ in
     username = "khanhbui";
     homeDirectory = "/home/khanhbui";
     stateVersion = "25.05";
+    sessionVariables = {
+      EDITOR = "nvim";
+      VISUAL = "nvim";
+    };
     packages = with pkgs; [
       customNeovim.neovim
       nerd-fonts.space-mono

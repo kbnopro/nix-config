@@ -19,531 +19,511 @@ let
     '';
   };
 
+  mkNode = args: children: {
+    _args = args;
+    _children = children;
+  };
+
+  mkBind = key: children: { bind = mkNode [ key ] children; };
+
+  mkAmong = modes: binds: { shared_among = mkNode modes binds; };
+  mkExcept = modes: binds: { shared_except = mkNode modes binds; };
+
   paneBinds = [
-    {
-      bind = {
-        _args = [ "c" ];
-        _children = [
-          { SwitchToMode._args = [ "renamepane" ]; }
-          { PaneNameInput._args = [ 0 ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "d" ];
-        _children = [
-          { NewPane._args = [ "down" ]; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "e" ];
-        _children = [
-          { TogglePaneEmbedOrFloating = { }; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "f" ];
-        _children = [
-          { ToggleFocusFullscreen = { }; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "h" ];
-        _children = [
-          { MoveFocus._args = [ "left" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "i" ];
-        _children = [
-          { TogglePanePinned = { }; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "j" ];
-        _children = [
-          { MoveFocus._args = [ "down" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "k" ];
-        _children = [
-          { MoveFocus._args = [ "up" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "l" ];
-        _children = [
-          { MoveFocus._args = [ "right" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "n" ];
-        _children = [
-          { NewPane = { }; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "p" ];
-        _children = [
-          { SwitchToMode._args = [ "normal" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "r" ];
-        _children = [
-          { NewPane._args = [ "right" ]; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "s" ];
-        _children = [
-          { NewPane._args = [ "stacked" ]; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "w" ];
-        _children = [
-          { ToggleFloatingPanes = { }; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "x" ];
-        _children = [
-          { CloseFocus = { }; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "z" ];
-        _children = [
-          { TogglePaneFrames = { }; }
-          { SwitchToMode._args = [ "locked" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "tab" ];
-        _children = [
-          { SwitchFocus = { }; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "left" ];
-        _children = [
-          { MoveFocus._args = [ "left" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "down" ];
-        _children = [
-          { MoveFocus._args = [ "down" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "up" ];
-        _children = [
-          { MoveFocus._args = [ "up" ]; }
-        ];
-      };
-    }
-    {
-      bind = {
-        _args = [ "right" ];
-        _children = [
-          { MoveFocus._args = [ "right" ]; }
-        ];
-      };
-    }
+    (mkBind "c" [
+      { SwitchToMode = [ "renamepane" ]; }
+      { PaneNameInput = [ 0 ]; }
+    ])
+
+    (mkBind "d" [
+      { NewPane = [ "down" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "e" [
+      { TogglePaneEmbedOrFloating = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "f" [
+      { ToggleFocusFullscreen = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "h" [
+      { MoveFocus = [ "left" ]; }
+    ])
+
+    (mkBind "i" [
+      { TogglePanePinned = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "j" [
+      { MoveFocus = [ "down" ]; }
+    ])
+
+    (mkBind "k" [
+      { MoveFocus = [ "up" ]; }
+    ])
+
+    (mkBind "l" [
+      { MoveFocus = [ "right" ]; }
+    ])
+
+    (mkBind "n" [
+      { NewPane = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "p" [
+      { SwitchToMode = [ "normal" ]; }
+    ])
+
+    (mkBind "r" [
+      { NewPane = [ "right" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "s" [
+      { NewPane = [ "stacked" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "w" [
+      { ToggleFloatingPanes = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "x" [
+      { CloseFocus = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "z" [
+      { TogglePaneFrames = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "tab" [
+      { SwitchFocus = [ ]; }
+    ])
+
+    (mkBind "left" [
+      { MoveFocus = [ "left" ]; }
+    ])
+
+    (mkBind "down" [
+      { MoveFocus = [ "down" ]; }
+    ])
+
+    (mkBind "up" [
+      { MoveFocus = [ "up" ]; }
+    ])
+
+    (mkBind "right" [
+      { MoveFocus = [ "right" ]; }
+    ])
   ];
 
-  sharedBinds = [
-    {
-      shared_among = {
-        _args = [
-          "normal"
-          "locked"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "Ctrl h" ];
-              _children = [
-                {
-                  MessagePlugin = {
-                    _args = [
-                      "file:${wasm}"
-                    ];
-                    _children = [
-                      {
-                        name = [ "move_focus" ];
-                        payload = [ "left" ];
-                      }
-                    ];
-                  };
-                }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Ctrl j" ];
-              _children = [
-                {
-                  MessagePlugin = {
-                    _args = [
-                      "file:${wasm}"
-                    ];
-                    _children = [
-                      {
-                        name = [ "move_focus" ];
-                        payload = [ "down" ];
-                      }
-                    ];
-                  };
-                }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Ctrl k" ];
-              _children = [
-                {
-                  MessagePlugin = {
-                    _args = [
-                      "file:${wasm}"
-                    ];
-                    _children = [
-                      {
-                        name = [ "move_focus" ];
-                        payload = [ "up" ];
-                      }
-                    ];
-                  };
-                }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Ctrl l" ];
-              _children = [
-                {
-                  MessagePlugin = {
-                    _args = [
-                      "file:${wasm}"
-                    ];
-                    _children = [
-                      {
-                        name = [ "move_focus" ];
-                        payload = [ "right" ];
-                      }
-                    ];
-                  };
-                }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Alt f" ];
-              _children = [
-                { ToggleFloatingPanes = { }; }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Alt n" ];
-              _children = [
-                { NewPane = { }; }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Alt p" ];
-              _children = [
-                { TogglePaneInGroup = { }; }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Alt Shift p" ];
-              _children = [
-                { ToggleGroupMarking = { }; }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Alt [" ];
-              _children = [
-                { PreviousSwapLayout = { }; }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Alt ]" ];
-              _children = [
-                { NextSwapLayout = { }; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_except = {
-        _args = [
-          "locked"
-          "renametab"
-          "renamepane"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "Ctrl g" ];
-              _children = [
-                { SwitchToMode._args = [ "locked" ]; }
-              ];
-            };
-          }
-          {
-            bind = {
-              _args = [ "Ctrl q" ];
-              _children = [
-                { Quit = { }; }
-              ];
-            };
-          }
-        ];
+  tabBinds = [
+    (mkBind "left" [ { GoToPreviousTab = [ ]; } ])
+    (mkBind "down" [ { GoToNextTab = [ ]; } ])
+    (mkBind "up" [ { GoToPreviousTab = [ ]; } ])
+    (mkBind "right" [ { GoToNextTab = [ ]; } ])
 
-      };
-    }
-    {
-      shared_except = {
-        _args = [
-          "locked"
-          "entersearch"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "enter" ];
-              _children = [
-                { SwitchToMode._args = [ "locked" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_except = {
-        _args = [
-          "locked"
-          "entersearch"
-          "renametab"
-          "renamepane"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "esc" ];
-              _children = [
-                { SwitchToMode._args = [ "locked" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_except = {
-        _args = [
-          "locked"
-          "entersearch"
-          "renametab"
-          "renamepane"
-          "move"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "m" ];
-              _children = [
-                { SwitchToMode._args = [ "move" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_except = {
-        _args = [
-          "locked"
-          "entersearch"
-          "search"
-          "renametab"
-          "renamepane"
-          "session"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "o" ];
-              _children = [
-                { SwitchToMode._args = [ "session" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_except = {
-        _args = [
-          "locked"
-          "tab"
-          "entersearch"
-          "renametab"
-          "renamepane"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "t" ];
-              _children = [
-                { SwitchToMode._args = [ "tab" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_among = {
-        _args = [
-          "normal"
-          "resize"
-          "tab"
-          "scroll"
-          "prompt"
-          "tmux"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "p" ];
-              _children = [
-                { SwitchToMode._args = [ "pane" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_among = {
-        _args = [
-          "normal"
-          "resize"
-          "search"
-          "move"
-          "prompt"
-          "tmux"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "s" ];
-              _children = [
-                { SwitchToMode._args = [ "scroll" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
-    {
-      shared_except = {
-        _args = [
-          "locked"
-          "resize"
-          "pane"
-          "tab"
-          "entersearch"
-          "renametab"
-          "renamepane"
-        ];
-        _children = [
-          {
-            bind = {
-              _args = [ "r" ];
-              _children = [
-                { SwitchToMode._args = [ "resize" ]; }
-              ];
-            };
-          }
-        ];
-      };
-    }
+    (mkBind "1" [
+      { GoToTab = [ 1 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "2" [
+      { GoToTab = [ 2 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "3" [
+      { GoToTab = [ 3 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "4" [
+      { GoToTab = [ 4 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "5" [
+      { GoToTab = [ 5 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "6" [
+      { GoToTab = [ 6 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "7" [
+      { GoToTab = [ 7 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "8" [
+      { GoToTab = [ 8 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "9" [
+      { GoToTab = [ 9 ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "[" [
+      { BreakPaneLeft = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "]" [
+      { BreakPaneRight = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "b" [
+      { BreakPane = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "h" [ { GoToPreviousTab = [ ]; } ])
+    (mkBind "j" [ { GoToNextTab = [ ]; } ])
+    (mkBind "k" [ { GoToPreviousTab = [ ]; } ])
+    (mkBind "l" [ { GoToNextTab = [ ]; } ])
+
+    (mkBind "n" [
+      { NewTab = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "r" [
+      { SwitchToMode = [ "renametab" ]; }
+      { TabNameInput = [ 0 ]; }
+    ])
+
+    (mkBind "s" [
+      { ToggleActiveSyncTab = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "t" [ { SwitchToMode = [ "normal" ]; } ])
+    (mkBind "x" [
+      { CloseTab = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "tab" [ { ToggleTab = [ ]; } ])
   ];
+
+  resizeBinds = [
+    (mkBind "left" [ { Resize = [ "Increase left" ]; } ])
+    (mkBind "down" [ { Resize = [ "Increase down" ]; } ])
+    (mkBind "up" [ { Resize = [ "Increase up" ]; } ])
+    (mkBind "right" [ { Resize = [ "Increase right" ]; } ])
+
+    (mkBind "+" [ { Resize = [ "Increase" ]; } ])
+    (mkBind "-" [ { Resize = [ "Decrease" ]; } ])
+    (mkBind "=" [ { Resize = [ "Increase" ]; } ])
+
+    (mkBind "H" [ { Resize = [ "Decrease left" ]; } ])
+    (mkBind "J" [ { Resize = [ "Decrease down" ]; } ])
+    (mkBind "K" [ { Resize = [ "Decrease up" ]; } ])
+    (mkBind "L" [ { Resize = [ "Decrease right" ]; } ])
+
+    (mkBind "h" [ { Resize = [ "Increase left" ]; } ])
+    (mkBind "j" [ { Resize = [ "Increase down" ]; } ])
+    (mkBind "k" [ { Resize = [ "Increase up" ]; } ])
+    (mkBind "l" [ { Resize = [ "Increase right" ]; } ])
+
+    (mkBind "r" [ { SwitchToMode = [ "normal" ]; } ])
+  ];
+
+  moveBinds = [
+    (mkBind "left" [ { MovePane = [ "left" ]; } ])
+    (mkBind "down" [ { MovePane = [ "down" ]; } ])
+    (mkBind "up" [ { MovePane = [ "up" ]; } ])
+    (mkBind "right" [ { MovePane = [ "right" ]; } ])
+
+    (mkBind "h" [ { MovePane = [ "left" ]; } ])
+    (mkBind "j" [ { MovePane = [ "down" ]; } ])
+    (mkBind "k" [ { MovePane = [ "up" ]; } ])
+    (mkBind "l" [ { MovePane = [ "right" ]; } ])
+
+    (mkBind "m" [ { SwitchToMode = [ "normal" ]; } ])
+    (mkBind "n" [ { MovePane = [ ]; } ])
+    (mkBind "p" [ { MovePaneBackwards = [ ]; } ])
+    (mkBind "tab" [ { MovePane = [ ]; } ])
+  ];
+
+  scrollBinds = [
+    (mkBind "Alt left" [
+      { MoveFocusOrTab = [ "left" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "Alt down" [
+      { MoveFocus = [ "down" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "Alt up" [
+      { MoveFocus = [ "up" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "Alt right" [
+      { MoveFocusOrTab = [ "right" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "e" [
+      { EditScrollback = [ ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "f" [
+      { SwitchToMode = [ "entersearch" ]; }
+      { SearchInput = [ 0 ]; }
+    ])
+
+    (mkBind "Alt h" [
+      { MoveFocusOrTab = [ "left" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "Alt j" [
+      { MoveFocus = [ "down" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "Alt k" [
+      { MoveFocus = [ "up" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+    (mkBind "Alt l" [
+      { MoveFocusOrTab = [ "right" ]; }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "s" [ { SwitchToMode = [ "normal" ]; } ])
+  ];
+
+  searchBinds = [
+    (mkBind "c" [ { SearchToggleOption = [ "CaseSensitivity" ]; } ])
+    (mkBind "n" [ { Search = [ "down" ]; } ])
+    (mkBind "o" [ { SearchToggleOption = [ "WholeWord" ]; } ])
+    (mkBind "p" [ { Search = [ "up" ]; } ])
+    (mkBind "w" [ { SearchToggleOption = [ "Wrap" ]; } ])
+  ];
+
+  sessionBinds = [
+    (mkBind "a" [
+      {
+        LaunchOrFocusPlugin =
+          mkNode
+            [ "zellij:about" ]
+            [
+              { floating = [ true ]; }
+              { move_to_focused_tab = [ true ]; }
+            ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "c" [
+      {
+        LaunchOrFocusPlugin =
+          mkNode
+            [ "configuration" ]
+            [
+              { floating = [ true ]; }
+              { move_to_focused_tab = [ true ]; }
+            ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "d" [ { Detach = [ ]; } ])
+    (mkBind "o" [ { SwitchToMode = [ "normal" ]; } ])
+
+    (mkBind "p" [
+      {
+        LaunchOrFocusPlugin =
+          mkNode
+            [ "plugin-manager" ]
+            [
+              { floating = [ true ]; }
+              { move_to_focused_tab = [ true ]; }
+            ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "s" [
+      {
+        LaunchOrFocusPlugin =
+          mkNode
+            [ "zellij:share" ]
+            [
+              { floating = [ true ]; }
+              { move_to_focused_tab = [ true ]; }
+            ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "w" [
+      {
+        LaunchOrFocusPlugin =
+          mkNode
+            [ "session-manager" ]
+            [
+              { floating = [ true ]; }
+              { move_to_focused_tab = [ true ]; }
+            ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+  ];
+
+  sharedAmongBinds = [
+    (mkAmong
+      [ "normal" "locked" ]
+      [
+        (mkBind "Ctrl h" [
+          {
+            MessagePlugin =
+              mkNode
+                [ "file:${wasm}" ]
+                [
+                  {
+                    name = [ "move_focus" ];
+                    payload = [ "left" ];
+                  }
+                ];
+          }
+        ])
+        (mkBind "Ctrl j" [
+          {
+            MessagePlugin =
+              mkNode
+                [ "file:${wasm}" ]
+                [
+                  {
+                    name = [ "move_focus" ];
+                    payload = [ "down" ];
+                  }
+                ];
+          }
+        ])
+        (mkBind "Ctrl k" [
+          {
+            MessagePlugin =
+              mkNode
+                [ "file:${wasm}" ]
+                [
+                  {
+                    name = [ "move_focus" ];
+                    payload = [ "up" ];
+                  }
+                ];
+          }
+        ])
+        (mkBind "Ctrl l" [
+          {
+            MessagePlugin =
+              mkNode
+                [ "file:${wasm}" ]
+                [
+                  {
+                    name = [ "move_focus" ];
+                    payload = [ "right" ];
+                  }
+                ];
+          }
+        ])
+
+        (mkBind "Alt f" [ { ToggleFloatingPanes = [ ]; } ])
+        (mkBind "Alt n" [ { NewPane = [ ]; } ])
+        (mkBind "Alt p" [ { TogglePaneInGroup = [ ]; } ])
+        (mkBind "Alt Shift p" [ { ToggleGroupMarking = [ ]; } ])
+        (mkBind "Alt [" [ { PreviousSwapLayout = [ ]; } ])
+        (mkBind "Alt ]" [ { NextSwapLayout = [ ]; } ])
+      ]
+    )
+
+    (mkAmong
+      [ "normal" "resize" "tab" "scroll" "prompt" "tmux" ]
+      [
+        (mkBind "p" [ { SwitchToMode = [ "pane" ]; } ])
+      ]
+    )
+
+    (mkAmong
+      [ "normal" "resize" "search" "move" "prompt" "tmux" ]
+      [
+        (mkBind "s" [ { SwitchToMode = [ "scroll" ]; } ])
+      ]
+    )
+  ];
+
+  sharedExceptBinds = [
+    (mkExcept
+      [ "locked" "renametab" "renamepane" ]
+      [
+        (mkBind "Ctrl g" [ { SwitchToMode = [ "locked" ]; } ])
+        (mkBind "Ctrl q" [ { Quit = [ ]; } ])
+      ]
+    )
+
+    (mkExcept
+      [ "locked" "entersearch" ]
+      [
+        (mkBind "enter" [ { SwitchToMode = [ "locked" ]; } ])
+      ]
+    )
+
+    (mkExcept
+      [ "locked" "entersearch" "renametab" "renamepane" ]
+      [
+        (mkBind "esc" [ { SwitchToMode = [ "locked" ]; } ])
+      ]
+    )
+
+    (mkExcept
+      [ "locked" "entersearch" "renametab" "renamepane" "move" ]
+      [
+        (mkBind "m" [ { SwitchToMode = [ "move" ]; } ])
+      ]
+    )
+
+    (mkExcept
+      [ "locked" "entersearch" "search" "renametab" "renamepane" "session" ]
+      [
+        (mkBind "o" [ { SwitchToMode = [ "session" ]; } ])
+      ]
+    )
+
+    (mkExcept
+      [ "locked" "tab" "entersearch" "renametab" "renamepane" ]
+      [
+        (mkBind "t" [ { SwitchToMode = [ "tab" ]; } ])
+      ]
+    )
+
+    (mkExcept
+      [
+        "locked"
+        "resize"
+        "pane"
+        "tab"
+        "entersearch"
+        "renametab"
+        "renamepane"
+      ]
+      [
+        (mkBind "r" [ { SwitchToMode = [ "resize" ]; } ])
+      ]
+    )
+  ];
+
+  sharedBinds = sharedAmongBinds ++ sharedExceptBinds;
 
 in
 {
   programs.zellij = {
     settings = {
       default_mode._args = [ "locked" ];
+      show_startup_tips = [ false ];
 
       plugins._children = [
         { about._props.location = "zellij:about"; }
@@ -585,7 +565,54 @@ in
         }
       ];
 
+      keybinds.entersearch = {
+        _children = [
+          (mkBind "Ctrl c" [ { SwitchToMode = [ "scroll" ]; } ])
+          (mkBind "esc" [ { SwitchToMode = [ "scroll" ]; } ])
+          (mkBind "enter" [ { SwitchToMode = [ "search" ]; } ])
+        ];
+      };
+
+      keybinds.renametab = {
+        _children = [
+          (mkBind "esc" [
+            { UndoRenameTab = [ ]; }
+            { SwitchToMode = [ "tab" ]; }
+          ])
+        ];
+      };
+
+      keybinds.renamepane = {
+        _children = [
+          (mkBind "esc" [
+            { UndoRenamePane = [ ]; }
+            { SwitchToMode = [ "pane" ]; }
+          ])
+        ];
+      };
+
+      sharedAmongBinds = [
+        (mkAmong
+          [ "renametab" "renamepane" ]
+          [
+            (mkBind "Ctrl c" [ { SwitchToMode = [ "locked" ]; } ])
+          ]
+        )
+      ];
+
       keybinds.pane._children = paneBinds;
+
+      keybinds.tab._children = tabBinds;
+
+      keybinds.resize._children = resizeBinds;
+
+      keybinds.move._children = moveBinds;
+
+      keybinds.scroll._children = scrollBinds;
+
+      keybinds.search._children = searchBinds;
+
+      keybinds.session._children = sessionBinds;
 
       keybinds._children = sharedBinds;
     };
