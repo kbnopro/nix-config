@@ -5,6 +5,7 @@
     enable = true;
     setupOpts = {
       multiplexer_integration = "zellij";
+      zellij_move_focus_or_tab = true;
     };
     keymaps = {
       move_cursor_down = "<C-j>";

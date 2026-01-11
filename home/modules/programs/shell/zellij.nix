@@ -386,7 +386,7 @@ let
                 [ "file:${wasm}" ]
                 [
                   {
-                    name = [ "move_focus" ];
+                    name = [ "move_focus_or_tab" ];
                     payload = [ "left" ];
                   }
                 ];
@@ -425,7 +425,7 @@ let
                 [ "file:${wasm}" ]
                 [
                   {
-                    name = [ "move_focus" ];
+                    name = [ "move_focus_or_tab" ];
                     payload = [ "right" ];
                   }
                 ];
