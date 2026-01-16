@@ -28,8 +28,8 @@ in
         foreground = color.onSurface;
         background-opacity = 0.90;
         font-size = 10;
-        window-padding-x = 20;
-        window-padding-y = 20;
+        window-padding-x = 16;
+        window-padding-y = 16;
         keybind = [
           "clear" # clear all default keybinds to define it here, we can move this to Zellij / tmux config later
           "ctrl+shift+c=copy_to_clipboard"

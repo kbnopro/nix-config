@@ -3,8 +3,6 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
@@ -27,6 +25,8 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+
+  hardware.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Ho_Chi_Minh";
@@ -105,7 +105,6 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     wget
-    foot
     git
     fish
     uwsm
@@ -114,6 +113,7 @@
     gcc
     gh
     libsecret
+    blueberry
   ];
 
   nix.settings.experimental-features = [
