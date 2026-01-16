@@ -42,5 +42,23 @@
       lua = true;
       mode = "n";
     }
+    {
+      key = "<leader>sd";
+      action = ''
+        function () Snacks.picker.diagnostics() end
+      '';
+      desc = "Diagnostics";
+      lua = true;
+      mode = "n";
+    }
+    {
+      key = "<leader>fb";
+      action = ''
+        function () Snacks.picker.buffers() end
+      '';
+      desc = "Buffers";
+      lua = true;
+      mode = "n";
+    }
   ];
 }
