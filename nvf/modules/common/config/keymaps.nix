@@ -1,24 +1,5 @@
 { lib, ... }:
 let
-  vimKeys = [
-    {
-      key = "h";
-      direction = "Left";
-    }
-    {
-      key = "j";
-      direction = "Down";
-    }
-    {
-      key = "k";
-      direction = "Up";
-    }
-    {
-      key = "l";
-      direction = "Right";
-    }
-  ];
-
   betterUp =
     map
       (key: {
