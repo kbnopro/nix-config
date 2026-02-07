@@ -438,6 +438,9 @@ let
         (mkBind "Alt Shift p" [ { ToggleGroupMarking = [ ]; } ])
         (mkBind "Alt [" [ { PreviousSwapLayout = [ ]; } ])
         (mkBind "Alt ]" [ { NextSwapLayout = [ ]; } ])
+        (mkBind "Alt +" [ { Resize = [ "Increase" ]; } ])
+        (mkBind "Alt =" [ { Resize = [ "Increase" ]; } ])
+        (mkBind "Alt -" [ { Resize = [ "Decrease" ]; } ])
       ]
     )
 
@@ -524,6 +527,7 @@ in
     settings = {
       default_mode._args = [ "locked" ];
       show_startup_tips = [ false ];
+      stacked_resize = [ true ];
 
       plugins._children = [
         { about._props.location = "zellij:about"; }

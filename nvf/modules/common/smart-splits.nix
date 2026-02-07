@@ -12,10 +12,6 @@
       move_cursor_up = "<C-k>";
       move_cursor_left = "<C-h>";
       move_cursor_right = "<C-l>";
-      resize_down = "<M-j>";
-      resize_up = "<M-k>";
-      resize_left = "<M-h>";
-      resize_right = "<M-l>";
     };
   };
 
