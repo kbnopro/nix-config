@@ -67,7 +67,7 @@ in
   options.background = {
     path = lib.mkOption {
       type = lib.types.path;
-      default = mylib.relativeToRoot "home/background-images/cyan-moon.png";
+      default = mylib.relativeToRoot "home/background-images/blue-sunset.jpg";
     };
     color = lib.mkOption {
       type = lib.types.attrs;
