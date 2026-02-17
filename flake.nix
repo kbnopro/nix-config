@@ -7,7 +7,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvf.url = "github:notashelf/nvf?ref=f8dc16a29f56d60ef7a8f2cf79a80b1ae441d452";
+    nvf.url = "github:notashelf/nvf";
   };
 
   outputs =
