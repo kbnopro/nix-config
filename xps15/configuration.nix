@@ -11,6 +11,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../modules
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -40,23 +41,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  services.keyd = {
-
-    enable = true;
-
-    keyboards = {
-
-      default = {
-        ids = [ "*" ];
-        settings = {
-          main = {
-            capslock = "overload(control,esc)";
-          };
-        };
-      };
-
-    };
-  };
+  services.keyd.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -98,8 +83,6 @@
   };
 
   programs.fish.enable = true;
-
-  # programs.firefox.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
