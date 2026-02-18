@@ -27,9 +27,11 @@ in
         "xrgb"
       ];
     }
+
     (lib.mkIf cfg.enable {
+      # This will fail when swww is not active yet due to race conditions, so voiding the error with || true.
       home.activation.setWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        ${myScript}/bin/set-wallpaper
+        ${myScript}/bin/set-wallpaper || true
       '';
     })
   ];
