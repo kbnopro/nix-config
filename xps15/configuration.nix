@@ -29,9 +29,6 @@
 
   hardware.bluetooth.enable = true;
 
-  # Set your time zone.
-  time.timeZone = "Asia/Ho_Chi_Minh";
-
   services.getty.autologinUser = "khanhbui";
 
   programs.hyprland = {
