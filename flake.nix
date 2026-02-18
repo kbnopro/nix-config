@@ -7,26 +7,29 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nvf.url = "github:notashelf/nvf";
+    nvf = {
+      url = "github:notashelf/nvf";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{ nixpkgs, home-manager, ... }:
 
     let
-      inherit (nixpkgs) lib;
-      mylib = import ./lib { inherit lib; };
+      mylib = import ./lib { inherit (nixpkgs) lib; };
 
       specialArgs = {
         inherit inputs mylib;
       };
 
-      overlays = import ./overlay.nix inputs;
-
       applyOverlays =
+        let
+          overlays = import ./overlay.nix inputs;
+        in
         { ... }:
         {
-          nixpkgs.overlays = lib.mkAfter overlays;
+          nixpkgs.overlays = nixpkgs.lib.mkAfter overlays;
         };
 
     in
