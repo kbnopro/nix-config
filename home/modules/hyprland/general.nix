@@ -62,7 +62,6 @@
       swallow_regex = "(foot|kitty|allacritty|Alacritty)";
       disable_hyprland_logo = true;
       force_default_wallpaper = 0;
-      new_window_takes_over_fullscreen = 2;
       allow_session_lock_restore = true;
       initial_workspace_tracking = false;
       focus_on_activate = true;
