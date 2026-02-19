@@ -1,13 +1,11 @@
 {
   config,
   lib,
-  mylib,
   ...
 }:
 
 with lib;
 let
-  inherit (mylib) trimHash;
   cfg = config.programs.foot;
   color = config.background.color;
 in
@@ -28,24 +26,24 @@ in
         };
 
         colors = {
-          background = trimHash color.surface;
-          foreground = trimHash color.onSurface;
-          regular0 = trimHash color.term0;
-          regular1 = trimHash color.term1;
-          regular2 = trimHash color.term2;
-          regular3 = trimHash color.term3;
-          regular4 = trimHash color.term4;
-          regular5 = trimHash color.term5;
-          regular6 = trimHash color.term6;
-          regular7 = trimHash color.term7;
-          bright0 = trimHash color.term8;
-          bright1 = trimHash color.term9;
-          bright2 = trimHash color.term10;
-          bright3 = trimHash color.term11;
-          bright4 = trimHash color.term12;
-          bright5 = trimHash color.term13;
-          bright6 = trimHash color.term14;
-          bright7 = trimHash color.term15;
+          background = color.withoutHash.surface;
+          foreground = color.withoutHash.onSurface;
+          regular0 = color.withoutHash.term0;
+          regular1 = color.withoutHash.term1;
+          regular2 = color.withoutHash.term2;
+          regular3 = color.withoutHash.term3;
+          regular4 = color.withoutHash.term4;
+          regular5 = color.withoutHash.term5;
+          regular6 = color.withoutHash.term6;
+          regular7 = color.withoutHash.term7;
+          bright0 = color.withoutHash.term8;
+          bright1 = color.withoutHash.term9;
+          bright2 = color.withoutHash.term10;
+          bright3 = color.withoutHash.term11;
+          bright4 = color.withoutHash.term12;
+          bright5 = color.withoutHash.term13;
+          bright6 = color.withoutHash.term14;
+          bright7 = color.withoutHash.term15;
           alpha = 0.90;
         };
       };

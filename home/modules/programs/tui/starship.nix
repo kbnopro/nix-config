@@ -15,12 +15,7 @@ let
   camelAttrsToSnake =
     attrs: lib.mapAttrs' (name: value: lib.nameValuePair (camelToSnake name) value) attrs;
 
-  color =
-    lib.removeAttrs config.background.color [
-      "darkmode"
-      "transparent"
-    ]
-    |> camelAttrsToSnake;
+  color = config.background.color |> (lib.filterAttrs (k: v: lib.isString v)) |> camelAttrsToSnake;
 in
 {
   programs.starship.settings = {

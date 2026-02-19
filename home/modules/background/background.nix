@@ -62,6 +62,14 @@ let
     in
     lib.foldl' (acc: item: acc // item) { } parsed;
 
+  color = parseVarsFile content;
+
+  trimHash =
+    string:
+    if builtins.substring 0 1 string == "#" then
+      builtins.substring 1 (builtins.stringLength string) string
+    else
+      string;
 in
 {
   options.background = {
@@ -72,10 +80,12 @@ in
     color = lib.mkOption {
       type = lib.types.attrs;
     };
-
   };
 
   config = {
-    background.color = parseVarsFile content;
+    background.color = color // {
+      withoutHash =
+        color |> (lib.filterAttrs (k: v: lib.isString v)) |> (lib.mapAttrs (k: v: trimHash v));
+    };
   };
 }
