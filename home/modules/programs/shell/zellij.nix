@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   ...
 }:
 let
@@ -521,6 +522,7 @@ let
 
   sharedBinds = sharedAmongBinds ++ sharedExceptBinds;
 
+  color = config.background.color;
 in
 {
   programs.zellij = {
@@ -528,6 +530,127 @@ in
       default_mode._args = [ "locked" ];
       show_startup_tips = [ false ];
       stacked_resize = [ true ];
+      theme = [ "custom" ];
+
+      themes.custom = {
+        # We use the default ansi16, and then custom it to our will
+        text_unselected = {
+          base = color.term15;
+          background = color.term0;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term2;
+          emphasis_3 = color.term5;
+        };
+        text_selected = {
+          base = color.term15;
+          background = color.term8;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term2;
+          emphasis_3 = color.term5;
+        };
+        ribbon_unselected = {
+          base = color.term0;
+          background = color.term7;
+          emphasis_0 = color.term1;
+          emphasis_1 = color.term15;
+          emphasis_2 = color.term4;
+          emphasis_3 = color.term5;
+        };
+        ribbon_selected = {
+          base = color.term0;
+          background = color.term2;
+          emphasis_0 = color.term1;
+          emphasis_1 = color.term9;
+          emphasis_2 = color.term5;
+          emphasis_3 = color.term4;
+        };
+        table_title = {
+          base = color.term2;
+          background = color.term0;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term2;
+          emphasis_3 = color.term5;
+        };
+        table_cell_unselected = {
+          base = color.term15;
+          background = color.term0;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term2;
+          emphasis_3 = color.term5;
+        };
+        table_cell_selected = {
+          base = color.term15;
+          background = color.term8;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term2;
+          emphasis_3 = color.term5;
+        };
+        list_unselected = {
+          base = color.term15;
+          background = color.term0;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term2;
+          emphasis_3 = color.term5;
+        };
+        list_selected = {
+          base = color.term15;
+          background = color.term8;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term2;
+          emphasis_3 = color.term5;
+        };
+        frame_selected = {
+          base = color.primary;
+          background = color.term0;
+          emphasis_0 = color.term9;
+          emphasis_1 = color.term6;
+          emphasis_2 = color.term5;
+          emphasis_3 = color.term0;
+        };
+        frame_highlight = {
+          base = color.tertiary;
+          background = color.term0;
+          emphasis_0 = color.term5;
+          emphasis_1 = color.term9;
+          emphasis_2 = color.term9;
+          emphasis_3 = color.term9;
+        };
+        exit_code_success = {
+          base = color.term2;
+          background = color.term0;
+          emphasis_0 = color.term6;
+          emphasis_1 = color.term0;
+          emphasis_2 = color.term5;
+          emphasis_3 = color.term4;
+        };
+        exit_code_error = {
+          base = color.term1;
+          background = color.term0;
+          emphasis_0 = color.term3;
+          emphasis_1 = color.term0;
+          emphasis_2 = color.term0;
+          emphasis_3 = color.term0;
+        };
+        multiplayer_user_colors = {
+          player_1 = color.term5;
+          player_2 = color.term4;
+          player_3 = color.term0;
+          player_4 = color.term3;
+          player_5 = color.term6;
+          player_6 = color.term0;
+          player_7 = color.term1;
+          player_8 = color.term0;
+          player_9 = color.term0;
+          player_10 = color.term0;
+        };
+      };
 
       plugins._children = [
         { about._props.location = "zellij:about"; }

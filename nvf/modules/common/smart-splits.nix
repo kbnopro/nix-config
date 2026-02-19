@@ -1,11 +1,13 @@
 { ... }:
-
 {
+  # TODO: Smart splits is buggy and add a lot of overhead, so we might want to write a simple one in the future
+  # Some useful functions: wincmd, vim.fn.winnr(), vim.fn.winnr('h')
   vim.utility.smart-splits = {
     enable = true;
     setupOpts = {
       multiplexer_integration = "zellij";
-      zellij_move_focus_or_tab = true;
+      # This is kinda buggy, but the "stop" is even worse
+      at_edge = "wrap";
     };
     keymaps = {
       move_cursor_down = "<C-j>";
@@ -14,5 +16,4 @@
       move_cursor_right = "<C-l>";
     };
   };
-
 }
