@@ -7,6 +7,7 @@
     setupOpts = {
       multiplexer_integration = "zellij";
       # This is kinda buggy, but the "stop" is even worse
+      zellij_move_focus_or_tab = true;
       at_edge = "wrap";
     };
     keymaps = {
