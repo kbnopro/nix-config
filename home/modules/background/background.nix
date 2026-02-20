@@ -83,9 +83,14 @@ in
   };
 
   config = {
-    background.color = color // {
-      withoutHash =
-        color |> (lib.filterAttrs (k: v: lib.isString v)) |> (lib.mapAttrs (k: v: trimHash v));
-    };
+    background.color =
+      color
+      // {
+        opacity = 0.90;
+      }
+      // {
+        withoutHash =
+          color |> (lib.filterAttrs (k: v: lib.isString v)) |> (lib.mapAttrs (k: v: trimHash v));
+      };
   };
 }

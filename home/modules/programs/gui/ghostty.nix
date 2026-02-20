@@ -26,7 +26,7 @@ in
       settings = {
         background = color.surface;
         foreground = color.onSurface;
-        background-opacity = 0.90;
+        background-opacity = color.opacity;
         font-size = 10;
         window-padding-x = 16;
         window-padding-y = 16;
