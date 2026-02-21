@@ -2,9 +2,12 @@
   pkgs,
   inputs,
   config,
+  lib,
   ...
 }:
 let
+  cfg = config.programs.spicetify;
+
   # Original starry night
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 
@@ -58,12 +61,21 @@ let
 
 in
 {
-  programs.spicetify = {
-    # theme = spicePkgs.themes.starryNight;
-    theme = spicePkgs.themes.starryNight // {
-      name = "stylix";
-      src = spiceCustomTheme;
-    };
-    colorScheme = "Base";
-  };
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      wayland.windowManager.hyprland.settings.windowrule = [
+        "opacity ${builtins.toString color.opacity}, match:initial_title ^(Spotify)(.*)$"
+      ];
+    })
+    {
+      programs.spicetify = {
+        # theme = spicePkgs.themes.starryNight;
+        theme = spicePkgs.themes.starryNight // {
+          name = "stylix";
+          src = spiceCustomTheme;
+        };
+        colorScheme = "Base";
+      };
+    }
+  ];
 }
