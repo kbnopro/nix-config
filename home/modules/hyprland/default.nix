@@ -15,6 +15,7 @@ in
   imports = mylib.scanPaths ./.;
 
   config = mkIf cfg.enable {
+    gtk.enable = true;
     wayland.windowManager.hyprland = {
       package = null;
       portalPackage = null;

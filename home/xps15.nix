@@ -66,6 +66,7 @@ in
     edge.enable = true;
     discord.enable = true;
     zathura.enable = true;
+    spicetify.enable = true;
 
     # TUI programs
     starship = {

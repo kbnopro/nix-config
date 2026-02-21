@@ -83,6 +83,7 @@ in
   };
 
   config = {
+    background.path = mylib.relativeToRoot "home/background-images/blue-sunset.jpg";
     background.color =
       color
       // {

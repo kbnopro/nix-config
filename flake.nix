@@ -11,10 +11,16 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   outputs =
-    inputs@{ nixpkgs, home-manager, ... }:
+    inputs@{
+      nixpkgs,
+      home-manager,
+      spicetify-nix,
+      ...
+    }:
 
     let
       mylib = import ./lib { inherit (nixpkgs) lib; };
@@ -44,6 +50,9 @@
           home-manager.nixosModules.home-manager
           {
             home-manager = {
+              sharedModules = [
+                spicetify-nix.homeManagerModules.spicetify
+              ];
               extraSpecialArgs = specialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;

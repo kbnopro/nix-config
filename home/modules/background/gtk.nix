@@ -1,0 +1,6 @@
+{ ... }:
+{
+  gtk = {
+    colorScheme = "dark";
+  };
+}
