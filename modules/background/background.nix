@@ -1,8 +1,8 @@
 {
-  mylib,
   lib,
   pkgs,
   config,
+  options,
   ...
 }:
 let
@@ -19,7 +19,7 @@ let
         buildInputs = [ pythonEnv ];
       }
       ''
-        python ${./color-generation.py} --path "${bgPath}" --termscheme "${./terminal/scheme-base.json}" --blend_bg_fg --transparency "opaque" --mode "dark" --term_fg_boost 0 --harmonize_threshold 15 > $out
+        python ${./color-generation.py} --path "${bgPath}" --termscheme "${./base-terminal-scheme.json}" --blend_bg_fg --transparency "opaque" --mode "dark" --term_fg_boost 0 --harmonize_threshold 15 > $out
       '';
 
   content = builtins.trace (builtins.readFile generated) (builtins.readFile generated);
@@ -70,28 +70,58 @@ let
       builtins.substring 1 (builtins.stringLength string) string
     else
       string;
+
+  backgroundPath = ../../background-images/blue-sunset.jpg;
+
+  colorAttrs =
+    color
+    // {
+      opacity = 0.90;
+    }
+    // {
+      withoutHash =
+        color |> (lib.filterAttrs (k: v: lib.isString v)) |> (lib.mapAttrs (k: v: trimHash v));
+    };
 in
 {
   options.background = {
     path = lib.mkOption {
       type = lib.types.path;
-      default = mylib.relativeToRoot "home/background-images/blue-sunset.jpg";
     };
     color = lib.mkOption {
       type = lib.types.attrs;
     };
   };
 
-  config = {
-    background.path = mylib.relativeToRoot "home/background-images/blue-sunset.jpg";
-    background.color =
-      color
-      // {
-        opacity = 0.90;
-      }
-      // {
-        withoutHash =
-          color |> (lib.filterAttrs (k: v: lib.isString v)) |> (lib.mapAttrs (k: v: trimHash v));
-      };
-  };
+  config = lib.mkMerge [
+    {
+      background.path = backgroundPath;
+      background.color = colorAttrs;
+    }
+    (lib.optionalAttrs (options ? home-manager) {
+      home-manager.sharedModules = [
+        (
+          { ... }:
+          {
+            # Options are inherited from the top-level, so should only be read only
+            options.background = {
+              path = lib.mkOption {
+                type = lib.types.path;
+                readOnly = true;
+              };
+              color = lib.mkOption {
+                type = lib.types.attrs;
+                readOnly = true;
+              };
+            };
+
+            config.background = {
+              path = backgroundPath;
+              color = colorAttrs;
+            };
+          }
+        )
+      ];
+    })
+  ];
 }
