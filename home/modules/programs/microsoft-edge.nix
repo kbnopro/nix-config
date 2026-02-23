@@ -15,7 +15,7 @@ let
   edgeFlags = [
     "--password-store=gnome-libsecret"
     "--ozone-platform=wayland"
-    "--gtk-version=4"
+    "--gtk-version=3"
     "--enable-features=TouchPadOverscrollHistoryNavigation,UseOzonePlatform"
     "--enable-wayland-ime"
     "--disable-features=WaylandWpColorManager"
@@ -43,6 +43,9 @@ in
     };
     wayland.windowManager.hyprland.settings.windowrule = [
       "opacity ${builtins.toString opacity} ${builtins.toString opacity} 1, match:class microsoft-edge"
+      # Edge randomly spawn a client with basically no info, so this is to avoid layout shifiting
+      # We can remove this when the issue is fixed, or remove the browser :skull:
+      # "float on, match:initial_title ^$" fixed by overlay
     ];
   };
 }
