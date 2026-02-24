@@ -3,13 +3,13 @@
   ...
 }:
 let
-  color = config.background.color;
+  colors = config.background.colors;
 in
 {
   wayland.windowManager.hyprland.settings = {
-    general = {
-      "col.active_border" = "rgba(${color.withoutHash.onSurface}39)";
-      "col.inactive_border" = "rgba(${color.withoutHash.outline}30)";
+    general = with colors; {
+      "col.active_border" = "rgba(${onSurface}39)";
+      "col.inactive_border" = "rgba(${outline}30)";
     };
   };
 }

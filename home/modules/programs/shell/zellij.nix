@@ -522,7 +522,7 @@ let
 
   sharedBinds = sharedAmongBinds ++ sharedExceptBinds;
 
-  color = config.background.color;
+  colors = config.background.colors;
 in
 {
   programs.zellij = {
@@ -532,123 +532,123 @@ in
       stacked_resize = [ true ];
       theme = [ "custom" ];
 
-      themes.custom = {
+      themes.custom = with colors.withHashtag; {
         # We use the default ansi16, and then custom it to our will
         text_unselected = {
-          base = color.term15;
-          background = color.term0;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term2;
-          emphasis_3 = color.term5;
+          base = term15;
+          background = term0;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term2;
+          emphasis_3 = term5;
         };
         text_selected = {
-          base = color.term15;
-          background = color.term8;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term2;
-          emphasis_3 = color.term5;
+          base = term15;
+          background = term8;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term2;
+          emphasis_3 = term5;
         };
         ribbon_unselected = {
-          base = color.term0;
-          background = color.term7;
-          emphasis_0 = color.term1;
-          emphasis_1 = color.term15;
-          emphasis_2 = color.term4;
-          emphasis_3 = color.term5;
+          base = term0;
+          background = term7;
+          emphasis_0 = term1;
+          emphasis_1 = term15;
+          emphasis_2 = term4;
+          emphasis_3 = term5;
         };
         ribbon_selected = {
-          base = color.term0;
-          background = color.term2;
-          emphasis_0 = color.term1;
-          emphasis_1 = color.term9;
-          emphasis_2 = color.term5;
-          emphasis_3 = color.term4;
+          base = term0;
+          background = term2;
+          emphasis_0 = term1;
+          emphasis_1 = term9;
+          emphasis_2 = term5;
+          emphasis_3 = term4;
         };
         table_title = {
-          base = color.term2;
-          background = color.term0;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term2;
-          emphasis_3 = color.term5;
+          base = term2;
+          background = term0;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term2;
+          emphasis_3 = term5;
         };
         table_cell_unselected = {
-          base = color.term15;
-          background = color.term0;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term2;
-          emphasis_3 = color.term5;
+          base = term15;
+          background = term0;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term2;
+          emphasis_3 = term5;
         };
         table_cell_selected = {
-          base = color.term15;
-          background = color.term8;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term2;
-          emphasis_3 = color.term5;
+          base = term15;
+          background = term8;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term2;
+          emphasis_3 = term5;
         };
         list_unselected = {
-          base = color.term15;
-          background = color.term0;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term2;
-          emphasis_3 = color.term5;
+          base = term15;
+          background = term0;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term2;
+          emphasis_3 = term5;
         };
         list_selected = {
-          base = color.term15;
-          background = color.term8;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term2;
-          emphasis_3 = color.term5;
+          base = term15;
+          background = term8;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term2;
+          emphasis_3 = term5;
         };
         frame_selected = {
-          base = color.primary;
-          background = color.term0;
-          emphasis_0 = color.term9;
-          emphasis_1 = color.term6;
-          emphasis_2 = color.term5;
-          emphasis_3 = color.term0;
+          base = primary;
+          background = term0;
+          emphasis_0 = term9;
+          emphasis_1 = term6;
+          emphasis_2 = term5;
+          emphasis_3 = term0;
         };
         frame_highlight = {
-          base = color.tertiary;
-          background = color.term0;
-          emphasis_0 = color.term5;
-          emphasis_1 = color.term9;
-          emphasis_2 = color.term9;
-          emphasis_3 = color.term9;
+          base = tertiary;
+          background = term0;
+          emphasis_0 = term5;
+          emphasis_1 = term9;
+          emphasis_2 = term9;
+          emphasis_3 = term9;
         };
         exit_code_success = {
-          base = color.term2;
-          background = color.term0;
-          emphasis_0 = color.term6;
-          emphasis_1 = color.term0;
-          emphasis_2 = color.term5;
-          emphasis_3 = color.term4;
+          base = term2;
+          background = term0;
+          emphasis_0 = term6;
+          emphasis_1 = term0;
+          emphasis_2 = term5;
+          emphasis_3 = term4;
         };
         exit_code_error = {
-          base = color.term1;
-          background = color.term0;
-          emphasis_0 = color.term3;
-          emphasis_1 = color.term0;
-          emphasis_2 = color.term0;
-          emphasis_3 = color.term0;
+          base = term1;
+          background = term0;
+          emphasis_0 = term3;
+          emphasis_1 = term0;
+          emphasis_2 = term0;
+          emphasis_3 = term0;
         };
-        multiplayer_user_colors = {
-          player_1 = color.term5;
-          player_2 = color.term4;
-          player_3 = color.term0;
-          player_4 = color.term3;
-          player_5 = color.term6;
-          player_6 = color.term0;
-          player_7 = color.term1;
-          player_8 = color.term0;
-          player_9 = color.term0;
-          player_10 = color.term0;
+        multiplayer_user_colorss = {
+          player_1 = term5;
+          player_2 = term4;
+          player_3 = term0;
+          player_4 = term3;
+          player_5 = term6;
+          player_6 = term0;
+          player_7 = term1;
+          player_8 = term0;
+          player_9 = term0;
+          player_10 = term0;
         };
       };
 

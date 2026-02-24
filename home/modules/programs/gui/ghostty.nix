@@ -7,13 +7,7 @@
 with lib;
 let
   cfg = config.programs.ghostty;
-  color = config.background.color;
-  trimTerm =
-    string:
-    if builtins.substring 0 4 string == "term" then
-      builtins.substring 4 (builtins.stringLength string) string
-    else
-      string;
+  colors = config.background.colors;
 in
 {
   config = mkIf cfg.enable {
@@ -22,11 +16,11 @@ in
         "SUPER, T, exec, ghostty"
       ];
     };
-    programs.ghostty = {
+    programs.ghostty = with colors.withHashtag; {
       settings = {
-        background = color.surface;
-        foreground = color.onSurface;
-        background-opacity = color.opacity;
+        background = surface;
+        foreground = onSurface;
+        background-opacity = colors.opacity;
         font-size = 10;
         window-padding-x = 16;
         window-padding-y = 16;
@@ -47,22 +41,22 @@ in
           "paste=paste_from_clipboard"
         ];
         palette = [
-          "0=${trimTerm color.term0}"
-          "1=${trimTerm color.term1}"
-          "2=${trimTerm color.term2}"
-          "3=${trimTerm color.term3}"
-          "4=${trimTerm color.term4}"
-          "5=${trimTerm color.term5}"
-          "6=${trimTerm color.term6}"
-          "7=${trimTerm color.term7}"
-          "8=${trimTerm color.term8}"
-          "9=${trimTerm color.term9}"
-          "10=${trimTerm color.term10}"
-          "11=${trimTerm color.term11}"
-          "12=${trimTerm color.term12}"
-          "13=${trimTerm color.term13}"
-          "14=${trimTerm color.term14}"
-          "15=${trimTerm color.term15}"
+          "0=${term0}"
+          "1=${term1}"
+          "2=${term2}"
+          "3=${term3}"
+          "4=${term4}"
+          "5=${term5}"
+          "6=${term6}"
+          "7=${term7}"
+          "8=${term8}"
+          "9=${term9}"
+          "10=${term10}"
+          "11=${term11}"
+          "12=${term12}"
+          "13=${term13}"
+          "14=${term14}"
+          "15=${term15}"
         ];
       };
     };

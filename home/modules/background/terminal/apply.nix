@@ -5,7 +5,7 @@
   ...
 }:
 let
-  color = config.background.color;
+  colors = config.background.colors;
 
   controlSeqTemp = builtins.readFile ./sequences.txt;
 
@@ -15,17 +15,11 @@ let
       keys = builtins.attrNames attrs;
       values = map (key: attrs.${key}) keys;
       appendedKeys = map (key: "\$${key}") keys;
-      processedValues = map (
-        value:
-        if (lib.strings.hasPrefix "#" value) then
-          (builtins.substring 1 (builtins.stringLength value) value)
-        else
-          value
-      ) values;
+      processedValues = values;
     in
     builtins.replaceStrings appendedKeys processedValues str;
 
-  controlSeq = replaceFromAttrs color controlSeqTemp;
+  controlSeq = replaceFromAttrs colors controlSeqTemp;
 
   myScript = pkgs.writeShellApplication {
     name = "apply-terminal";

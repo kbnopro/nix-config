@@ -8,8 +8,8 @@ with lib;
 
 let
   cfg = config.programs.fuzzel;
-  color = config.background.color;
-  opacity = lib.toHexString (builtins.ceil (color.opacity * 255));
+  colors = config.background.colors;
+  opacity = lib.toHexString (builtins.ceil (colors.opacity * 255));
 in
 {
   config = mkIf cfg.enable {
@@ -18,7 +18,7 @@ in
         "Super, Space, exec, pkill fuzzel || fuzzel"
       ];
     };
-    programs.fuzzel.settings.colors = with color.withoutHash; {
+    programs.fuzzel.settings.colors = with colors; {
       background = "${surfaceContainerHigh}${opacity}";
       text = "${onSurface}ff";
       placeholder = "${term3}ff";

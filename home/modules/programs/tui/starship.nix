@@ -15,11 +15,14 @@ let
   camelAttrsToSnake =
     attrs: lib.mapAttrs' (name: value: lib.nameValuePair (camelToSnake name) value) attrs;
 
-  color = config.background.color |> (lib.filterAttrs (k: v: lib.isString v)) |> camelAttrsToSnake;
+  colors =
+    config.background.colors.withHashtag
+    |> (lib.filterAttrs (k: v: lib.isString v))
+    |> camelAttrsToSnake;
 in
 {
   programs.starship.settings = {
-    palettes.custom = color;
+    palettes.custom = colors;
     palette = "custom";
 
     add_newline = false;

@@ -6,7 +6,7 @@
   ...
 }:
 let
-  color = config.background.color;
+  colors = config.background.colors;
 
   # nvf stuffs
   customNeovim = inputs.nvf.lib.neovimConfiguration {
@@ -15,7 +15,7 @@ let
       ../nvf/xps15.nix
     ];
     extraSpecialArgs = {
-      inherit mylib color;
+      inherit mylib colors;
     };
   };
 

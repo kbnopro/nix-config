@@ -11,12 +11,12 @@ let
   # Original starry night
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.system};
 
-  color = config.background.color;
+  colors = config.background.colors;
 
   spiceOverrideColor = pkgs.writeTextFile {
     name = "color.ini";
     destination = "/color.ini";
-    text = with color.withoutHash; ''
+    text = with colors; ''
       [Base]
       star                    = FFFFFF
       star-glow               = FFFFFF
@@ -40,7 +40,7 @@ let
       highlight               = 191919
       highlight-elevated      = 152238 
 
-      shadow                  = ${color.shadow}
+      shadow                  = ${shadow}
       selected-row            = ${surfaceContainerLow}
       misc                    = 7F7F7F
       notification-error      = E22134 
@@ -64,7 +64,7 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland.settings.windowrule = [
-        "opacity ${builtins.toString color.opacity}, match:class Spotify"
+        "opacity ${builtins.toString colors.opacity}, match:class Spotify"
       ];
     })
     {

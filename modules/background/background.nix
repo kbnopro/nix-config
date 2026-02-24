@@ -74,13 +74,16 @@ let
   backgroundPath = ../../background-images/blue-sunset.jpg;
 
   colorAttrs =
-    color
+    (
+      # our default algorithm generates code with hash and non-string (boolean, etc) values
+      color |> (lib.mapAttrs (k: v: if lib.isString v then trimHash v else v))
+    )
     // {
+      # extended attributes that are not generated but useful
       opacity = 0.90;
-    }
-    // {
-      withoutHash =
-        color |> (lib.filterAttrs (k: v: lib.isString v)) |> (lib.mapAttrs (k: v: trimHash v));
+      withHashtag =
+        # pick out all the color and add hash to it
+        color |> (lib.filterAttrs (k: v: lib.isString v));
     };
 in
 {
@@ -88,7 +91,7 @@ in
     path = lib.mkOption {
       type = lib.types.path;
     };
-    color = lib.mkOption {
+    colors = lib.mkOption {
       type = lib.types.attrs;
     };
   };
@@ -96,7 +99,7 @@ in
   config = lib.mkMerge [
     {
       background.path = backgroundPath;
-      background.color = colorAttrs;
+      background.colors = colorAttrs;
     }
     (lib.optionalAttrs (options ? home-manager) {
       home-manager.sharedModules = [
@@ -109,7 +112,7 @@ in
                 type = lib.types.path;
                 readOnly = true;
               };
-              color = lib.mkOption {
+              colors = lib.mkOption {
                 type = lib.types.attrs;
                 readOnly = true;
               };
@@ -117,7 +120,7 @@ in
 
             config.background = {
               path = backgroundPath;
-              color = colorAttrs;
+              colors = colorAttrs;
             };
           }
         )

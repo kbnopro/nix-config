@@ -1,4 +1,4 @@
-{ color, ... }:
+{ colors, ... }:
 {
   vim = {
     theme = {
@@ -7,23 +7,23 @@
       style = "night";
     };
 
-    luaConfigPost = ''
+    luaConfigPost = with colors.withHashtag; ''
       local util = require("tokyonight.util")
       require("tokyonight").setup({
         on_colors = function(colors)
-          colors.bg = "${color.surfaceContainerLow}";
-          colors.bg_float = "${color.surfaceContainer}";
-          colors.bg_dark = "${color.surfaceContainer}";
-          colors.bg_dark1 = "${color.surfaceContainerLowest}";
-          colors.bg_hightlight = "${color.surfaceContainerHighest}";
-          colors.bg_popup = "${color.surfaceContainer}";
-          colors.bg_search = "${color.primaryContainer}";
-          colors.bg_visual = "${color.secondaryContainer}";
+          colors.bg = "${surfaceContainerLow}";
+          colors.bg_float = "${surfaceContainer}";
+          colors.bg_dark = "${surfaceContainer}";
+          colors.bg_dark1 = "${surfaceContainerLowest}";
+          colors.bg_hightlight = "${surfaceContainerHighest}";
+          colors.bg_popup = "${surfaceContainer}";
+          colors.bg_search = "${primaryContainer}";
+          colors.bg_visual = "${secondaryContainer}";
         end,
 
         on_highlights = function(highlights, colors) 
           highlights.AlphaHeader = {
-            fg = "${color.primary}"
+            fg = "${primary}"
           }
         end,
       })

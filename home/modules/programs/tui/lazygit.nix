@@ -4,7 +4,7 @@
   ...
 }:
 let
-  color = config.background.color;
+  colors = config.background.colors;
   # Lazygit seems to use a mixture of self config + color from the terminal
   cfg = config.programs.lazygit;
 in
@@ -13,29 +13,29 @@ in
     home.shellAliases.lazygit = "lg";
     programs.lazygit = {
       settings = {
-        gui.theme = {
+        gui.theme = with colors.withHashtag; {
           activeBorderColor = [
-            "${color.primary}"
+            "${primary}"
             "bold"
           ];
           inactiveBorderColor = [
-            "${color.onSurface}"
+            "${onSurface}"
           ];
           selectedLineBgColor = [
-            "${color.secondaryContainer}"
+            "${secondaryContainer}"
           ];
           searchingActiveBorderColor = [
-            "${color.term6}" # cyan
+            "${term6}" # cyan
             "bold"
           ];
           optionsTextColor = [
-            "${color.term4}" # blue
+            "${term4}" # blue
           ];
           cherryPickedCommitFgColor = [
-            "${color.onPrimaryContainer}"
+            "${onPrimaryContainer}"
           ];
           cherryPickedCommitBgColor = [
-            "${color.primaryContainer}"
+            "${primaryContainer}"
           ];
         };
       };

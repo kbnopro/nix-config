@@ -10,7 +10,7 @@ with lib;
 let
   cfg = config.programs.edge;
 
-  color = config.background.color;
+  colors = config.background.colors;
 
   edgeFlags = [
     "--password-store=gnome-libsecret"
@@ -26,7 +26,7 @@ let
   };
 
   # Browser need a bit more opacity as we use it quite often, and it looks too transparent with the same opacity as other windows.
-  opacity = 1 - (1 - color.opacity) / 2;
+  opacity = 1 - (1 - colors.opacity) / 2;
 
 in
 {
