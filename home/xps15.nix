@@ -1,25 +1,7 @@
 {
   pkgs,
-  inputs,
-  mylib,
-  config,
   ...
 }:
-let
-  colors = config.background.colors;
-
-  # nvf stuffs
-  customNeovim = inputs.nvf.lib.neovimConfiguration {
-    inherit pkgs;
-    modules = [
-      ../nvf/xps15.nix
-    ];
-    extraSpecialArgs = {
-      inherit mylib colors;
-    };
-  };
-
-in
 {
   imports = [ ./modules ];
 
@@ -32,9 +14,9 @@ in
       VISUAL = "nvim";
     };
     packages = with pkgs; [
-      customNeovim.neovim
       nerd-fonts.space-mono
       gnome-control-center
+      blueberry
     ];
   };
 
@@ -47,14 +29,6 @@ in
           exec uwsm start hyprland-uwsm.desktop 
         end
       '';
-    };
-
-    git = {
-      enable = true;
-      settings = {
-        user.name = "kbnopro";
-        user.email = "tuankhanhb00@gmail.com";
-      };
     };
 
     # GUI programs
@@ -77,12 +51,19 @@ in
     lazygit.enable = true;
 
     # Shell programs
+    git.enable = true;
+
     zoxide = {
       enable = true;
       enableFishIntegration = true;
     };
 
     zellij = {
+      enable = true;
+      enableFishIntegration = true;
+    };
+
+    direnv = {
       enable = true;
       enableFishIntegration = true;
     };

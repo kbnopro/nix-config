@@ -35,7 +35,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ edge ];
+    home.packages = with pkgs; [
+      edge
+      libsecret
+    ];
     wayland.windowManager.hyprland.settings = {
       bind = [
         "SUPER, E, exec, microsoft-edge"
