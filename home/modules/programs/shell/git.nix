@@ -8,6 +8,7 @@
     };
     ignores = [
       ".envrc"
+      ".direnv/"
     ];
   };
 }
