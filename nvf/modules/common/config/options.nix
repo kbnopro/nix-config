@@ -26,5 +26,7 @@
     linebreak = true;
     wrapmargin = 0;
     textwidth = 0;
+
+    undofile = true;
   };
 }
