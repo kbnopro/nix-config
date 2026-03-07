@@ -71,8 +71,6 @@ let
     else
       string;
 
-  backgroundPath = ../../background-images/blue-sunset.jpg;
-
   colorAttrs =
     (
       # our default algorithm generates code with hash and non-string (boolean, etc) values
@@ -90,6 +88,7 @@ in
   options.background = {
     path = lib.mkOption {
       type = lib.types.path;
+      default = ../../background-images/blue-sunset.jpg;
     };
     colors = lib.mkOption {
       type = lib.types.attrs;
@@ -98,7 +97,6 @@ in
 
   config = lib.mkMerge [
     {
-      background.path = backgroundPath;
       background.colors = colorAttrs;
     }
     (lib.optionalAttrs (options ? home-manager) {
@@ -119,7 +117,7 @@ in
             };
 
             config.background = {
-              path = backgroundPath;
+              path = bgPath;
               colors = colorAttrs;
             };
           }
