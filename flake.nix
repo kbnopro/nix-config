@@ -16,6 +16,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
 
   outputs =
@@ -24,6 +25,7 @@
       home-manager,
       spicetify-nix,
       nix-darwin,
+      mac-app-util,
       ...
     }:
 
@@ -51,9 +53,11 @@
         modules = [
           ./naki/configuration.nix
           home-manager.darwinModules.home-manager
+          mac-app-util.darwinModules.default
           {
             home-manager = {
               sharedModules = [
+                mac-app-util.homeManagerModules.default
                 spicetify-nix.homeManagerModules.spicetify
               ];
               extraSpecialArgs = specialArgs;

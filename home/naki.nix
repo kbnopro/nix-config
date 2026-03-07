@@ -3,7 +3,7 @@
   ...
 }:
 {
-  imports = [ ./modules ];
+  imports = [ ./modules/programs/spicetify.nix ];
 
   home = {
     username = "theatran";
