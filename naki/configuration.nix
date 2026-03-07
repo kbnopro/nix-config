@@ -5,7 +5,7 @@
   ];
 
   config = {
-    background.path = "../background-images/purple-sunset.jpg";
+    background.path = ../background-images/purple-sunset.jpg;
 
     nixpkgs.hostPlatform = "aarch64-darwin";
     nix.settings.experimental-features = [

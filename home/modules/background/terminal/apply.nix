@@ -23,9 +23,6 @@ let
 
   myScript = pkgs.writeShellApplication {
     name = "apply-terminal";
-    runtimeInputs = [
-      pkgs.swww
-    ];
     text = ''
       for file in /dev/pts/*; do
         if [[ $file =~ ^/dev/pts/[0-9]+$ ]]; then
