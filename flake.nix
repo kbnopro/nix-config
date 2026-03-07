@@ -11,6 +11,10 @@
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
@@ -19,6 +23,7 @@
       nixpkgs,
       home-manager,
       spicetify-nix,
+      nix-darwin,
       ...
     }:
 
@@ -40,6 +45,26 @@
 
     in
     {
+      darwinConfigurations."naki" = nix-darwin.lib.darwinSystem {
+        inherit specialArgs;
+
+        modules = [
+          ./naki/configuration.nix
+          home-manager.darwinModules.home-manager
+          {
+            home-manager = {
+              sharedModules = [
+                spicetify-nix.homeManagerModules.spicetify
+              ];
+              extraSpecialArgs = specialArgs;
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.theatran.imports = [ ./home/naki.nix ];
+            };
+          }
+        ];
+      };
+
       nixosConfigurations."xps15" = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
 

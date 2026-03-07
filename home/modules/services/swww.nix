@@ -6,7 +6,7 @@
 }:
 let
   bgPath = config.background.path;
-  cfg = config.services.swww;
+  cfgEnable = config.services.swww.enable;
   myScript = pkgs.writeShellApplication {
     name = "set-wallpaper";
     runtimeInputs = [
@@ -20,19 +20,16 @@ let
   };
 in
 {
-  config = lib.mkMerge [
-    {
+  config = (
+    lib.mkIf cfgEnable {
+      # This will fail when swww is not active yet due to race conditions, so voiding the error with || true.
       services.swww.extraArgs = [
         "--format"
         "xrgb"
       ];
-    }
-
-    (lib.mkIf cfg.enable {
-      # This will fail when swww is not active yet due to race conditions, so voiding the error with || true.
       home.activation.setWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         ${myScript}/bin/set-wallpaper || true
       '';
-    })
-  ];
+    }
+  );
 }
