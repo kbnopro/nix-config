@@ -41,6 +41,7 @@
     discord.enable = true;
     zathura.enable = true;
     spicetify.enable = true;
+    rstudio.enable = true;
 
     # TUI programs
     starship = {

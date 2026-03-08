@@ -1,5 +1,12 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
+  cfg = config.programs.rstudio;
+
   rPkgs = with pkgs.rPackages; [
     knitr
     htmltools
@@ -20,8 +27,14 @@ let
   };
 in
 {
-  home.packages = [
-    rEnv
-    rStudio
-  ];
+  options.programs.rstudio = {
+    enable = lib.mkEnableOption "RStudio IDE";
+  };
+
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      rEnv
+      rStudio
+    ];
+  };
 }
