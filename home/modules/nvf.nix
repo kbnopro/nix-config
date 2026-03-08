@@ -3,9 +3,11 @@
   inputs,
   pkgs,
   mylib,
+  lib,
   ...
 }:
 let
+  cfg = config.programs.nvf;
   colors = config.background.colors;
 
   # nvf stuffs
@@ -21,7 +23,13 @@ let
 
 in
 {
-  config.home.packages = [
-    nvf.neovim
-  ];
+  options = {
+    programs.nvf.enable = lib.mkEnableOption "Neovim with nvf configuration";
+  };
+
+  config = lib.mkIf cfg.enable {
+    home.packages = [
+      nvf.neovim
+    ];
+  };
 }

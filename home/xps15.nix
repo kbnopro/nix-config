@@ -54,6 +54,7 @@
     # Shell programs
     git.enable = true;
     gh.enable = true;
+    nvf.enable = true;
 
     zoxide = {
       enable = true;
