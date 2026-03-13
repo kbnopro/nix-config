@@ -41,7 +41,9 @@
     discord.enable = true;
     zathura.enable = true;
     spicetify.enable = true;
+    # Uni apps, might vary a lot
     rstudio.enable = true;
+    intellij.enable = true;
 
     # TUI programs
     starship = {

@@ -17,6 +17,7 @@
     };
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     mac-app-util.url = "github:hraban/mac-app-util";
+    nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
   };
 
   outputs =
