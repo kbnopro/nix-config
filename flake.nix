@@ -52,6 +52,7 @@
         inherit specialArgs;
 
         modules = [
+          ./modules/background
           ./naki/configuration.nix
           home-manager.darwinModules.home-manager
           mac-app-util.darwinModules.default
@@ -76,6 +77,8 @@
         system = "x86_64-linux";
         modules = [
           applyOverlays
+          ./modules/background
+          ./modules/nixos
           ./xps15/configuration.nix
           home-manager.nixosModules.home-manager
           {

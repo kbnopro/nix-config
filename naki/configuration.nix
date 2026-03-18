@@ -1,9 +1,5 @@
 { ... }:
 {
-  imports = [
-    ../modules/background
-  ];
-
   config = {
     background.path = ../background-images/purple-sunset.jpg;
 

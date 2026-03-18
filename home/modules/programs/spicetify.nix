@@ -41,7 +41,7 @@ let
       highlight-elevated      = 152238 
 
       shadow                  = ${shadow}
-      selected-row            = ${surfaceContainerLow}
+      selected-row            = FFFFFF
       misc                    = 7F7F7F
       notification-error      = E22134 
       notification            = 4687d6
