@@ -65,7 +65,7 @@
               extraSpecialArgs = specialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.theatran.imports = [ ./home/naki.nix ];
+              users.theatran.imports = [ ./modules/home/naki.nix ];
             };
           }
         ];
@@ -89,7 +89,7 @@
               extraSpecialArgs = specialArgs;
               useGlobalPkgs = true;
               useUserPackages = true;
-              users.khanhbui.imports = [ ./home/xps15.nix ];
+              users.khanhbui.imports = [ ./modules/home/xps15.nix ];
             };
           }
         ];
