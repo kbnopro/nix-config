@@ -31,7 +31,7 @@
     };
 
     # GUI programs
-    alacritty.enable = true;
+    ghostty.enable = true;
 
     # Apps programs
     discord.enable = true;
