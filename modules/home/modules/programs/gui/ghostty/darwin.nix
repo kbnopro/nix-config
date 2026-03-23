@@ -12,5 +12,6 @@ in
 {
   config = mkIf (cfg.enable && pkgs.stdenv.isDarwin) {
     programs.ghostty.package = pkgs.ghostty-bin;
+    programs.ghostty.settings.font-size = lib.mkForce 13;
   };
 }
