@@ -8,7 +8,7 @@
 
   home = {
     username = "khanhbui";
-    homeDirectory = lib.mkForce "/Users/theatran";
+    homeDirectory = lib.mkForce "/Users/khanhbui";
     stateVersion = "25.05";
     sessionVariables = {
       EDITOR = "nvim";
