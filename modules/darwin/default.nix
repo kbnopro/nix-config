@@ -1,5 +1,7 @@
-{ ... }:
+{ mylib, ... }:
 {
+  imports = mylib.scanPaths ./.;
+
   system.defaults = {
     dock.autohide = true;
     NSGlobalDomain.KeyRepeat = 2;
