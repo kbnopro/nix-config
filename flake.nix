@@ -46,53 +46,86 @@
           nixpkgs.overlays = nixpkgs.lib.mkAfter overlays;
         };
 
+      mkDarwinSystem =
+        {
+          configuration,
+          homeManagerUsers ? { },
+          extraModules ? [ ],
+        }:
+        nix-darwin.lib.darwinSystem {
+          inherit specialArgs;
+
+          system = "aarch64-darwin";
+          modules = [
+            applyOverlays
+            ./modules/background
+            ./modules/darwin
+            configuration
+            mac-app-util.darwinModules.default
+
+            # home-manager
+            home-manager.darwinModules.home-manager
+            {
+              home-manager = {
+                sharedModules = [
+                  mac-app-util.homeManagerModules.default
+                  spicetify-nix.homeManagerModules.spicetify
+                ];
+                extraSpecialArgs = specialArgs;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = homeManagerUsers;
+              };
+            }
+          ]
+          ++ extraModules;
+        };
+
+      mkNixOSSystem =
+        {
+          configuration,
+          homeManagerUsers ? { },
+          extraModules ? [ ],
+        }:
+        nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+
+          system = "x86_64-linux";
+          modules = [
+            applyOverlays
+            ./modules/background
+            ./modules/nixos
+            configuration
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                sharedModules = [
+                  spicetify-nix.homeManagerModules.spicetify
+                ];
+                extraSpecialArgs = specialArgs;
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users = homeManagerUsers;
+              };
+            }
+          ]
+          ++ extraModules;
+        };
+
     in
     {
-      darwinConfigurations."naki" = nix-darwin.lib.darwinSystem {
-        inherit specialArgs;
-
-        modules = [
-          ./modules/background
-          ./naki/configuration.nix
-          home-manager.darwinModules.home-manager
-          mac-app-util.darwinModules.default
-          {
-            home-manager = {
-              sharedModules = [
-                mac-app-util.homeManagerModules.default
-                spicetify-nix.homeManagerModules.spicetify
-              ];
-              extraSpecialArgs = specialArgs;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.theatran.imports = [ ./modules/home/naki.nix ];
-            };
-          }
-        ];
+      darwinConfigurations."naki" = mkDarwinSystem {
+        configuration = ./naki/configuration.nix;
+        homeManagerUsers = {
+          theatran.imports = [ ./modules/home/naki.nix ];
+        };
       };
 
-      nixosConfigurations."xps15" = nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
-
-        system = "x86_64-linux";
-        modules = [
-          applyOverlays
-          ./modules/background
-          ./modules/nixos
-          ./xps15/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              sharedModules = [
-                spicetify-nix.homeManagerModules.spicetify
-              ];
-              extraSpecialArgs = specialArgs;
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.khanhbui.imports = [ ./modules/home/xps15.nix ];
-            };
-          }
-        ];
+      nixosConfigurations."xps15" = mkNixOSSystem {
+        configuration = ./xps15/configuration.nix;
+        homeManagerUsers = {
+          khanhbui.imports = [ ./modules/home/xps15.nix ];
+        };
       };
     };
 }

@@ -72,9 +72,6 @@
       "wheel" # Enable ‘sudo’ for the user.
       "networkmanager" # Allow managing network
     ];
-    packages = with pkgs; [
-      tree
-    ];
     shell = pkgs.fish;
   };
 
