@@ -3,9 +3,11 @@
   config = {
     # Users
     system.primaryUser = "khanhbui";
+    users.knownUsers = [ "khanhbui" ];
     users.users.khanhbui = {
       description = "Khanh Bui";
       shell = pkgs.fish;
+      uid = 501;
     };
     programs.fish.enable = true;
 
