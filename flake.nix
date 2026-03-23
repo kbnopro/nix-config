@@ -121,6 +121,13 @@
         };
       };
 
+      darwinConfigurations."m4-air" = mkDarwinSystem {
+        configuration = ./m4-air/configuration.nix;
+        homeManagerUsers = {
+          khanhbui.imports = [ ./modules/home/m4-air.nix ];
+        };
+      };
+
       nixosConfigurations."xps15" = mkNixOSSystem {
         configuration = ./xps15/configuration.nix;
         homeManagerUsers = {
