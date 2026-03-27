@@ -16,7 +16,7 @@
     packages = with pkgs; [
       nerd-fonts.space-mono
       gnome-control-center
-      blueberry
+      blueman
     ];
   };
 

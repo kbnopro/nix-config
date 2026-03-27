@@ -46,6 +46,24 @@
           nixpkgs.overlays = nixpkgs.lib.mkAfter overlays;
         };
 
+      commonNix =
+        {
+          ...
+        }:
+        {
+          imports = [ applyOverlays ];
+          nixpkgs.config.allowUnfree = true;
+          nix.settings.experimental-features = [
+            "nix-command"
+            "flakes"
+            "pipe-operators"
+          ];
+          # temporary workaround for electron 38.8.4, which is required by rsutdio
+          nixpkgs.config.permittedInsecurePackages = [
+            "electron-38.8.4"
+          ];
+        };
+
       mkDarwinSystem =
         {
           configuration,
@@ -57,7 +75,7 @@
 
           system = "aarch64-darwin";
           modules = [
-            applyOverlays
+            commonNix
             ./modules/background
             ./modules/darwin
             configuration
@@ -92,7 +110,7 @@
 
           system = "x86_64-linux";
           modules = [
-            applyOverlays
+            commonNix
             ./modules/background
             ./modules/nixos
             configuration

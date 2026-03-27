@@ -35,8 +35,6 @@
     withUWSM = true;
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   services.keyd.enable = true;
 
   # Configure network proxy if necessary
@@ -82,12 +80,6 @@
   environment.systemPackages = with pkgs; [
     uwsm
     fastfetch
-  ];
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-    "pipe-operators"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
