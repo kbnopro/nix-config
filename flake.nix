@@ -58,7 +58,7 @@
             "flakes"
             "pipe-operators"
           ];
-          # temporary workaround for electron 38.8.4, which is required by rsutdio
+          # temporary workaround for electron 38.8.4, which is required by rstudio
           nixpkgs.config.permittedInsecurePackages = [
             "electron-38.8.4"
           ];

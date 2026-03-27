@@ -333,6 +333,19 @@ let
       { SwitchToMode = [ "locked" ]; }
     ])
 
+    (mkBind "l" [
+      {
+        LaunchOrFocusPlugin =
+          mkNode
+            [ "zellij:layout-manager" ]
+            [
+              { floating = [ true ]; }
+              { move_to_focused_tab = [ true ]; }
+            ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
     (mkBind "d" [ { Detach = [ ]; } ])
     (mkBind "o" [ { SwitchToMode = [ "normal" ]; } ])
 
