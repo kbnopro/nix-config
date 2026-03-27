@@ -1,7 +1,7 @@
 { ... }:
 {
   config = {
-    background.path = ../background-images/purple-sunset.jpg;
+    background.path = ../background-images/cat.png;
 
     # Users
     system.primaryUser = "theatran";

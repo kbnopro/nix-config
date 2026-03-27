@@ -64,7 +64,7 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       wayland.windowManager.hyprland.settings.windowrule = [
-        "opacity ${builtins.toString colors.opacity}, match:class Spotify"
+        "opacity ${builtins.toString colors.opacity}, match:class spotify"
       ];
     })
     {
