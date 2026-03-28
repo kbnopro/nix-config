@@ -8,5 +8,9 @@
         auto_trigger = true;
       };
     };
+    mappings.suggestion = {
+      accept = "<A-l>";
+      acceptWord = "<A-w>";
+    };
   };
 }
