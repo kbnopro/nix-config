@@ -29,7 +29,7 @@
       action = ''
         function () Snacks.picker.files() end
       '';
-      desc = "Smart Find Files";
+      desc = "Find Files";
       lua = true;
       mode = "n";
     }
@@ -38,7 +38,7 @@
       action = ''
         function () Snacks.picker.grep() end
       '';
-      desc = "Smart Find Files";
+      desc = "Smart Grep";
       lua = true;
       mode = "n";
     }
