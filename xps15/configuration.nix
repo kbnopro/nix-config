@@ -34,6 +34,12 @@
     enable = true;
   };
 
+  # Stable symlink for cards
+  services.udev.extraRules = ''
+    KERNEL=="card*", KERNELS=="0000:00:02.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/intel-igpu"
+    KERNEL=="card*", KERNELS=="0000:01:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/nvidia-dgpu"
+
+  '';
   services.keyd.enable = true;
 
   # Configure network proxy if necessary

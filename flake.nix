@@ -18,6 +18,7 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
   };
 
   outputs =
@@ -27,6 +28,7 @@
       spicetify-nix,
       nix-darwin,
       mac-app-util,
+      nixos-hardware,
       ...
     }:
 
@@ -151,6 +153,10 @@
         homeManagerUsers = {
           khanhbui.imports = [ ./modules/home/xps15.nix ];
         };
+        extraModules = [
+          nixos-hardware.nixosModules.dell-xps-15-9510
+          # nixos-hardware.nixosModules.dell-xps-15-9510-nvidia
+        ];
       };
     };
 }
