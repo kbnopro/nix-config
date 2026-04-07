@@ -32,7 +32,6 @@
 
   programs.hyprland = {
     enable = true;
-    withUWSM = true;
   };
 
   services.keyd.enable = true;
