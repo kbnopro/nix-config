@@ -13,6 +13,7 @@
       typst.enable = true;
       clang.enable = true;
       java.enable = true;
+      markdown.enable = true;
     };
 
     vim.assistant.copilot.enable = true;
