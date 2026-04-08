@@ -14,6 +14,7 @@
       clang.enable = true;
       java.enable = true;
       markdown.enable = true;
+      go.enable = true;
     };
 
     vim.assistant.copilot.enable = true;
