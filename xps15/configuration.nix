@@ -28,21 +28,11 @@
 
   hardware.bluetooth.enable = true;
 
-  services.getty.autologinUser = "khanhbui";
-
-  programs.hyprland = {
-    enable = true;
-  };
-
   # Stable symlink for cards
   services.udev.extraRules = ''
     KERNEL=="card*", KERNELS=="0000:00:02.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/intel-igpu"
     KERNEL=="card*", KERNELS=="0000:01:00.0", SUBSYSTEM=="drm", SUBSYSTEMS=="pci", SYMLINK+="dri/nvidia-dgpu"
   '';
-
-  services.keyd.enable = true;
-
-  services.tpm-fido.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -70,6 +60,22 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
+  services = {
+    # autologin
+    getty.autologinUser = "khanhbui";
+
+    #services
+    dbus.implementation = "broker";
+    keyd.enable = true;
+    tpm-fido.enable = true;
+    fwupd.enable = true;
+  };
+
+  programs = {
+    hyprland.enable = true;
+    fish.enable = true;
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.khanhbui = {
     isNormalUser = true;
@@ -79,8 +85,6 @@
     ];
     shell = pkgs.fish;
   };
-
-  programs.fish.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
