@@ -71,7 +71,7 @@ in
         ExecStart = "${linux-id}/bin/linux-id --auth fprintd";
         Restart = "always";
         RestartSec = "3";
-        # Requirement: tpm-fido needs pinentry to ask for your TPM PIN
+        # Requirement: tpm-fido needs pinentry to verify user presence
         Environment = "PATH=${
           lib.makeBinPath [
             pkgs.pinentry-qt
@@ -79,29 +79,5 @@ in
         }";
       };
     };
-
-    # Create a systemd user service to launch it
-    systemd.user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
-
-    security.polkit.extraConfig = ''
-      polkit.addRule(function(action, subject) {
-        if (action.id == "net.reactivated.fprint.device.verify" &&
-            subject.isInGroup("wheel")) {
-          return polkit.Result.YES;
-        }
-      });
-    '';
   };
 }
