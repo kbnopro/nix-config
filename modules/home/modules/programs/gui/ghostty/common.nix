@@ -13,7 +13,7 @@ in
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "SUPER, T, exec, ghostty"
+        "SUPER, T, exec, ghostty +new-window"
       ];
     };
     programs.ghostty = with colors.withHashtag; {
