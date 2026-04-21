@@ -16,6 +16,7 @@
       markdown.enable = true;
       go.enable = true;
       coq.enable = true;
+      lua.enable = true;
     };
 
     vim.assistant.copilot.enable = true;
