@@ -34,6 +34,8 @@
         textwidth = 0;
 
         undofile = true;
+
+        sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,terminal";
       };
     }
 
