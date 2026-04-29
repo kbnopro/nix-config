@@ -24,6 +24,7 @@ in
         font-size = 10;
         window-padding-x = 16;
         window-padding-y = 16;
+        confirm-close-surface = false;
         keybind = [
           "clear" # clear all default keybinds to define it here, we can move this to Zellij / tmux config later
           "ctrl+shift+c=copy_to_clipboard"
