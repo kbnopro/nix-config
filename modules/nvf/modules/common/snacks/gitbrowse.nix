@@ -8,7 +8,7 @@
           Snacks.gitbrowse()
         end
       '';
-      desc = "Git Browse (Copy)";
+      desc = "Git Browse (Open)";
       lua = true;
       mode = [
         "n"

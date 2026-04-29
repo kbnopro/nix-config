@@ -15,6 +15,10 @@
       move_cursor_up = "<C-k>";
       move_cursor_left = "<C-h>";
       move_cursor_right = "<C-l>";
+      swap_buf_up = null;
+      swap_buf_down = null;
+      swap_buf_left = null;
+      swap_buf_right = null;
     };
   };
 }

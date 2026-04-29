@@ -17,7 +17,7 @@
     {
       key = "<leader><space>";
       action = ''
-        function () Snacks.picker.smart() end
+        Snacks.picker.smart
       '';
       desc = "Smart Find Files";
       lua = true;
@@ -27,7 +27,7 @@
     {
       key = "<leader>ff";
       action = ''
-        function () Snacks.picker.files() end
+        Snacks.picker.files
       '';
       desc = "Find Files";
       lua = true;
@@ -36,7 +36,7 @@
     {
       key = "<leader>sg";
       action = ''
-        function () Snacks.picker.grep() end
+        Snacks.picker.grep
       '';
       desc = "Smart Grep";
       lua = true;
@@ -45,7 +45,7 @@
     {
       key = "<leader>sd";
       action = ''
-        function () Snacks.picker.diagnostics() end
+        Snacks.picker.diagnostics
       '';
       desc = "Diagnostics";
       lua = true;
@@ -54,9 +54,18 @@
     {
       key = "<leader>fb";
       action = ''
-        function () Snacks.picker.buffers() end
+        Snacks.picker.buffers
       '';
       desc = "Buffers";
+      lua = true;
+      mode = "n";
+    }
+    {
+      key = "<leader>sk";
+      action = ''
+        Snacks.picker.keymaps
+      '';
+      desc = "Keymaps";
       lua = true;
       mode = "n";
     }
