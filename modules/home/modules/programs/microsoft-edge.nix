@@ -13,9 +13,8 @@ let
   colors = config.background.colors;
 
   edgeFlags = [
-    "--password-store=gnome-libsecret"
-    "--ozone-platform=wayland"
-    "--gtk-version=3"
+    "--ozone-platform-hint=wayland"
+    "--gtk-version=4"
     "--enable-features=TouchPadOverscrollHistoryNavigation,UseOzonePlatform"
     "--enable-wayland-ime"
     "--disable-features=WaylandWpColorManager"
@@ -35,9 +34,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = with pkgs; [
+    home.packages = [
       edge
-      libsecret
     ];
     wayland.windowManager.hyprland.settings = {
       bind = [
