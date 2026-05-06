@@ -11,6 +11,7 @@
           (_type == "directory") # include directories
           || (
             (path != "default.nix") # ignore default.nix
+            && !(lib.strings.hasPrefix "_" path) # ignore files starting with _
             && (lib.strings.hasSuffix ".nix" path) # include .nix files
           )
         ) (builtins.readDir path)

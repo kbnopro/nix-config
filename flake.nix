@@ -19,6 +19,7 @@
     mac-app-util.url = "github:hraban/mac-app-util";
     nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs =
@@ -29,6 +30,7 @@
       nix-darwin,
       mac-app-util,
       nixos-hardware,
+      flake-utils,
       ...
     }:
 
@@ -158,5 +160,38 @@
           # nixos-hardware.nixosModules.dell-xps-15-9510-nvidia
         ];
       };
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+        lib = pkgs.lib;
+
+        colors =
+          (import ./modules/background/_color.nix {
+            inherit lib pkgs;
+            bgPath = ./background-images/blue-sunset.jpg;
+          }).colorAttrs;
+
+        nvf = inputs.nvf.lib.neovimConfiguration {
+          inherit pkgs;
+          modules = [
+            ./modules/nvf
+          ];
+          extraSpecialArgs = {
+            inherit mylib colors;
+          };
+        };
+      in
+      {
+        apps.nvim = {
+          type = "app";
+          program = "${nvf.neovim}/bin/nvim";
+        };
+      }
+    )
+
+  ;
 }
