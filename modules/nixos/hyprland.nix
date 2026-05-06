@@ -17,6 +17,14 @@ in
     programs.hyprland = {
       withUWSM = true;
     };
-    home-manager.users."${cfg.hmUser}".wayland.windowManager.hyprland.enable = true;
+    home-manager.users."${cfg.hmUser}" = {
+      wayland.windowManager.hyprland.enable = true;
+      programs.fish.loginShellInit = ''
+        if uwsm check may-start
+          exec uwsm start hyprland-uwsm.desktop 
+        end
+      '';
+
+    };
   };
 }

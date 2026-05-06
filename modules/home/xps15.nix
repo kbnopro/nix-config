@@ -21,16 +21,6 @@
   };
 
   programs = {
-    # Temporary programs (ideally, all configs should be moved to designated folder)
-    fish = {
-      enable = true;
-      loginShellInit = ''
-        if uwsm check may-start
-          exec uwsm start hyprland-uwsm.desktop 
-        end
-      '';
-    };
-
     # GUI programs
     # foot.enable = true;
     ghostty.enable = true;
@@ -57,6 +47,7 @@
     git.enable = true;
     gh.enable = true;
     nvf.enable = true;
+    fish.enable = true;
 
     zoxide = {
       enable = true;

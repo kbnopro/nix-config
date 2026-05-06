@@ -20,16 +20,6 @@
   };
 
   programs = {
-    # Temporary programs (ideally, all configs should be moved to designated folder)
-    fish = {
-      enable = true;
-      loginShellInit = ''
-        if uwsm check may-start
-          exec uwsm start hyprland-uwsm.desktop 
-        end
-      '';
-    };
-
     # GUI programs
     ghostty.enable = true;
 
