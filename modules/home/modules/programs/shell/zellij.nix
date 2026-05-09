@@ -543,6 +543,7 @@ in
       default_mode._args = [ "locked" ];
       show_startup_tips = [ false ];
       stacked_resize = [ true ];
+      on_force_close = [ "quit" ];
       theme = [ "custom" ];
 
       themes.custom = with colors.withHashtag; {
