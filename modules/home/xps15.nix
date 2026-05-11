@@ -25,6 +25,7 @@
     # foot.enable = true;
     ghostty.enable = true;
     fuzzel.enable = true;
+    # quickshell.enable = true;
 
     # Apps programs
     edge.enable = true;
@@ -41,10 +42,15 @@
       enableFishIntegration = true;
     };
 
-    lazygit.enable = true;
-
     # Shell programs
-    git.enable = true;
+    lazygit.enable = true;
+    git = {
+      enable = true;
+      settings = {
+        user.signingkey = "230413BD8EA1E853";
+        commit.gpgsign = true;
+      };
+    };
     gh.enable = true;
     nvf.enable = true;
     fish.enable = true;
@@ -63,10 +69,14 @@
       enable = true;
       enableFishIntegration = true;
     };
+
+    # Gpg
+    gpg.enable = true;
   };
 
   services = {
     swww.enable = true;
+    ssh-agent.enable = true;
   };
 
 }
