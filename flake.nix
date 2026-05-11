@@ -20,10 +20,19 @@
     nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     flake-utils.url = "github:numtide/flake-utils";
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{
+      self,
       nixpkgs,
       home-manager,
       spicetify-nix,
@@ -31,6 +40,8 @@
       mac-app-util,
       nixos-hardware,
       flake-utils,
+      disko,
+      deploy-rs,
       ...
     }:
 
@@ -160,6 +171,26 @@
           # nixos-hardware.nixosModules.dell-xps-15-9510-nvidia
         ];
       };
+
+      nixosConfigurations."hetzner" = mkNixOSSystem {
+        configuration = ./hetzner/configuration.nix;
+        extraModules = [
+          disko.nixosModules.disko
+        ];
+      };
+
+      deploy.nodes."hetzner" = {
+        hostname = "hetzner";
+        sshUser = "root";
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."hetzner";
+        };
+      };
+
+      # This is highly advised, and will prevent many possible mistakes
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+
     }
     // flake-utils.lib.eachDefaultSystem (
       system:
