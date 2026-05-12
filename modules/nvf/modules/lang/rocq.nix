@@ -6,6 +6,15 @@
 }:
 let
   cfg = config.vim.languages.coq;
+
+  # To avoid having to open terminal in neovim and compile,
+  # we can install coq and coq-lsp in the shell where neovim is launched.
+  # myCoq = pkgs.coq_9_0.withPackages (
+  #   ps: with ps; [
+  #     coq-lsp
+  #     stdlib
+  #   ]
+  # );
 in
 {
   options = {
@@ -15,9 +24,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    vim.extraPackages = with pkgs.coqPackages; [
-      coq-lsp
-    ];
+    # vim.extraPackages = [
+    #   myCoq
+    # ];
 
     vim.lazy.plugins."coq-lsp.nvim" = {
       enabled = true;
