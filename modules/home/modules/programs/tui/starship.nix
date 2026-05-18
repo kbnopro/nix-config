@@ -45,7 +45,7 @@ in
     git_branch = {
       style = "bg:primary";
       symbol = "󰘬";
-      truncation_length = 4;
+      truncation_length = 10;
       truncation_symbol = "";
       format = "• [](bold fg:primary)[$symbol $branch(:$remote_branch)](fg:on_primary bg:primary)[ ](bold fg:primary)";
     };
