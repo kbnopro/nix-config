@@ -25,7 +25,7 @@
     # foot.enable = true;
     ghostty.enable = true;
     fuzzel.enable = true;
-    # quickshell.enable = true;
+    quickshell.enable = true;
 
     # Apps programs
     edge.enable = true;
