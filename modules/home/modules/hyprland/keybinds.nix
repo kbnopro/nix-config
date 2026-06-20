@@ -63,6 +63,9 @@
       "Super, 8, workspace, 8" # [hidden]
       "Super, 9, workspace, 9" # [hidden]
       "Super, 0, workspace, 10" # [hidden]
+      "Ctrl+Super, l, workspace, r+1" # [hidden]
+      "Ctrl+Super, h, workspace, r-1" # [hidden]
+      "Super, s, togglespecialworkspace, # Toggle scratchpad" # Toggle scratchpad
 
       ##! Workspace management
       # Move window to workspace Super + Alt + [0-9]
@@ -77,6 +80,7 @@
       "Super+Alt, 8, movetoworkspacesilent, 8" # [hidden]
       "Super+Alt, 9, movetoworkspacesilent, 9" # [hidden]
       "Super+Alt, 0, movetoworkspacesilent, 10" # [hidden]
+      "Super+Alt, s, movetoworkspacesilent, special" # Move to scratchpad
       "Super+Shift, S, exec, sleep 0.2 && grimblast copy area"
 
     ];

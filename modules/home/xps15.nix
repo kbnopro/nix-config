@@ -1,7 +1,24 @@
 {
   pkgs,
+  lib,
   ...
 }:
+let
+  monitorScript = pkgs.writeShellApplication {
+    name = "toggle-laptop-monitor";
+    runtimeInputs = [
+      pkgs.hyprland
+    ];
+    text = ''
+      lidState=$(cat /proc/acpi/button/lid/LID0/state | grep -c closed)
+      if [ "$lidState" -eq 1 ]; then
+        hyprctl keyword monitor "eDP-1, disable"
+      else
+        hyprctl keyword monitor "eDP-1, preferred, auto, 1"
+      fi
+    '';
+  };
+in
 {
   imports = [ ./modules ];
 
@@ -79,4 +96,13 @@
     ssh-agent.enable = true;
   };
 
+  wayland.windowManager.hyprland.settings = {
+    bindl = [
+      '',switch:off:Lid Switch,exec,hyprctl keyword monitor "eDP-1, preferred, auto, 1"''
+      '',switch:on:Lid Switch,exec,hyprctl keyword monitor "eDP-1, disable"''
+    ];
+    exec = [
+      "${monitorScript}/bin/toggle-laptop-monitor"
+    ];
+  };
 }
