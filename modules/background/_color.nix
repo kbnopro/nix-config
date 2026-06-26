@@ -16,7 +16,15 @@ let
         buildInputs = [ pythonEnv ];
       }
       ''
-        python ${./color-generation.py} --path "${bgPath}" --termscheme "${./base-terminal-scheme.json}" --blend_bg_fg --transparency "opaque" --mode "dark" --term_fg_boost 0 --harmonize_threshold 15 > $out
+        python ${./color-generation.py} \
+          --path "${bgPath}" \
+          --termscheme "${./base-terminal-scheme.json}" \
+          --blend_bg_fg  \
+          --transparency "opaque" \
+          --mode "dark" \
+          --term_fg_boost 0  \
+          --harmonize_threshold 15 \
+          --scheme "vibrant" > $out
       '';
 
   content = builtins.readFile generated;

@@ -4,16 +4,19 @@
 
 {
   wayland.windowManager.hyprland.settings = {
-    gesture = [
-      "3, horizontal, workspace"
-    ];
+    gesture = {
+      fingers = 3;
+      direction = "horizontal";
+      action = "workspace";
+    };
 
-    input = {
-      touchpad = {
-        natural_scroll = true;
-        scroll_factor = 0.5;
+    config = {
+      input = {
+        touchpad = {
+          natural_scroll = true;
+          scroll_factor = 0.5;
+        };
       };
     };
   };
 }
-

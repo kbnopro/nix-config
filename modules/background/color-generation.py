@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import sys
 import math
 import json
 from PIL import Image
@@ -214,7 +215,7 @@ elif args.scheme == "content":
 elif args.scheme == "vibrant":
     from materialyoucolor.scheme.scheme_vibrant import SchemeVibrant as Scheme
 else:
-    from schemes.scheme_morevibrant import SchemeMoreVibrant as Scheme
+    raise ValueError(f"Unknown scheme: {args.scheme}")
 
 # Generate
 scheme = Scheme(hct, darkmode, 0.0)
@@ -236,10 +237,13 @@ for name, _color in extended_colors:
     cap_name = name.capitalize()
     color = hex_to_argb(_color)
     palette = custom_color(color)["dark" if darkmode else "light"]
-    material_colors[f"{name}"] = rgba_to_hex(palette["color"])
-    material_colors[f"on{cap_name}"] = rgba_to_hex(palette["onColor"])
-    material_colors[f"{name}Container"] = rgba_to_hex(palette["colorContainer"])
-    material_colors[f"on{cap_name}Container"] = rgba_to_hex(palette["onColorContainer"])
+    # print palette to stderr
+    print(f"{name} palette: {palette}", file=sys.stderr)
+
+    material_colors[f"{name}"] = argb_to_hex(palette["color"])
+    material_colors[f"on{cap_name}"] = argb_to_hex(palette["onColor"])
+    material_colors[f"{name}Container"] = argb_to_hex(palette["colorContainer"])
+    material_colors[f"on{cap_name}Container"] = argb_to_hex(palette["onColorContainer"])
 
 # Terminal Colors
 if args.termscheme is not None:
@@ -247,7 +251,7 @@ if args.termscheme is not None:
         json_termscheme = f.read()
     term_source_colors = json.loads(json_termscheme)["dark" if darkmode else "light"]
 
-    primary_color_argb = hex_to_argb(material_colors["primary_paletteKeyColor"])
+    primary_color_argb = hex_to_argb(material_colors["primaryPaletteKeyColor"])
     for color, val in term_source_colors.items():
         if args.scheme == "monochrome":
             term_colors[color] = val

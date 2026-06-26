@@ -15,7 +15,12 @@ in
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "Super, Space, exec, pkill fuzzel || fuzzel"
+        {
+          _args = [
+            "SUPER + SPACE"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd('pkill fuzzel || fuzzel')")
+          ];
+        }
       ];
     };
     programs.fuzzel.settings.colors = with colors; {

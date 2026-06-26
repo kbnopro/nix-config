@@ -1,107 +1,216 @@
-# Inspired by: https://github.com/end-4/dots-hyprland/blob/main/.config/hypr/hyprland/keybinds.conf
-# We will have special syntax to be able to parse this for cheat sheet (in the future I hope)
-# Lines ending with `# [hidden]` won't be shown on cheatsheet
-# Lines starting with #! and ##! are section headings and sub headings
-# Lines starting with #/# are only for cheatsheet
 {
+  lib,
   ...
 }:
+let
+  vimDirections = [
+    {
+      key = "h";
+      direction = "l";
+    }
+    {
+      key = "j";
+      direction = "d";
+    }
+    {
+      key = "k";
+      direction = "u";
+    }
+    {
+      key = "l";
+      direction = "r";
+    }
+  ];
 
+  arrowDirections = [
+    {
+      key = "LEFT";
+      direction = "l";
+    }
+    {
+      key = "DOWN";
+      direction = "d";
+    }
+    {
+      key = "UP";
+      direction = "u";
+    }
+    {
+      key = "RIGHT";
+      direction = "r";
+    }
+  ];
+
+  workspaces =
+    (lib.range 1 10)
+    |> (map (m: {
+      key = lib.trivial.mod m 10;
+      workspace = m;
+    }));
+
+  directions = vimDirections ++ arrowDirections;
+
+  mkBind = dsp: key: args: {
+    _args = [
+      key
+      (lib.generators.mkLuaInline "hl.dsp.${dsp}(${lib.generators.toLua { } args})")
+    ];
+  };
+
+  mkBindFlags = dsp: key: args: flags: {
+    _args = [
+      key
+      (lib.generators.mkLuaInline "hl.dsp.${dsp}(${lib.generators.toLua { } args})")
+      (lib.generators.mkLuaInline (lib.generators.toLua { } flags))
+    ];
+  };
+
+  addModifier = modifier: input: input // { key = "${modifier} + ${lib.toString input.key}"; };
+
+in
 {
   wayland.windowManager.hyprland.settings = {
-    bind = [
-      ##! Window management
-      # Focusing
-      #/# bind = Super, ←/↑/→/↓,, # Move focus in direction
-      "Super, h, movefocus, l" # [hidden]
-      "Super, l, movefocus, r" # [hidden]
-      "Super, k, movefocus, u" # [hidden]
-      "Super, j, movefocus, d" # [hidden]
-      "Super, Left, movefocus, l" # [hidden]
-      "Super, Right, movefocus, r" # [hidden]
-      "Super, Up, movefocus, u" # [hidden]
-      "Super, Down, movefocus, d" # [hidden]
-      "Super, BracketLeft, movefocus, l" # [hidden]
-      "Super, BracketRight, movefocus, r" # [hidden]
-      "Super, Q, killactive,"
-      "Super+Shift+Alt, Q, exec, hyprctl kill" # Pick and kill a window
+    bind = lib.flatten [
+      # Window focus
+      (
+        directions
+        |> (map (addModifier "SUPER"))
+        |> (map ({ key, direction }: (mkBind "focus" key { inherit direction; })))
+      )
+      # Move window
+      (
+        directions
+        |> (map (addModifier "SUPER + SHIFT"))
+        |> (map ({ key, direction }: (mkBind "window.move" key { inherit direction; })))
+      )
+      # Close window
+      (mkBind "window.close" "SUPER + Q" { })
 
-      ##! Window arrangement
-      #/# bind = Super+Shift, ←/↑/→/↓,, # Window: move in direction
-      "Super+Shift, h, movewindow, l" # [hidden]
-      "Super+Shift, l, movewindow, r" # [hidden]
-      "Super+Shift, k, movewindow, u" # [hidden]
-      "Super+Shift, j, movewindow, d" # [hidden]
-      "Super+Shift, Left, movewindow, l" # [hidden]
-      "Super+Shift, Right, movewindow, r" # [hidden]
-      "Super+Shift, Up, movewindow, u" # [hidden]
-      "Super+Shift, Down, movewindow, d" # [hidden]
+      # Workspace focus
+      (
+        workspaces
+        |> (map (addModifier "SUPER"))
+        |> (map ({ key, workspace }: (mkBind "focus" key { inherit workspace; })))
+      )
+      (
+        [
+          {
+            key = "l";
+            direction = "r+1";
+          }
+          {
+            key = "h";
+            direction = "r-1";
+          }
+        ]
+        |> (map (addModifier "SUPER + CTRL"))
+        |> (map ({ key, direction }: (mkBind "focus" key { workspace = direction; })))
+      )
+      # Move window to workspace
+      (
+        workspaces
+        |> (map (addModifier "SUPER + ALT"))
+        |> (map (
+          { key, workspace }:
+          (mkBind "window.move" key {
+            inherit workspace;
+            follow = false;
+          })
+        ))
+      )
 
-      # Window split ratio
-      #/# binde = Super, +/-,, # Window: split ratio +/- 0.1
-      "binde = Super, Minus, splitratio, -0.1" # [hidden]
-      "binde = Super, Equal, splitratio, +0.1" # [hidden]
-      "binde = Super, Semicolon, splitratio, -0.1" # [hidden]
-      "binde = Super, Apostrophe, splitratio, +0.1" # [hidden]
+      # Volume control
+      (
+        [
+          {
+            key = "XF86AudioRaiseVolume";
+            command = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+";
+          }
+          {
+            key = "XF86AudioLowerVolume";
+            command = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
+          }
+        ]
+        |> (map ({ key, command }: (mkBindFlags "exec_cmd" key command { repeating = true; })))
+      )
+      # Audio play and mute button
+      (
+        [
+          {
+            key = "XF86AudioMute";
+            command = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          }
+          {
+            key = "XF86AudioPlay";
+            command = "playerctl play-pause";
+          }
+          {
+            key = "XF86AudioNext";
+            command = "playerctl next";
+          }
+          {
+            key = "XF86AudioPrev";
+            command = "playerctl previous";
+          }
+        ]
+        |> (map ({ key, command }: (mkBindFlags "exec_cmd" key command { locked = true; })))
+      )
+      # Brightness control
+      (
+        [
+          {
+            key = "XF86MonBrightnessUp";
+            command = "brightnessctl set '5%+'";
+          }
+          {
+            key = "XF86MonBrightnessDown";
+            command = "brightnessctl set --min-value=1 '5%-'";
+          }
+        ]
+        |> (map ({ key, command }: (mkBindFlags "exec_cmd" key command { repeating = true; })))
+      )
+      # Move and resize window with mouse
+      (mkBindFlags "window.drag" "SUPER + mouse:272" null { mouse = true; })
+      (mkBindFlags "window.resize" "SUPER + mouse:273" null { mouse = true; })
 
-      # Positioning mode
-      "Super+Alt, Space, togglefloating,"
-      "Super+Alt, F, fullscreenstate, 0 3" # Toggle fake fullscreen
-      "Super, F, fullscreen, 0"
-      "Super, D, fullscreen, 1"
+      # Screenshot
+      (mkBind "exec_cmd" "SUPER + SHIFT + S" "grimblast copy area")
+      (mkBind "exec_cmd" "Print" "grimblast copy area")
 
-      ##! Workspace navigation
-      # Switching
-      #/# bind = Super, Hash,, # Focus workspace # (1, 2, 3, 4, ...)
-      "Super, 1, workspace, 1" # [hidden]
-      "Super, 2, workspace, 2" # [hidden]
-      "Super, 3, workspace, 3" # [hidden]
-      "Super, 4, workspace, 4" # [hidden]
-      "Super, 5, workspace, 5" # [hidden]
-      "Super, 6, workspace, 6" # [hidden]
-      "Super, 7, workspace, 7" # [hidden]
-      "Super, 8, workspace, 8" # [hidden]
-      "Super, 9, workspace, 9" # [hidden]
-      "Super, 0, workspace, 10" # [hidden]
-      "Ctrl+Super, l, workspace, r+1" # [hidden]
-      "Ctrl+Super, h, workspace, r-1" # [hidden]
-      "Super, s, togglespecialworkspace, # Toggle scratchpad" # Toggle scratchpad
+      # Fullscreen toggle
+      (mkBind "window.fullscreen" "SUPER + F" {
+        mode = "fullscreen";
+        action = "toggle";
+      })
+      (mkBind "window.fullscreen" "SUPER + D" {
+        mode = "maximized";
+        action = "toggle";
+      })
+      (mkBind "window.fullscreen_state" "SUPER + ALT + F" {
+        internal = 0;
+        client = 3;
+        action = "toggle";
+      })
+      (mkBind "window.float" "SUPER + ALT + SPACE" {
+        action = "toggle";
+      })
 
-      ##! Workspace management
-      # Move window to workspace Super + Alt + [0-9]
-      #/# bind = Super+Alt, Hash,, # Window: move to workspace # (1, 2, 3, 4, ...)
-      "Super+Alt, 1, movetoworkspacesilent, 1" # [hidden]
-      "Super+Alt, 2, movetoworkspacesilent, 2" # [hidden]
-      "Super+Alt, 3, movetoworkspacesilent, 3" # [hidden]
-      "Super+Alt, 4, movetoworkspacesilent, 4" # [hidden]
-      "Super+Alt, 5, movetoworkspacesilent, 5" # [hidden]
-      "Super+Alt, 6, movetoworkspacesilent, 6" # [hidden]
-      "Super+Alt, 7, movetoworkspacesilent, 7" # [hidden]
-      "Super+Alt, 8, movetoworkspacesilent, 8" # [hidden]
-      "Super+Alt, 9, movetoworkspacesilent, 9" # [hidden]
-      "Super+Alt, 0, movetoworkspacesilent, 10" # [hidden]
-      "Super+Alt, s, movetoworkspacesilent, special" # Move to scratchpad
-      "Super+Shift, S, exec, sleep 0.2 && grimblast copy area"
-
+      # Scratchpad toggle
+      (mkBind "workspace.toggle_special" "SUPER + S" "scratchpad")
+      (mkBind "window.move" "SUPER + ALT + S" {
+        workspace = "special:scratchpad";
+        follow = false;
+      })
     ];
 
-    bindle = [
-      ", XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+" # [hidden]
-      ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-" # [hidden]
-      ", XF86MonBrightnessUp, exec, brightnessctl set '5%+'" # [hidden]
-      ", XF86MonBrightnessDown, exec, brightnessctl set --min-value=1 '5%-'" # [hidden]
-    ];
-
-    bindl = [
-      ", XF86AudioPlay, exec, playerctl play-pause" # [hidden]
-      ", XF86AudioPause, exec, playerctl play-pause" # [hidden]
-      ", XF86AudioNext, exec, playerctl next" # [hidden]
-      ", XF86AudioPrev, exec, playerctl previous" # [hidden]
-    ];
-
-    bindm = [
-      "bindm = Super, mouse:272, movewindow"
-      "bindm = Super, mouse:273, resizewindow"
-    ];
+    # TODO: Smart splits like for this maybe?
+    #   bind = [
+    #     # Window split ratio
+    #     #/# binde = Super, +/-,, # Window: split ratio +/- 0.1
+    #     "binde = Super, Minus, splitratio, -0.1" # [hidden]
+    #     "binde = Super, Equal, splitratio, +0.1" # [hidden]
+    #     "binde = Super, Semicolon, splitratio, -0.1" # [hidden]
+    #     "binde = Super, Apostrophe, splitratio, +0.1" # [hidden]
+    #   ];
   };
 }

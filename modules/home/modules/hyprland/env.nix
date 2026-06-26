@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -12,13 +11,13 @@ in
   config = lib.mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       env = [
-        "HYPRCURSOR_THEME,rose-pine-hyprcursor"
-        "AQ_NO_MODIFIERS,1"
-        # "AQ_DRM_DEVICES, /dev/dri/nvidia-dgpu:/dev/dri/intel-igpu"
+        {
+          _args = [
+            "HYPRCURSOR_THEME"
+            "rose-pine-hyprcursor"
+          ];
+        }
       ];
     };
-    home.packages = with pkgs; [
-      rose-pine-hyprcursor
-    ];
   };
 }
