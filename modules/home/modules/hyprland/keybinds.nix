@@ -146,15 +146,5 @@ in
         follow = false;
       })
     ];
-
-    # TODO: Smart splits like for this maybe?
-    #   bind = [
-    #     # Window split ratio
-    #     #/# binde = Super, +/-,, # Window: split ratio +/- 0.1
-    #     "binde = Super, Minus, splitratio, -0.1" # [hidden]
-    #     "binde = Super, Equal, splitratio, +0.1" # [hidden]
-    #     "binde = Super, Semicolon, splitratio, -0.1" # [hidden]
-    #     "binde = Super, Apostrophe, splitratio, +0.1" # [hidden]
-    #   ];
   };
 }
