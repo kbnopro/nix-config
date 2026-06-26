@@ -19,22 +19,22 @@ in
       (
         directions
         |> (map (addModifier "SUPER"))
-        |> (map ({ key, direction }: (mkBind "focus" key { inherit direction; })))
+        |> (map ({ key, direction }: (mkBind key "focus" { inherit direction; })))
       )
       # Move window
       (
         directions
         |> (map (addModifier "SUPER + SHIFT"))
-        |> (map ({ key, direction }: (mkBind "window.move" key { inherit direction; })))
+        |> (map ({ key, direction }: (mkBind key "window.move" { inherit direction; })))
       )
       # Close window
-      (mkBind "window.close" "SUPER + Q" { })
+      (mkBind "SUPER + Q" "window.close" { })
 
       # Workspace focus
       (
         workspaces
         |> (map (addModifier "SUPER"))
-        |> (map ({ key, workspace }: (mkBind "focus" key { inherit workspace; })))
+        |> (map ({ key, workspace }: (mkBind key "focus" { inherit workspace; })))
       )
       (
         [
@@ -48,7 +48,7 @@ in
           }
         ]
         |> (map (addModifier "SUPER + CTRL"))
-        |> (map ({ key, direction }: (mkBind "focus" key { workspace = direction; })))
+        |> (map ({ key, direction }: (mkBind key "focus" { workspace = direction; })))
       )
       # Move window to workspace
       (
@@ -56,7 +56,7 @@ in
         |> (map (addModifier "SUPER + ALT"))
         |> (map (
           { key, workspace }:
-          (mkBind "window.move" key {
+          (mkBind key "window.move" {
             inherit workspace;
             follow = false;
           })
@@ -75,7 +75,7 @@ in
             command = "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
           }
         ]
-        |> (map ({ key, command }: (mkBindFlags "exec_cmd" key command { repeating = true; })))
+        |> (map ({ key, command }: (mkBindFlags key "exec_cmd" command { repeating = true; })))
       )
       # Audio play and mute button
       (
@@ -97,7 +97,7 @@ in
             command = "playerctl previous";
           }
         ]
-        |> (map ({ key, command }: (mkBindFlags "exec_cmd" key command { locked = true; })))
+        |> (map ({ key, command }: (mkBindFlags key "exec_cmd" command { locked = true; })))
       )
       # Brightness control
       (
@@ -111,37 +111,37 @@ in
             command = "brightnessctl set --min-value=1 '5%-'";
           }
         ]
-        |> (map ({ key, command }: (mkBindFlags "exec_cmd" key command { repeating = true; })))
+        |> (map ({ key, command }: (mkBindFlags key "exec_cmd" command { repeating = true; })))
       )
       # Move and resize window with mouse
-      (mkBindFlags "window.drag" "SUPER + mouse:272" null { mouse = true; })
-      (mkBindFlags "window.resize" "SUPER + mouse:273" null { mouse = true; })
+      (mkBindFlags "SUPER + mouse:272" "window.drag" null { mouse = true; })
+      (mkBindFlags "SUPER + mouse:273" "window.resize" null { mouse = true; })
 
       # Screenshot
-      (mkBind "exec_cmd" "SUPER + SHIFT + S" "grimblast copy area")
-      (mkBind "exec_cmd" "Print" "grimblast copy area")
+      (mkBind "SUPER + SHIFT + S" "exec_cmd" "grimblast copy area")
+      (mkBind "Print" "exec_cmd" "grimblast copy area")
 
       # Fullscreen toggle
-      (mkBind "window.fullscreen" "SUPER + F" {
+      (mkBind "SUPER + F" "window.fullscreen" {
         mode = "fullscreen";
         action = "toggle";
       })
-      (mkBind "window.fullscreen" "SUPER + D" {
+      (mkBind "SUPER + D" "window.fullscreen" {
         mode = "maximized";
         action = "toggle";
       })
-      (mkBind "window.fullscreen_state" "SUPER + ALT + F" {
+      (mkBind "SUPER + ALT + F" "window.fullscreen_state" {
         internal = 0;
         client = 3;
         action = "toggle";
       })
-      (mkBind "window.float" "SUPER + ALT + SPACE" {
+      (mkBind "SUPER + ALT + SPACE" "window.float" {
         action = "toggle";
       })
 
       # Scratchpad toggle
-      (mkBind "workspace.toggle_special" "SUPER + S" "scratchpad")
-      (mkBind "window.move" "SUPER + ALT + S" {
+      (mkBind "SUPER + S" "workspace.toggle_special" "scratchpad")
+      (mkBind "SUPER + ALT + S" "window.move" {
         workspace = "special:scratchpad";
         follow = false;
       })

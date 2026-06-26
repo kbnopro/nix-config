@@ -50,14 +50,14 @@ rec {
 
   directions = vimDirections ++ arrowDirections;
 
-  mkBind = dsp: key: args: {
+  mkBind = key: dsp: args: {
     _args = [
       key
       (lib.generators.mkLuaInline "hl.dsp.${dsp}(${lib.generators.toLua { } args})")
     ];
   };
 
-  mkBindFlags = dsp: key: args: flags: {
+  mkBindFlags = key: dsp: args: flags: {
     _args = [
       key
       (lib.generators.mkLuaInline "hl.dsp.${dsp}(${lib.generators.toLua { } args})")

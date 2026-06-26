@@ -21,11 +21,11 @@ in
     };
     bind = [
       # Resizing
-      (mkBind "layout" "SUPER + APOSTROPHE" "colresize +conf")
-      (mkBind "layout" "SUPER + SEMICOLON" "colresize -conf")
+      (mkBind "SUPER + APOSTROPHE" "layout" "colresize +conf")
+      (mkBind "SUPER + SEMICOLON" "layout" "colresize -conf")
       # Expel, promote, consume
-      (mkBind "layout" "SUPER + EQUAL" "expel")
-      (mkBind "layout" "SUPER + MINUS" "consume")
+      (mkBind "SUPER + EQUAL" "layout" "expel")
+      (mkBind "SUPER + MINUS" "layout" "consume")
     ];
   };
 }
