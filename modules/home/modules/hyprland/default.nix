@@ -19,11 +19,12 @@ in
     wayland.windowManager.hyprland = {
       package = null;
       portalPackage = null;
+      configType = "lua";
     };
     home.packages = with pkgs; [
       brightnessctl
       grimblast
-      socat
+      rose-pine-hyprcursor
     ];
   };
 }

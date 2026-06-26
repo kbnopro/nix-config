@@ -27,8 +27,8 @@ let
       main-elevated           = ${surfaceContainerHigh}
       card                    = ${surfaceContainerHigh}
 
-      sidebar                 = ${surfaceContainerHighest}" ; bottom part of sky
-      sidebar-alt             = ${surfaceContainerLowest} ; top part of sky
+      sidebar                 = ${surfaceContainerLowest}" ; bottom part of sky
+      sidebar-alt             = ${surfaceContainerHigh} ; top part of sky
 
       text                    = ${onSurface}
       subtext                 = ${onSurfaceVariant}
@@ -63,8 +63,13 @@ in
 {
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      wayland.windowManager.hyprland.settings.windowrule = [
-        "opacity ${builtins.toString colors.opacity}, match:class spotify"
+      wayland.windowManager.hyprland.settings.window_rule = [
+        {
+          match = {
+            class = "Spotify";
+          };
+          opacity = toString colors.opacity;
+        }
       ];
     })
     {

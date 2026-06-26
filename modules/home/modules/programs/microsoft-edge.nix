@@ -39,11 +39,21 @@ in
     ];
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "SUPER, E, exec, microsoft-edge"
+        {
+          _args = [
+            "SUPER + E"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd('microsoft-edge')")
+          ];
+        }
       ];
     };
-    wayland.windowManager.hyprland.settings.windowrule = [
-      "opacity ${builtins.toString opacity} ${builtins.toString opacity} 1, match:class microsoft-edge"
+    wayland.windowManager.hyprland.settings.window_rule = [
+      {
+        match = {
+          class = "microsoft-edge";
+        };
+        opacity = toString opacity;
+      }
       # Edge randomly spawn a client with basically no info, so this is to avoid layout shifiting
       # We can remove this when the issue is fixed, or remove the browser :skull:
       # "float on, match:initial_title ^$" fixed by overlay

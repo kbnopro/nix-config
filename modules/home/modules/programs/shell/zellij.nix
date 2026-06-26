@@ -652,7 +652,7 @@ in
           emphasis_2 = term0;
           emphasis_3 = term0;
         };
-        multiplayer_user_colorss = {
+        multiplayer_user_colors = {
           player_1 = term5;
           player_2 = term4;
           player_3 = term0;
