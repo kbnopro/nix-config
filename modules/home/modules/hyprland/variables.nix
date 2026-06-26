@@ -20,7 +20,6 @@ in
 
         resize_on_border = true;
         no_focus_fallback = true;
-        layout = "dwindle";
 
         animations = {
           bezier = [
