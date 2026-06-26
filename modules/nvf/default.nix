@@ -1,10 +1,9 @@
 {
+  mylib,
   ...
 }:
 {
-  imports = [
-    ./modules
-  ];
+  imports = mylib.scanPaths ./.;
 
   config = {
     vim.languages = {
