@@ -17,6 +17,7 @@
       go.enable = true;
       coq.enable = true;
       lua.enable = true;
+      qml.enable = true;
     };
 
     vim.assistant.copilot.enable = true;
