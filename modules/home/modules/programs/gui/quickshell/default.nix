@@ -13,6 +13,7 @@ in
     xdg.configFile."quickshell".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/modules/home/modules/programs/gui/quickshell/qml";
     xdg.cacheFile."quickshell/theme.json".text = builtins.toJSON colors;
+    programs.quickshell.systemd.enable = true;
     home.packages = with pkgs; [
       libnotify
     ];
