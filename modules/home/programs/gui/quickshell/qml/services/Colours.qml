@@ -16,15 +16,33 @@ Singleton {
     property string scheme
     readonly property M3Palette palette: M3Palette {}
 
-    function load(path: string) {
+    function load(scheme: string) {
+        root.scheme = scheme;
+        const parsedScheme = JSON.parse(scheme);
+        for (const key in parsedScheme) {
+            if (root.palette.hasOwnProperty(key)) {
+                root.palette[key] = parsedScheme[key];
+            }
+        }
     }
 
     FileView {
-        path: Paths.state + "/quickshell/theme.json"
-        watchChanges: true
+        id: themeFile
 
-        onLoaded: root.load()
-        onDataChanged: reload()
+        path: Paths.state + "/quickshell/scheme.json"
+
+        onLoaded: root.load(text())
+        onFileChanged: reload()
+    }
+
+    IpcHandler {
+        // Manual reload of theme file
+        target: "themeFile"
+
+        function reload(): void {
+            console.info("Reloaded theme file");
+            themeFile.reload();
+        }
     }
 
     component M3Palette: QtObject {
