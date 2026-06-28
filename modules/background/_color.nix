@@ -5,10 +5,7 @@
   ...
 }:
 let
-  pythonEnv = pkgs.python312.withPackages (ps: [
-    ps.materialyoucolor
-    ps.pillow
-  ]);
+  inherit (import ./_pythonEnv.nix { inherit pkgs; }) pythonEnv;
 
   generated =
     pkgs.runCommand "generate-color"

@@ -8,14 +8,16 @@
 let
   bgPath = config.background.path;
 
-  colors =
+  inherit
     (import ./_color.nix {
       inherit
         lib
         pkgs
         bgPath
         ;
-    }).colorAttrs;
+    })
+    colorAttrs
+    ;
 in
 {
   options.background = {
@@ -30,7 +32,7 @@ in
 
   config = lib.mkMerge [
     {
-      background.colors = colors;
+      background.colors = colorAttrs;
     }
     (lib.optionalAttrs (options ? home-manager) {
       home-manager.sharedModules = [
@@ -51,7 +53,7 @@ in
 
             config.background = {
               path = bgPath;
-              colors = colors;
+              colors = colorAttrs;
             };
           }
         )
