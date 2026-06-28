@@ -1,10 +1,13 @@
-{ ... }:
+{ lib, config, ... }:
+let
+  cfg = config.vim.languages.qml;
+in
 {
-  config = {
+  config = lib.mkIf cfg.enable {
     vim.lsp.servers.qmlls = {
       root_markers = [
         ".git"
-        ".qmlls.init"
+        ".qmlls.ini"
       ];
     };
     vim.languages.qml = {

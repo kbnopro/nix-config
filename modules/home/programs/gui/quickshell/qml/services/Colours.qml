@@ -4,11 +4,11 @@ pragma ComponentBehavior: Bound
 import QtQuick
 import Quickshell
 
-// import Quickshell.Io
+import Quickshell.Io
 // import Caelestia
 // import Caelestia.Config
 // import qs.services
-// import qs.utils
+import qs.utils
 
 Singleton {
     id: root
@@ -17,6 +17,14 @@ Singleton {
     readonly property M3Palette palette: M3Palette {}
 
     function load(path: string) {
+    }
+
+    FileView {
+        path: Paths.state + "/quickshell/theme.json"
+        watchChanges: true
+
+        onLoaded: root.load()
+        onDataChanged: reload()
     }
 
     component M3Palette: QtObject {
