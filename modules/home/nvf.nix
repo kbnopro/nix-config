@@ -14,7 +14,7 @@ let
   nvf = inputs.nvf.lib.neovimConfiguration {
     inherit pkgs;
     modules = [
-      ../../nvf
+      ../nvf
     ];
     extraSpecialArgs = {
       inherit mylib colors;

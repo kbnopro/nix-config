@@ -21,8 +21,6 @@ let
   };
 in
 {
-  imports = [ ./modules ];
-
   home = {
     username = "khanhbui";
     homeDirectory = "/home/khanhbui";

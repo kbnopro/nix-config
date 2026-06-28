@@ -3,8 +3,6 @@
   ...
 }:
 {
-  imports = [ ./modules ];
-
   home = {
     username = "theatran";
     homeDirectory = lib.mkForce "/Users/theatran";
