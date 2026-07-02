@@ -13,7 +13,8 @@ let
   colors = config.background.colors;
 
   edgeFlags = [
-    "--ozone-platform-hint=wayland"
+    "--ozone-platform-hint=x11"
+    "--ozone-platform=x11"
     "--gtk-version=4"
     "--enable-features=TouchPadOverscrollHistoryNavigation,UseOzonePlatform"
     "--enable-wayland-ime"
