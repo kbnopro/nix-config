@@ -5,8 +5,7 @@ in
 {
   config = lib.mkIf cfg.enable {
     vim.lsp.servers.qmlls = {
-      root_markers = [
-        ".git"
+      root_markers = lib.mkAfter [
         ".qmlls.ini"
       ];
     };
@@ -15,5 +14,7 @@ in
       lsp.enable = true;
       treesitter.enable = true;
     };
+    # Until Neovim add tree-sitter indentation support for qml
+    vim.treesitter.indent.excludes = lib.mkAfter [ "qml" ];
   };
 }

@@ -6,7 +6,5 @@ import qs.services
 import qs.utils
 
 ShellRoot {
-    Component.onCompleted: {
-        Colours;
-    }
+    Component.onCompleted: {}
 }

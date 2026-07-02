@@ -16,11 +16,15 @@ let
       jq '.' ugly.json > $out
     ''
   );
+
+  pathToConfig = "${config.home.homeDirectory}/nixos-config/modules/home/programs/gui/quickshell";
+
+  inherit (config.lib.file) mkOutOfStoreSymlink;
 in
 {
   config = lib.mkIf cfg.enable {
-    xdg.configFile."quickshell".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/nixos-config/modules/home/programs/gui/quickshell/qml";
+    xdg.configFile."quickshell".source = mkOutOfStoreSymlink "${pathToConfig}/qml";
+    xdg.configFile."shell.json".source = mkOutOfStoreSymlink "${pathToConfig}/shell.json";
     xdg.stateFile."quickshell/scheme.json" = {
       text = prettyColorsJSON;
       # Manually trigger the reload

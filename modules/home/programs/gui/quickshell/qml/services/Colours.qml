@@ -29,7 +29,7 @@ Singleton {
     FileView {
         id: themeFile
 
-        path: Paths.state + "/quickshell/scheme.json"
+        path: `${Paths.state}/quickshell/scheme.json`
 
         onLoaded: root.load(text())
         onFileChanged: reload()
