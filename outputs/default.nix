@@ -12,6 +12,7 @@ let
     hetzner = import ./hosts/hetzner/outputs.nix inputs;
     m4-air = import ./hosts/m4-air/outputs.nix inputs;
     naki = import ./hosts/naki/outputs.nix inputs;
+    meshy = import ./hosts/meshy/outputs.nix inputs;
   };
 
   loadOutputs =

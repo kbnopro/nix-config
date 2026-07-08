@@ -19,6 +19,6 @@
     };
 
     vim.assistant.copilot.enable = true;
-    vim.presence.neocord.enable = true;
+    # vim.presence.neocord.enable = true;
   };
 }
