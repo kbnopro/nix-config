@@ -56,6 +56,7 @@
   programs = {
     hyprland.enable = true;
     fish.enable = true;
+    ddcutil.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
