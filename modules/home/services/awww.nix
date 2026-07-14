@@ -5,8 +5,9 @@
   ...
 }:
 let
-  bgPath = config.background.path;
   cfgEnable = config.services.awww.enable;
+
+  bgPath = config.background.path;
   myScript = pkgs.writeShellApplication {
     name = "set-wallpaper";
     runtimeInputs = [
