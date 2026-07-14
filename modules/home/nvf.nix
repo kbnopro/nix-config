@@ -17,7 +17,7 @@ let
       ../nvf
     ];
     extraSpecialArgs = {
-      inherit mylib colors;
+      inherit mylib colors inputs;
     };
   };
 

@@ -19,7 +19,7 @@ in
 {
   options = {
     vim.languages.coq = {
-      enable = lib.mkEnableOption "Coq support";
+      enable = lib.mkEnableOption "Coq Theorem Prover";
     };
   };
 

@@ -1,7 +1,11 @@
 {
-  colors ? { },
+  colors,
+  lib,
   ...
 }:
+let
+  inherit (lib.nvim.dag) entryBefore;
+in
 {
   vim = {
     theme = {
@@ -10,7 +14,11 @@
       style = "night";
     };
 
-    luaConfigPost =
+    options.termguicolors = true;
+
+    startPlugins = [ "tokyonight" ];
+
+    luaConfigRC.theme = entryBefore [ "pluginConfigs" "lazyConfigs" ] (
       if (colors ? withHashtag) then
         with colors.withHashtag;
         ''
@@ -27,7 +35,7 @@
               colors.bg_visual = "${secondaryContainer}";
             end,
 
-            on_highlights = function(highlights, colors) 
+            on_highlights = function(highlights, colors)
               highlights.AlphaHeader = {
                 fg = "${primary}"
               }
@@ -36,6 +44,7 @@
           vim.cmd.colorscheme("tokyonight")
         ''
       else
-        "";
+        ""
+    );
   };
 }

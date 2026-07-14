@@ -16,9 +16,10 @@
       go.enable = true;
       coq.enable = true;
       lua.enable = true;
+      prisma.enable = true;
     };
 
     vim.assistant.copilot.enable = true;
-    # vim.presence.neocord.enable = true;
+    vim.presence.neocord.enable = true;
   };
 }
