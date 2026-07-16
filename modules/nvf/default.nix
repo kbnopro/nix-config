@@ -17,6 +17,8 @@
       coq.enable = true;
       lua.enable = true;
       prisma.enable = true;
+      typescript.enable = true;
+      tsx.enable = true;
     };
 
     vim.assistant.copilot.enable = true;
