@@ -3,7 +3,7 @@
   lib,
   pkgs,
   ...
-}@args:
+}:
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -22,12 +22,6 @@
     pkgs.curl
     pkgs.gitMinimal
   ];
-
-  users.users.root.openssh.authorizedKeys.keys = [
-    # change this to your ssh key
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJy4fvbn0Jf75XNl//nx7jvQqJ2+0DvhgpD2e5i++J98 khanhbui@kb-xps15"
-  ]
-  ++ (args.extraPublicKeys or [ ]); # this is used for unit-testing this module and can be removed if not needed
 
   system.stateVersion = "24.05";
 }

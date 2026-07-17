@@ -25,23 +25,21 @@
   networking.hostName = "kb-meshy"; # Define your hostname.
   networking.networkmanager.enable = true;
 
-  hardware.bluetooth.enable = true;
+  hardware = {
+    bluetooth.enable = true;
+    graphics.enable = true;
 
-  hardware.graphics = {
-    enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      open = true;
+      nvidiaSettings = true;
+
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
   };
-
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = false;
-    powerManagement.finegrained = false;
-    open = true;
-    nvidiaSettings = true;
-
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
 
   services = {
     # autologin
@@ -51,6 +49,8 @@
     dbus.implementation = "broker";
     keyd.enable = true;
     fwupd.enable = true;
+    openssh.enable = true;
+    tailscale.enable = true;
   };
 
   programs = {
