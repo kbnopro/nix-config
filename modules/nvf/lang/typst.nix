@@ -1,9 +1,21 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.vim.languages.typst;
 in
 {
   config = lib.mkIf cfg.enable {
+    vim.extraPackages = with pkgs; [
+      websocat
+      tinymist
+    ];
+
+    vim.extraPlugins.typst-preview-nvim.package = pkgs.vimPlugins.typst-preview-nvim;
+
     vim.languages.typst = {
       format.enable = true;
       lsp = {
@@ -11,7 +23,14 @@ in
         servers = [ "tinymist" ];
       };
       treesitter.enable = true;
-      extensions.typst-preview-nvim.enable = true;
+
+      extensions.typst-preview-nvim = {
+        enable = true;
+        setupOpts = {
+          extra_args = [ "--verbose" ];
+        };
+      };
+
     };
 
     vim.autocmds = [
@@ -19,7 +38,7 @@ in
         event = [ "LspAttach" ];
         pattern = [ "*" ];
         callback = lib.generators.mkLuaInline ''
-          function(e) 
+          function(e)
             local client = vim.lsp.get_client_by_id(e.data.client_id)
             if client.name == "tinymist" then
               -- Set up keymaps for Typst LSP
