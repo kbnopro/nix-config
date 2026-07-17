@@ -25,6 +25,19 @@
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   hardware.bluetooth.enable = true;
+  services.xserver.videoDrivers = [
+    "nvidia"
+    "modesetting"
+  ];
+
+  hardware.nvidia = {
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
+    };
+  };
 
   # Stable symlink for cards
   services.udev.extraRules = ''
@@ -41,6 +54,8 @@
     keyd.enable = true;
     tpm-fido.enable = true;
     fwupd.enable = true;
+    tailscale.enable = true;
+    openssh.enable = true;
   };
 
   programs = {
@@ -57,6 +72,8 @@
     ];
     shell = pkgs.fish;
   };
+
+  networking.firewall.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

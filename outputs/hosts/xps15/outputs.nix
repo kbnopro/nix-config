@@ -15,7 +15,7 @@ in
     };
     extraModules = [
       nixos-hardware.nixosModules.dell-xps-15-9510
-      # nixos-hardware.nixosModules.dell-xps-15-9510-nvidia
+      nixos-hardware.nixosModules.dell-xps-15-9510-nvidia
     ];
   };
 }
