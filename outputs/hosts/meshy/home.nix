@@ -61,7 +61,8 @@
 
     zellij = {
       enable = true;
-      enableFishIntegration = true;
+      enableFishIntegrationSSH = true;
+      enableFishIntegration = false;
     };
 
     direnv = {

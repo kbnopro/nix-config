@@ -1,9 +1,12 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 let
+  cfg = config.programs.zellij;
+
   wasm = pkgs.stdenv.mkDerivation rec {
     pname = "vim-zellij-navigator-wasm";
     version = "0.3.0";
@@ -536,226 +539,248 @@ let
   sharedBinds = sharedAmongBinds ++ sharedExceptBinds;
 
   colors = config.background.colors;
+
 in
 {
-  programs.zellij = {
-    settings = {
-      default_mode._args = [ "locked" ];
-      show_startup_tips = [ false ];
-      stacked_resize = [ true ];
-      on_force_close = [ "quit" ];
-      theme = [ "custom" ];
-
-      themes.custom = with colors.withHashtag; {
-        # We use the default ansi16, and then custom it to our will
-        text_unselected = {
-          base = term15;
-          background = term0;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term2;
-          emphasis_3 = term5;
-        };
-        text_selected = {
-          base = term15;
-          background = term8;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term2;
-          emphasis_3 = term5;
-        };
-        ribbon_unselected = {
-          base = term0;
-          background = term7;
-          emphasis_0 = term1;
-          emphasis_1 = term15;
-          emphasis_2 = term4;
-          emphasis_3 = term5;
-        };
-        ribbon_selected = {
-          base = term0;
-          background = term2;
-          emphasis_0 = term1;
-          emphasis_1 = term9;
-          emphasis_2 = term5;
-          emphasis_3 = term4;
-        };
-        table_title = {
-          base = term2;
-          background = term0;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term2;
-          emphasis_3 = term5;
-        };
-        table_cell_unselected = {
-          base = term15;
-          background = term0;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term2;
-          emphasis_3 = term5;
-        };
-        table_cell_selected = {
-          base = term15;
-          background = term8;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term2;
-          emphasis_3 = term5;
-        };
-        list_unselected = {
-          base = term15;
-          background = term0;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term2;
-          emphasis_3 = term5;
-        };
-        list_selected = {
-          base = term15;
-          background = term8;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term2;
-          emphasis_3 = term5;
-        };
-        frame_selected = {
-          base = primary;
-          background = term0;
-          emphasis_0 = term9;
-          emphasis_1 = term6;
-          emphasis_2 = term5;
-          emphasis_3 = term0;
-        };
-        frame_highlight = {
-          base = tertiary;
-          background = term0;
-          emphasis_0 = term5;
-          emphasis_1 = term9;
-          emphasis_2 = term9;
-          emphasis_3 = term9;
-        };
-        exit_code_success = {
-          base = term2;
-          background = term0;
-          emphasis_0 = term6;
-          emphasis_1 = term0;
-          emphasis_2 = term5;
-          emphasis_3 = term4;
-        };
-        exit_code_error = {
-          base = term1;
-          background = term0;
-          emphasis_0 = term3;
-          emphasis_1 = term0;
-          emphasis_2 = term0;
-          emphasis_3 = term0;
-        };
-        multiplayer_user_colors = {
-          player_1 = term5;
-          player_2 = term4;
-          player_3 = term0;
-          player_4 = term3;
-          player_5 = term6;
-          player_6 = term0;
-          player_7 = term1;
-          player_8 = term0;
-          player_9 = term0;
-          player_10 = term0;
-        };
-      };
-
-      plugins._children = [
-        { about._props.location = "zellij:about"; }
-        { compact-bar._props.location = "zellij:compact-bar"; }
-        { configuration._props.location = "zellij:configuration"; }
-        {
-          filepicker = {
-            _props.location = "zellij:strider";
-            _children = [
-              { cwd._args = [ "/" ]; }
-            ];
-          };
-        }
-        { plugin-manager._props.location = "zellij:plugin-manager"; }
-        { session-manager._props.location = "zellij:session-manager"; }
-        { status-bar._props.location = "zellij:status-bar"; }
-        { strider._props.location = "zellij:strider"; }
-        { tab-bar._props.location = "zellij:tab-bar"; }
-        {
-          welcome-screen = {
-            _props.location = "zellij:session-manager";
-            _children = [
-              { welcome_screen._args = [ true ]; }
-            ];
-          };
-        }
-      ];
-
-      keybinds._props.clear-defaults = true;
-
-      keybinds.locked._children = [
-        {
-          bind = {
-            _args = [ "Ctrl g" ];
-            _children = [
-              { SwitchToMode._args = [ "normal" ]; }
-            ];
-          };
-        }
-      ];
-
-      keybinds.entersearch = {
-        _children = [
-          (mkBind "Ctrl c" [ { SwitchToMode = [ "scroll" ]; } ])
-          (mkBind "esc" [ { SwitchToMode = [ "scroll" ]; } ])
-          (mkBind "enter" [ { SwitchToMode = [ "search" ]; } ])
-        ];
-      };
-
-      keybinds.renametab = {
-        _children = [
-          (mkBind "esc" [
-            { UndoRenameTab = [ ]; }
-            { SwitchToMode = [ "tab" ]; }
-          ])
-        ];
-      };
-
-      keybinds.renamepane = {
-        _children = [
-          (mkBind "esc" [
-            { UndoRenamePane = [ ]; }
-            { SwitchToMode = [ "pane" ]; }
-          ])
-        ];
-      };
-
-      sharedAmongBinds = [
-        (mkAmong
-          [ "renametab" "renamepane" ]
-          [
-            (mkBind "Ctrl c" [ { SwitchToMode = [ "locked" ]; } ])
-          ]
-        )
-      ];
-
-      keybinds.pane._children = paneBinds;
-
-      keybinds.tab._children = tabBinds;
-
-      keybinds.resize._children = resizeBinds;
-
-      keybinds.move._children = moveBinds;
-
-      keybinds.scroll._children = scrollBinds;
-
-      keybinds.search._children = searchBinds;
-
-      keybinds.session._children = sessionBinds;
-
-      keybinds._children = sharedBinds;
-    };
+  options.programs.zellij = {
+    enableFishIntegrationSSH = lib.mkEnableOption "Enable zellij fish integration for SSH sessions";
   };
+
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enableFishIntegrationSSH {
+      assertions = [
+        {
+          assertion = !cfg.enableFishIntegration;
+          message = "Cannot enable both zellij.enableFishIntegration and zellij.enableFishIntegrationSSH";
+        }
+      ];
+      programs.fish.interactiveShellInit = ''
+        if test "$TERM" != dumb && not set -q SSH_CONNECTION
+                eval (/nix/store/557l8d2jcfrxxwkjzvjzbi0j4wkzyklm-zellij-0.44.3/bin/zellij setup --generate-auto-start fish | string collect)
+            end
+      '';
+    })
+    {
+      programs.zellij = {
+        settings = {
+          default_mode._args = [ "locked" ];
+          show_startup_tips = [ false ];
+          stacked_resize = [ true ];
+          on_force_close = [ "quit" ];
+          theme = [ "custom" ];
+
+          themes.custom = with colors.withHashtag; {
+            # We use the default ansi16, and then custom it to our will
+            text_unselected = {
+              base = term15;
+              background = term0;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term2;
+              emphasis_3 = term5;
+            };
+            text_selected = {
+              base = term15;
+              background = term8;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term2;
+              emphasis_3 = term5;
+            };
+            ribbon_unselected = {
+              base = term0;
+              background = term7;
+              emphasis_0 = term1;
+              emphasis_1 = term15;
+              emphasis_2 = term4;
+              emphasis_3 = term5;
+            };
+            ribbon_selected = {
+              base = term0;
+              background = term2;
+              emphasis_0 = term1;
+              emphasis_1 = term9;
+              emphasis_2 = term5;
+              emphasis_3 = term4;
+            };
+            table_title = {
+              base = term2;
+              background = term0;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term2;
+              emphasis_3 = term5;
+            };
+            table_cell_unselected = {
+              base = term15;
+              background = term0;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term2;
+              emphasis_3 = term5;
+            };
+            table_cell_selected = {
+              base = term15;
+              background = term8;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term2;
+              emphasis_3 = term5;
+            };
+            list_unselected = {
+              base = term15;
+              background = term0;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term2;
+              emphasis_3 = term5;
+            };
+            list_selected = {
+              base = term15;
+              background = term8;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term2;
+              emphasis_3 = term5;
+            };
+            frame_selected = {
+              base = primary;
+              background = term0;
+              emphasis_0 = term9;
+              emphasis_1 = term6;
+              emphasis_2 = term5;
+              emphasis_3 = term0;
+            };
+            frame_highlight = {
+              base = tertiary;
+              background = term0;
+              emphasis_0 = term5;
+              emphasis_1 = term9;
+              emphasis_2 = term9;
+              emphasis_3 = term9;
+            };
+            exit_code_success = {
+              base = term2;
+              background = term0;
+              emphasis_0 = term6;
+              emphasis_1 = term0;
+              emphasis_2 = term5;
+              emphasis_3 = term4;
+            };
+            exit_code_error = {
+              base = term1;
+              background = term0;
+              emphasis_0 = term3;
+              emphasis_1 = term0;
+              emphasis_2 = term0;
+              emphasis_3 = term0;
+            };
+            multiplayer_user_colors = {
+              player_1 = term5;
+              player_2 = term4;
+              player_3 = term0;
+              player_4 = term3;
+              player_5 = term6;
+              player_6 = term0;
+              player_7 = term1;
+              player_8 = term0;
+              player_9 = term0;
+              player_10 = term0;
+            };
+          };
+
+          plugins._children = [
+            { about._props.location = "zellij:about"; }
+            { compact-bar._props.location = "zellij:compact-bar"; }
+            { configuration._props.location = "zellij:configuration"; }
+            {
+              filepicker = {
+                _props.location = "zellij:strider";
+                _children = [
+                  { cwd._args = [ "/" ]; }
+                ];
+              };
+            }
+            { plugin-manager._props.location = "zellij:plugin-manager"; }
+            { session-manager._props.location = "zellij:session-manager"; }
+            { status-bar._props.location = "zellij:status-bar"; }
+            { strider._props.location = "zellij:strider"; }
+            { tab-bar._props.location = "zellij:tab-bar"; }
+            {
+              welcome-screen = {
+                _props.location = "zellij:session-manager";
+                _children = [
+                  { welcome_screen._args = [ true ]; }
+                ];
+              };
+            }
+          ];
+
+          keybinds._props.clear-defaults = true;
+
+          keybinds.locked._children = [
+            {
+              bind = {
+                _args = [ "Ctrl g" ];
+                _children = [
+                  { SwitchToMode._args = [ "normal" ]; }
+                ];
+              };
+            }
+          ];
+
+          keybinds.entersearch = {
+            _children = [
+              (mkBind "Ctrl c" [ { SwitchToMode = [ "scroll" ]; } ])
+              (mkBind "esc" [ { SwitchToMode = [ "scroll" ]; } ])
+              (mkBind "enter" [ { SwitchToMode = [ "search" ]; } ])
+            ];
+          };
+
+          keybinds.renametab = {
+            _children = [
+              (mkBind "esc" [
+                { UndoRenameTab = [ ]; }
+                { SwitchToMode = [ "tab" ]; }
+              ])
+            ];
+          };
+
+          keybinds.renamepane = {
+            _children = [
+              (mkBind "esc" [
+                { UndoRenamePane = [ ]; }
+                { SwitchToMode = [ "pane" ]; }
+              ])
+            ];
+          };
+
+          sharedAmongBinds = [
+            (mkAmong
+              [ "renametab" "renamepane" ]
+              [
+                (mkBind "Ctrl c" [ { SwitchToMode = [ "locked" ]; } ])
+              ]
+            )
+          ];
+
+          keybinds.pane._children = paneBinds;
+
+          keybinds.tab._children = tabBinds;
+
+          keybinds.resize._children = resizeBinds;
+
+          keybinds.move._children = moveBinds;
+
+          keybinds.scroll._children = scrollBinds;
+
+          keybinds.search._children = searchBinds;
+
+          keybinds.session._children = sessionBinds;
+
+          keybinds._children = sharedBinds;
+        };
+      };
+    }
+  ];
 }

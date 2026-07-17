@@ -20,7 +20,7 @@ in
     home-manager.users."${cfg.hmUser}" = {
       wayland.windowManager.hyprland.enable = true;
       programs.fish.loginShellInit = ''
-        if uwsm check may-start
+        if uwsm check may-start -q
           exec uwsm start hyprland-uwsm.desktop 
         end
       '';

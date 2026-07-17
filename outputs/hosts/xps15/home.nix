@@ -79,7 +79,9 @@ in
 
     zellij = {
       enable = true;
-      enableFishIntegration = true;
+      # Disable autostart if in ssh session
+      enableFishIntegrationSSH = true;
+      enableFishIntegration = false;
     };
 
     direnv = {

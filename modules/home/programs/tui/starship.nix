@@ -30,7 +30,7 @@ in
     # Note that not all config and use, and only the ones in use works with the color system
     format = ''
       $cmd_duration$directory $git_branch
-      $character
+      ($username$hostname )$character
     '';
 
     character = {
@@ -47,7 +47,7 @@ in
       symbol = "󰘬";
       truncation_length = 10;
       truncation_symbol = "";
-      format = "• [](bold fg:primary)[$symbol $branch(:$remote_branch)](fg:on_primary bg:primary)[ ](bold fg:primary)";
+      format = "• [](bold fg:primary)[$symbol $branch(:$remote_branch)](fg:on_primary bg:primary)[](bold fg:primary)";
     };
 
     git_commit = {
@@ -74,8 +74,7 @@ in
     };
 
     hostname = {
-      ssh_only = false;
-      format = "[•$hostname](bg:cyan bold fg:black)[](bold fg:cyan )";
+      format = "[@$hostname](fg:primary)";
       trim_at = ".companyname.com";
       disabled = false;
     };
@@ -98,11 +97,10 @@ in
     };
 
     username = {
-      style_user = "bold bg:cyan fg:black";
-      style_root = "red bold";
-      format = "[](bold fg:cyan)[$user]($style)";
+      style_user = "bold fg:primary";
+      style_root = "bold fg:error";
+      format = "[$user]($style)";
       disabled = false;
-      show_always = true;
     };
 
     directory = {
