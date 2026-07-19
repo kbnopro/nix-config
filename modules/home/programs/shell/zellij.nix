@@ -556,13 +556,15 @@ in
       ];
       programs.fish.interactiveShellInit = ''
         if test "$TERM" != dumb && not set -q SSH_CONNECTION
-                eval (/nix/store/557l8d2jcfrxxwkjzvjzbi0j4wkzyklm-zellij-0.44.3/bin/zellij setup --generate-auto-start fish | string collect)
-            end
+            eval (/nix/store/557l8d2jcfrxxwkjzvjzbi0j4wkzyklm-zellij-0.44.3/bin/zellij setup --generate-auto-start fish | string collect)
+
+        end
       '';
     })
     {
       programs.zellij = {
         settings = {
+          mirror_session = [ false ];
           default_mode._args = [ "locked" ];
           show_startup_tips = [ false ];
           stacked_resize = [ true ];

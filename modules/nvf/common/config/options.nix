@@ -6,14 +6,12 @@
         wl-copy.enable = true;
       };
     })
-
     {
+      vim.globals.clipboard = "osc52";
       vim.clipboard = {
         enable = true;
         registers = "unnamedplus";
       };
-    }
-    {
 
       vim.options = {
         # indent stuffs

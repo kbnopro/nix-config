@@ -23,6 +23,7 @@ in
     };
     programs.ghostty = with colors.withHashtag; {
       settings = {
+        app-notifications = "no-clipboard-copy";
         background = surface;
         foreground = onSurface;
         background-opacity = colors.opacity;

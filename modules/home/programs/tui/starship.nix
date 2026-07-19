@@ -30,7 +30,7 @@ in
     # Note that not all config and use, and only the ones in use works with the color system
     format = ''
       $cmd_duration$directory $git_branch
-      ($username$hostname )$character
+      ($username )$character
     '';
 
     character = {
@@ -99,7 +99,7 @@ in
     username = {
       style_user = "bold fg:primary";
       style_root = "bold fg:error";
-      format = "[$user]($style)";
+      format = "[\\[$user\\]]($style)";
       disabled = false;
     };
 
