@@ -48,7 +48,22 @@ in
           }
         ]
         |> (map (addModifier "SUPER + CTRL"))
-        |> (map ({ key, direction }: (mkBind key "focus" { workspace = direction; })))
+        |> (map (
+          { key, direction }:
+          {
+            _args = [
+              key
+              (lib.generators.mkLuaInline ''
+                function()
+                  local ws = hl.get_active_workspace()
+                  if ws ~= nil and ws.name:sub(1,#"permanent") ~= "permanent" then
+                    hl.dispatch(hl.dsp.focus({ workspace = "${direction}" }))
+                  end
+                end
+              '')
+            ];
+          }
+        ))
       )
       # Move window to workspace
       (

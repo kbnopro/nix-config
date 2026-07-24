@@ -50,18 +50,26 @@ rec {
 
   directions = vimDirections ++ arrowDirections;
 
+  toLuaArgs =
+    input:
+    let
+      # Wrap single items into a list so we can process everything uniformly
+      argsList = if builtins.isList input then input else [ input ];
+    in
+    builtins.concatStringsSep ", " (map (lib.generators.toLua { }) argsList);
+
   mkBind = key: dsp: args: {
     _args = [
       key
-      (lib.generators.mkLuaInline "hl.dsp.${dsp}(${lib.generators.toLua { } args})")
+      (lib.generators.mkLuaInline "hl.dsp.${dsp}(${toLuaArgs args})")
     ];
   };
 
   mkBindFlags = key: dsp: args: flags: {
     _args = [
       key
-      (lib.generators.mkLuaInline "hl.dsp.${dsp}(${lib.generators.toLua { } args})")
-      (lib.generators.mkLuaInline (lib.generators.toLua { } flags))
+      (lib.generators.mkLuaInline "hl.dsp.${dsp}(${toLuaArgs args})")
+      (lib.generators.mkLuaInline (toLuaArgs flags))
     ];
   };
 

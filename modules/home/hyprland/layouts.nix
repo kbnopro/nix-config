@@ -11,7 +11,7 @@ in
     config = {
       general.layout = "scrolling"; # default layout
       scrolling = {
-
+        fullscreen_on_one_column = false;
       };
       dwindle = {
         preserve_split = true;
