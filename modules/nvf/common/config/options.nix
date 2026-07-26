@@ -7,11 +7,22 @@
       };
     })
     {
-      vim.globals.clipboard = "osc52";
-      vim.clipboard = {
-        enable = true;
-        registers = "unnamedplus";
-      };
+      vim.clipboard.enable = true;
+
+      vim.keymaps = [
+        {
+          key = "<leader>y";
+          mode = "n";
+          silent = true;
+          action = ''"+yy'';
+        }
+        {
+          key = "<leader>y";
+          mode = "v";
+          silent = true;
+          action = ''"+y'';
+        }
+      ];
 
       vim.options = {
         # indent stuffs
@@ -36,7 +47,6 @@
         sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,terminal";
       };
     }
-
   ];
 
 }
