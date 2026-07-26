@@ -24,7 +24,18 @@ in
           exec uwsm start hyprland-uwsm.desktop 
         end
       '';
-
+      services.hypridle = {
+        enable = true;
+        settings = {
+          listener = [
+            {
+              timeout = 60 * 5; # 5 minutes
+              on-timeout = ''hyprctl eval 'hl.dispatch(hl.dsp.dpms({ action = "disable" }))' '';
+              on-resume = ''hyprctl eval 'hl.dispatch(hl.dsp.dpms({ action = "enable" }))' '';
+            }
+          ];
+        };
+      };
     };
   };
 }
