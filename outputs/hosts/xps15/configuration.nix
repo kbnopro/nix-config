@@ -6,7 +6,6 @@
   pkgs,
   ...
 }:
-
 {
   imports = [
     # Include the results of the hardware scan.
@@ -61,6 +60,7 @@
   programs = {
     hyprland.enable = true;
     fish.enable = true;
+    unimelb-vpn.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
