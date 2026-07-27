@@ -1,0 +1,6 @@
+{ ... }:
+{
+  services.tailscale = {
+    openFirewall = true;
+  };
+}
