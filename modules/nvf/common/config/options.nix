@@ -7,22 +7,10 @@
       };
     })
     {
-      vim.clipboard.enable = true;
-
-      vim.keymaps = [
-        {
-          key = "<leader>y";
-          mode = "n";
-          silent = true;
-          action = ''"+yy'';
-        }
-        {
-          key = "<leader>y";
-          mode = "v";
-          silent = true;
-          action = ''"+y'';
-        }
-      ];
+      vim.clipboard = {
+        enable = true;
+        registers = "unnamedplus";
+      };
 
       vim.options = {
         # indent stuffs
