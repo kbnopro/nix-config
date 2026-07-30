@@ -1,4 +1,7 @@
 { lib, pkgs, ... }:
+let
+  inherit (lib.nvim.dag) entryBefore;
+in
 {
   config = lib.mkMerge [
     (lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
@@ -9,8 +12,14 @@
     {
       vim.clipboard = {
         enable = true;
-        registers = "unnamedplus";
       };
+
+      vim.luaConfigRC.clipboard = entryBefore [ "optionsScript" ] ''
+        -- Check if the current session is NOT over SSH
+        if not vim.env.SSH_CLIENT and not vim.env.SSH_TTY then
+          vim.opt.clipboard = "unnamedplus"
+        end
+      '';
 
       vim.options = {
         # indent stuffs
