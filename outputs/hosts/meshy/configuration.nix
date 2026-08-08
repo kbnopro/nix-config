@@ -51,6 +51,11 @@
     fwupd.enable = true;
     openssh.enable = true;
     tailscale.enable = true;
+
+    hardware.openrgb = {
+      enable = true;
+      motherboard = "amd";
+    };
   };
 
   programs = {
