@@ -96,6 +96,10 @@ in
   services = {
     awww.enable = true;
     ssh-agent.enable = true;
+    gpg-agent = {
+      enable = true;
+      enableFishIntegration = true;
+    };
   };
 
   # wayland.windowManager.hyprland.settings = {
