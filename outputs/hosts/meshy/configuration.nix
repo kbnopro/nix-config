@@ -22,8 +22,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
 
-  networking.hostName = "kb-meshy"; # Define your hostname.
-  networking.networkmanager.enable = true;
+  networking.hostName = "kb-meshy";
+  networking.networkmanager = {
+    enable = true;
+    plugins = [
+      pkgs.networkmanager-openconnect
+    ];
+  };
 
   hardware = {
     bluetooth.enable = true;
