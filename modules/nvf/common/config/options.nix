@@ -19,6 +19,20 @@ in
         -- Check if the current session is NOT over SSH
         if not vim.env.SSH_CLIENT and not vim.env.SSH_TTY then
           vim.opt.clipboard = "unnamedplus"
+        else
+          -- TODO: fix osc52 behaviour for ssh
+          vim.g.clipboard = {
+            name = 'OSC 52',
+            copy = {
+              ['+'] = require('vim.ui.clipboard.osc52').copy('+'),
+              ['*'] = require('vim.ui.clipboard.osc52').copy('*'),
+            },
+            paste = {
+              -- Override paste functions so Neovim never sends an OSC 52 read request to Zellij
+              ['+'] = function() return {} end,
+              ['*'] = function() return {} end,
+            },
+          }
         end
       '';
 
