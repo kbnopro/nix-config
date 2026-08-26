@@ -38,16 +38,16 @@ in
     home.packages = [
       edge
     ];
-    wayland.windowManager.hyprland.settings = {
-      bind = [
-        {
-          _args = [
-            "SUPER + E"
-            (lib.generators.mkLuaInline "hl.dsp.exec_cmd('microsoft-edge')")
-          ];
-        }
-      ];
-    };
+    # wayland.windowManager.hyprland.settings = {
+    #   bind = [
+    #     {
+    #       _args = [
+    #         "SUPER + E"
+    #         (lib.generators.mkLuaInline "hl.dsp.exec_cmd('microsoft-edge')")
+    #       ];
+    #     }
+    #   ];
+    # };
     wayland.windowManager.hyprland.settings.window_rule = [
       {
         match = {
