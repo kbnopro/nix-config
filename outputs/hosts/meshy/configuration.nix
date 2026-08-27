@@ -64,6 +64,7 @@
   };
 
   programs = {
+    anime-game-launcher.enable = true;
     hyprland.enable = true;
     fish.enable = true;
     ddcutil.enable = true;
