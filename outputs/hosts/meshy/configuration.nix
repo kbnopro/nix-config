@@ -63,6 +63,11 @@
     };
   };
 
+  # HACK: Disable USB autosuspend for Logitech Unifying Receiver to prevent configuration reload
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c53a", ATTR{power/autosuspend_delay_ms}="-1"
+  '';
+
   programs = {
     anime-game-launcher.enable = true;
     hyprland.enable = true;
