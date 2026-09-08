@@ -64,9 +64,10 @@
   };
 
   # HACK: Disable USB autosuspend for Logitech Unifying Receiver to prevent configuration reload
-  services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c53a", ATTR{power/autosuspend_delay_ms}="-1"
-  '';
+  # services.udev.extraRules = ''
+  #   ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c53a", ATTR{power/autosuspend_delay_ms}="-1"
+  # '';
+  # No longer needed, as configuration can be saved to onboard memory.
 
   programs = {
     anime-game-launcher.enable = true;
