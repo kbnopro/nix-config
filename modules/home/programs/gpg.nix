@@ -11,8 +11,7 @@ in
   config = lib.mkIf cfg.enable {
     services.gpg-agent = {
       pinentry = {
-        package = pkgs.pinentry-qt;
-        program = "pinentry-qt";
+        package = pkgs.pinentry-curses;
       };
     };
   };
