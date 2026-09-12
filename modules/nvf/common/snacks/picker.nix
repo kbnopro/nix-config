@@ -69,5 +69,14 @@
       lua = true;
       mode = "n";
     }
+    {
+      key = "<leader>gb";
+      action = ''
+        Snacks.picker.git_log_line
+      '';
+      desc = "Git Blame Line";
+      lua = true;
+      mode = "n";
+    }
   ];
 }
