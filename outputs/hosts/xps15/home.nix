@@ -45,6 +45,7 @@ in
 
     # Apps programs
     edge.enable = true;
+    firefox.enable = true;
     discord.enable = true;
     zathura.enable = true;
     spicetify.enable = true;
