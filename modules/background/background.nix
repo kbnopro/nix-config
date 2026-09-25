@@ -21,7 +21,7 @@ in
   options.background = {
     path = lib.mkOption {
       type = lib.types.path;
-      default = ../../background-images/blue-sunset.jpg;
+      default = ../../background-images/blue-pink-sunset.jpg;
     };
     colors = lib.mkOption {
       type = lib.types.attrs;
