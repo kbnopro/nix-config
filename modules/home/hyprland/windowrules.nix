@@ -11,6 +11,12 @@
         };
         no_blur = true;
       }
+      {
+        match = {
+          title = "Genshin Impact";
+        };
+        idle_inhibit = "always";
+      }
       # "float on, match:title ^([Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture)(.*)$"
       # "center on, match:title ^(Open File)(.*)$"
       # "center on, match:title ^(Select a File)(.*)$"
