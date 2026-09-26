@@ -8,6 +8,7 @@ let
   cfgEnable = config.services.awww.enable;
 
   bgPath = config.background.path;
+  bgCropGravity = config.background.crop-gravity;
   myScript = pkgs.writeShellApplication {
     name = "set-wallpaper";
     runtimeInputs = [
@@ -16,7 +17,7 @@ let
     text = ''
       awww img "${bgPath}" --transition-step 100 --transition-fps 120 \
         --transition-type grow --transition-angle 30 --transition-duration 1 \
-        --transition-pos "0,0"
+        --transition-pos "0,0" --resize "crop" --crop-gravity "${bgCropGravity}" \
     '';
   };
 in

@@ -21,10 +21,14 @@ in
   options.background = {
     path = lib.mkOption {
       type = lib.types.path;
-      default = ../../background-images/blue-pink-sunset.jpg;
+      default = ../../background-images/cute-anime-thingy.png;
     };
     colors = lib.mkOption {
       type = lib.types.attrs;
+    };
+    crop-gravity = lib.mkOption {
+      type = lib.types.str;
+      default = "right";
     };
   };
 
