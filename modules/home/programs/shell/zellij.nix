@@ -390,6 +390,27 @@ let
       }
       { SwitchToMode = [ "locked" ]; }
     ])
+
+    (mkBind "f" [
+      {
+        ToggleHostFullscreen = [ ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "[" [
+      {
+        FocusGuestSession = [ ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
+
+    (mkBind "]" [
+      {
+        FocusHostSession = [ ];
+      }
+      { SwitchToMode = [ "locked" ]; }
+    ])
   ];
 
   sharedAmongBinds = [
@@ -570,6 +591,8 @@ in
           stacked_resize = [ true ];
           on_force_close = [ "quit" ];
           theme = [ "custom" ];
+          pane_frame_style = [ "full" ];
+          stacked_pane_list = false;
 
           themes.custom = with colors.withHashtag; {
             # We use the default ansi16, and then custom it to our will

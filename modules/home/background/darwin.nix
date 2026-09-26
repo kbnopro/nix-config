@@ -15,7 +15,7 @@ let
 in
 {
   config = (
-    lib.mkIf pkgs.stdenv.isDarwin {
+    lib.mkIf pkgs.stdenv.hostPlatform.isDarwin {
       home.activation.setWallpaper = lib.hm.dag.entryAfter [ "revealHomeLibraryDirectory" ] ''
         ${myScript}/bin/set-wallpaper || true
       '';

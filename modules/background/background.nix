@@ -51,11 +51,16 @@ in
                 type = lib.types.attrs;
                 readOnly = true;
               };
+              crop-gravity = lib.mkOption {
+                type = lib.types.str;
+                readOnly = true;
+              };
             };
 
             config.background = {
               path = bgPath;
               colors = colors;
+              crop-gravity = config.background.crop-gravity;
             };
           }
         )
