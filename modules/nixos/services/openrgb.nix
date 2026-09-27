@@ -18,7 +18,6 @@ in
   systemd.services.openrgb = {
     path = [
       nvidiaPkg
-      pkgs.xvfb-run
     ];
     environment = {
       QT_QPA_PLATFORM = "offscreen";
@@ -26,10 +25,12 @@ in
     serviceConfig.ExecStart = lib.mkForce (
       lib.escapeShellArgs ([
         (lib.getExe cfg.package)
-        "--server"
+        # TODO: figure out a way to load plugins
         "--startminimized"
+        "--server"
+        "--profile"
+        "profile"
       ])
     );
-
   };
 }
