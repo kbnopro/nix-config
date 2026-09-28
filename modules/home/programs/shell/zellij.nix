@@ -568,6 +568,7 @@ in
   };
 
   config = lib.mkMerge [
+    # No longer needed for new zellij which supports nested sessions
     (lib.mkIf cfg.enableFishIntegrationSSH {
       assertions = [
         {
