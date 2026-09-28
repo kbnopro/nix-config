@@ -19,6 +19,7 @@
       prisma.enable = true;
       typescript.enable = true;
       tsx.enable = true;
+      tex.enable = true;
     };
 
     vim.assistant.copilot.enable = true;
