@@ -54,10 +54,10 @@ let
     mkdir $out
     cp -r ${spicePkgs.themes.starryNight.src}/* $out/
     rm $out/color.ini
+    rm $out/theme.js
+    cp ${./spicetify-theme.js} $out/theme.js
     cp -r ${spiceOverrideColor}/* $out/
   '';
-
-  # spiceCustomTheme = spicePkgs.themes.starryNight.src;
 
 in
 {
