@@ -41,7 +41,7 @@ in
       ft = [ "coq" ];
       before = ''
         vim.g.loaded_coqtail = 1
-        vim.g["coqtail#supported"] = 0
+        vim.g.coqtail_supported = 0
       '';
     };
   };
