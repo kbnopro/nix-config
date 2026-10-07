@@ -55,6 +55,7 @@
     fwupd.enable = true;
     tailscale.enable = true;
     openssh.enable = true;
+    upower.enable = true;
   };
 
   programs = {

@@ -59,6 +59,10 @@ in
       enable = true;
       enableFishIntegration = true;
     };
+    btop = {
+      enable = true;
+      enableNvidia = true;
+    };
 
     # Shell programs
     lazygit.enable = true;
