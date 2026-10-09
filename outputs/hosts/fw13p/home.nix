@@ -43,7 +43,6 @@
     };
     btop = {
       enable = true;
-      enableNvidia = true;
     };
 
     # Shell programs

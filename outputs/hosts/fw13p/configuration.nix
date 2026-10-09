@@ -20,13 +20,13 @@
   ];
 
   boot.resumeDevice = "/dev/disk/by-label/NIXROOT";
-
   boot.kernelParams = [ "resume_offset=103385088" ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
+  boot.loader.systemd-boot.consoleMode = "0";
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -46,7 +46,7 @@
     tailscale.enable = true;
     openssh.enable = true;
     upower.enable = true;
-    power-profiles-daemon.enable = true;
+    tlp.enable = true;
   };
 
   programs = {
