@@ -9,7 +9,7 @@ let
 
   hasNvidia = builtins.elem "nvidia" config.services.xserver.videoDrivers;
 
-  nvidiaPkg = if hasNvidia then config.hardware.nvidia.package else null;
+  nvidiaPkg = if hasNvidia then config.hardware.nvidia.package else "";
 in
 {
   services.hardware.openrgb = {

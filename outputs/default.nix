@@ -13,6 +13,7 @@ let
     m4-air = import ./hosts/m4-air/outputs.nix inputs;
     naki = import ./hosts/naki/outputs.nix inputs;
     meshy = import ./hosts/meshy/outputs.nix inputs;
+    fw13p = import ./hosts/fw13p/outputs.nix inputs;
   };
 
   loadOutputs =
