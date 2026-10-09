@@ -98,6 +98,7 @@
         position = "0x0";
         scale = 1.5;
         bitdepth = 10;
+        # TODO: Wait for firmware update to fix vrr issue
         vrr = 0;
       }
     ];
