@@ -12,6 +12,17 @@
     ./hardware-configuration.nix
   ];
 
+  swapDevices = [
+    {
+      device = "/.swapfile";
+      size = 32 * 1024;
+    }
+  ];
+
+  boot.resumeDevice = "/dev/disk/by-label/NIXROOT";
+
+  boot.kernelParams = [ "resume_offset=103385088" ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
