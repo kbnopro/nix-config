@@ -34,6 +34,8 @@
   networking.hostName = "kb-fw13p"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
+  hardware.bluetooth.enable = true;
+
   services = {
     # autologin
     getty.autologinUser = "khanhbui";
