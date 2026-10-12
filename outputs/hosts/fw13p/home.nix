@@ -98,6 +98,7 @@
         scale = 1.5;
         bitdepth = 10;
         # TODO: Wait for firmware update to fix vrr issue
+        # https://community.frame.work/t/vrr-on-framework-13-pro-capped-to-70fps-when-enabled-on-linux/84427/5
         vrr = 0;
       }
     ];
