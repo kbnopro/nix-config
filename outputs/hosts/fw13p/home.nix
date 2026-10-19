@@ -95,7 +95,7 @@
         output = "eDP-1";
         mode = "2880x1920@120.00000";
         position = "0x0";
-        scale = 1.5;
+        scale = 1.67;
         bitdepth = 10;
         # TODO: Wait for firmware update to fix vrr issue
         # https://community.frame.work/t/vrr-on-framework-13-pro-capped-to-70fps-when-enabled-on-linux/84427/5
