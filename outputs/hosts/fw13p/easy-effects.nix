@@ -9,6 +9,13 @@
 
     # Define the preset structure directly
     extraPresets = {
+      empty = {
+        output = {
+          blocklist = [ ];
+          plugins_order = [ ];
+        };
+      };
+
       custom-preset = {
         output = {
           blocklist = [ ];
