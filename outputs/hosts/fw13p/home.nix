@@ -57,6 +57,7 @@
     gh.enable = true;
     nvf.enable = true;
     fish.enable = true;
+    ssh.enable = true;
 
     zoxide = {
       enable = true;
