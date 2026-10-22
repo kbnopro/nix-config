@@ -23,6 +23,7 @@ in
     };
     home.packages = with pkgs; [
       brightnessctl
+      playerctl
       grimblast
       rose-pine-hyprcursor
     ];
