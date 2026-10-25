@@ -1,4 +1,4 @@
-{ nixpkgs, ... }:
+{ nixpkgs, ghostty, ... }:
 
 let
   overlay-versioning = final: prev: {
@@ -10,6 +10,14 @@ let
         hash = "sha256-Uoh3cx2Cw7Af4fNiK3sP3vpppjP0vHuMFYK8ngfQjwA=";
       };
     });
+
+    ghostty =
+      let
+        noOverride = prev.lib.versionAtLeast prev.ghostty.version "1.4.0";
+      in
+      prev.lib.warnIf noOverride "ghostty version is already at least 1.4.0, no override needed" (
+        if noOverride then prev.ghostty else ghostty.packages.${final.system}.default
+      );
   };
 in
 [
