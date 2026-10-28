@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -9,13 +8,6 @@ let
 in
 {
   config = lib.mkIf cfg.enable {
-    vim.extraPackages = with pkgs; [
-      websocat
-      tinymist
-    ];
-
-    vim.extraPlugins.typst-preview-nvim.package = pkgs.vimPlugins.typst-preview-nvim;
-
     vim.languages.typst = {
       format.enable = true;
       lsp = {
@@ -23,14 +15,7 @@ in
         servers = [ "tinymist" ];
       };
       treesitter.enable = true;
-
-      extensions.typst-preview-nvim = {
-        enable = true;
-        setupOpts = {
-          extra_args = [ "--verbose" ];
-        };
-      };
-
+      extensions.typst-preview-nvim.enable = true;
     };
 
     vim.autocmds = [
@@ -49,6 +34,5 @@ in
         '';
       }
     ];
-
   };
 }
