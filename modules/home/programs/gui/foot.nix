@@ -13,19 +13,25 @@ in
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "SUPER, T, exec, foot"
+        {
+          _args = [
+            "SUPER + T"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd('${cfg.package}/bin/footclient')")
+          ];
+        }
       ];
     };
     programs.foot = {
+      server.enable = true;
       settings = {
         main = {
           term = "xterm-256color";
-          font = "SpaceMono Nerd Font:size=10";
+          font = "JetBrainsMono Nerd Font:size=10";
           dpi-aware = "no";
-          pad = "25x25 center";
+          pad = "16x16 center";
         };
 
-        colors = with colors; {
+        colors-dark = with colors; {
           background = surface;
           foreground = onSurface;
           regular0 = term0;
@@ -46,6 +52,7 @@ in
           bright7 = term15;
           alpha = 0.90;
         };
+
       };
     };
   };
