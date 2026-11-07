@@ -26,7 +26,7 @@ in
       settings = {
         main = {
           term = "xterm-256color";
-          font = "JetBrainsMono Nerd Font:size=10";
+          font = "JetBrainsMono:size=10";
           dpi-aware = "no";
           pad = "16x16 center";
         };

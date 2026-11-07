@@ -22,6 +22,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.systemd-boot.configurationLimit = 5;
 
+  # NTSync for NVIDIA GPU clock synchronization
+  boot.kernelModules = [ "ntsync" ];
+
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
