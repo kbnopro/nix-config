@@ -20,6 +20,7 @@
     nix-jetbrains-plugins.url = "github:nix-community/nix-jetbrains-plugins";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     flake-utils.url = "github:numtide/flake-utils";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +41,8 @@
       url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    import-tree.url = "github:vic/import-tree";
+
   };
 
   outputs = inputs: (import ./outputs inputs);

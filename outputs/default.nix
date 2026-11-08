@@ -1,7 +1,8 @@
 {
-  self,
   deploy-rs,
   nixpkgs,
+  flake-parts,
+  import-tree,
   ...
 }@inputs:
 let
@@ -18,12 +19,26 @@ let
 
   loadOutputs =
     name: hosts |> lib.filterAttrs (_: lib.hasAttr name) |> lib.mapAttrs (_: v: v.${name});
-in
-{
-  nixosConfigurations = loadOutputs "nixosConfigurations";
-  darwinConfigurations = loadOutputs "darwinConfigurations";
-  deploy.nodes = loadOutputs "nodes";
 
-  checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-}
+  # Define deploy configuration locally to avoid self-reference recursion
+  deployConfig = {
+    nodes = loadOutputs "nodes";
+  };
+in
+(
+
+  flake-parts.lib.mkFlake { inherit inputs; } {
+    imports = [
+      (import-tree.filterNot (lib.hasSuffix ".pkg.nix") ../den-modules)
+    ];
+
+    flake = {
+      nixosConfigurations = loadOutputs "nixosConfigurations";
+      darwinConfigurations = loadOutputs "darwinConfigurations";
+      deploy = deployConfig;
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks deployConfig) deploy-rs.lib;
+    };
+  }
+)
 // (import ./apps/nvim.nix inputs)
