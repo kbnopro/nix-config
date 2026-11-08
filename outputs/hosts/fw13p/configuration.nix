@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 {
   pkgs,
   ...
@@ -47,7 +43,7 @@
     #services
     dbus.implementation = "broker";
     keyd.enable = true;
-    tpm-fido.enable = true;
+    # tpm-fido.enable = true;
     fwupd.enable = true;
     tailscale.enable = true;
     openssh.enable = true;
