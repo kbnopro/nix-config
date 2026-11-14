@@ -22,6 +22,17 @@
 
   networking.hostName = "kb-xps15"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.interfaces.enp0s20f0u1c2 = {
+    ipv4.addresses = [
+      {
+        address = "192.168.2.1";
+        prefixLength = 24;
+      }
+    ];
+  };
+  networking.localCommands = ''
+    ip neigh replace 192.168.2.2 lladdr 30:c5:99:25:20:e8 dev enp0s20f0u1c2 nud permanent
+  '';
 
   hardware.bluetooth.enable = true;
   services.xserver.videoDrivers = [
@@ -56,6 +67,12 @@
     tailscale.enable = true;
     openssh.enable = true;
     upower.enable = true;
+    tlp.enable = true;
+    logind.settings = {
+      Login = {
+        HandleLidSwitch = "ignore";
+      };
+    };
   };
 
   programs = {
