@@ -19,7 +19,11 @@ in
     };
     home-manager.users."${cfg.hmUser}" = {
       wayland.windowManager.hyprland.enable = true;
-      # TODO: figure out whats wrong with exec uwsm start hyprland-uwsm.desktop
+      # programs.fish.loginShellInit = ''
+      #   if uwsm check may-start -q
+      #     exec uwsm start hyprland-uwsm.desktop
+      #   end
+      # '';
       programs.fish.loginShellInit = ''
         if uwsm check may-start -q
           exec start-hyprland

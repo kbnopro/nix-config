@@ -29,6 +29,27 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "kb-meshy";
+  networking = {
+    interfaces = {
+      eno1 = {
+        wakeOnLan.enable = true;
+        ipv4.addresses = [
+          {
+            address = "192.168.2.2"; # Use 192.168.2.1 on the source machine instead
+            prefixLength = 24;
+          }
+        ];
+      };
+    };
+    firewall = {
+      allowedUDPPorts = [ 9 ];
+    };
+
+  };
+  systemd.services.NetworkManager-wait-online.serviceConfig.ExecStart = [
+    ""
+    "${pkgs.networkmanager}/bin/nm-online -q"
+  ];
   networking.networkmanager = {
     enable = true;
     plugins = [
