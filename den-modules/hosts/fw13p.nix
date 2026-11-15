@@ -10,8 +10,8 @@
       {
         imports = [
           (modulesPath + "/installer/scan/not-detected.nix")
-          config.nixos.modules.pc
-          config.users.khanhbui.nixos.pc
+          config.nixos.modules.pc # pc scope (nixos modules only)
+          config.users.khanhbui.nixos.pc # user scope (with nixos and home-manager modules)
         ];
 
         system.stateVersion = "25.05";

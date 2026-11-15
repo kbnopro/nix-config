@@ -42,7 +42,7 @@
 
     #services
     # dbus.implementation = "broker";
-    keyd.enable = true;
+    # keyd.enable = true;
     # tpm-fido.enable = true;
     fwupd.enable = true;
     tailscale.enable = true;

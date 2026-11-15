@@ -8,7 +8,6 @@ flake-utils.lib.eachDefaultSystem (
   let
     pkgs = import nixpkgs {
       inherit system;
-      config.allowUnfree = true;
     };
     lib = pkgs.lib;
     mylib = import ../../lib { inherit lib pkgs; };
