@@ -20,8 +20,8 @@
 
   programs = {
     # GUI programs
-    foot.enable = true;
-    # ghostty.enable = true;
+    # foot.enable = true;
+    ghostty.enable = true;
     fuzzel.enable = true;
     # quickshell.enable = true;
 
