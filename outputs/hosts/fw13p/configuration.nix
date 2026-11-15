@@ -3,45 +3,45 @@
   ...
 }:
 {
-  imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-  ];
+  # imports = [
+  #   # Include the results of the hardware scan.
+  #   ./hardware-configuration.nix
+  # ];
+  #
+  # swapDevices = [
+  #   {
+  #     device = "/.swapfile";
+  #     size = 32 * 1024;
+  #   }
+  # ];
+  #
+  # boot.resumeDevice = "/dev/disk/by-label/NIXROOT";
+  # boot.kernelParams = [ "resume_offset=103385088" ];
+  #
+  # # Use the systemd-boot EFI boot loader.
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.configurationLimit = 5;
+  # boot.loader.systemd-boot.consoleMode = "0";
+  # boot.loader.systemd-boot.windows."11" = {
+  #   title = "Windows 11";
+  #   efiDeviceHandle = "HD0b";
+  # };
+  #
+  # # Use latest kernel.
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
+  #
+  # networking.hostName = "kb-fw13p"; # Define your hostname.
+  # networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  swapDevices = [
-    {
-      device = "/.swapfile";
-      size = 32 * 1024;
-    }
-  ];
-
-  boot.resumeDevice = "/dev/disk/by-label/NIXROOT";
-  boot.kernelParams = [ "resume_offset=103385088" ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.systemd-boot.configurationLimit = 5;
-  boot.loader.systemd-boot.consoleMode = "0";
-  boot.loader.systemd-boot.windows."11" = {
-    title = "Windows 11";
-    efiDeviceHandle = "HD0b";
-  };
-
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  networking.hostName = "kb-fw13p"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
-  hardware.bluetooth.enable = true;
+  # hardware.bluetooth.enable = true;
 
   services = {
     # autologin
-    getty.autologinUser = "khanhbui";
+    # getty.autologinUser = "khanhbui";
 
     #services
-    dbus.implementation = "broker";
+    # dbus.implementation = "broker";
     keyd.enable = true;
     # tpm-fido.enable = true;
     fwupd.enable = true;

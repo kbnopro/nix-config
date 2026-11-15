@@ -4,11 +4,9 @@
 }@inputs:
 let
   utils = import ../utils.nix inputs;
-  inherit (utils) mkNixOSSystem;
-in
-{
+  inherit (utils) mkNixOSSystem mkNixOSConfig;
 
-  nixosConfigurations = mkNixOSSystem {
+  configuration = {
     configuration = ./configuration.nix;
     homeManagerUsers = {
       khanhbui.imports = [
@@ -20,4 +18,9 @@ in
       nixos-hardware.nixosModules.framework-intel-core-ultra-series3
     ];
   };
+in
+{
+  configuration = mkNixOSConfig configuration;
+
+  nixosConfigurations = mkNixOSSystem configuration;
 }

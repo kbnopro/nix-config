@@ -44,7 +44,7 @@ let
     };
 
 in
-{
+rec {
   inherit mylib specialArgs;
 
   mkDarwinSystem =
@@ -82,13 +82,13 @@ in
       ++ extraModules;
     };
 
-  mkNixOSSystem =
+  mkNixOSConfig =
     {
       configuration,
       homeManagerUsers ? { },
       extraModules ? [ ],
     }:
-    nixpkgs.lib.nixosSystem {
+    {
       inherit specialArgs;
 
       system = "x86_64-linux";
@@ -112,4 +112,14 @@ in
       ]
       ++ extraModules;
     };
+
+  mkNixOSSystem =
+    {
+      configuration,
+      homeManagerUsers ? { },
+      extraModules ? [ ],
+    }:
+    nixpkgs.lib.nixosSystem (mkNixOSConfig {
+      inherit configuration homeManagerUsers extraModules;
+    });
 }
