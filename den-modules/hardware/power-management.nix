@@ -24,5 +24,4 @@
 
     systemd.sleep.settings.Sleep.HibernateDelaySec = "2h";
   };
-
 }

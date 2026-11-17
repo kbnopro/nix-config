@@ -46,7 +46,7 @@
     # tpm-fido.enable = true;
     # fwupd.enable = true;
     # tailscale.enable = true;
-    openssh.enable = true;
+    # openssh.enable = true;
     # upower.enable = true;
     # tlp.enable = true;
   };
@@ -67,7 +67,7 @@
     shell = pkgs.fish;
   };
 
-  networking.firewall.enable = true;
+  # networking.firewall.enable = true;
 
   # Uni VM
   # virtualisation.isolated-vm.enable = true;

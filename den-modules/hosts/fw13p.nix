@@ -68,6 +68,8 @@
         boot.loader.systemd-boot.configurationLimit = 5;
         boot.loader.systemd-boot.consoleMode = "0";
         boot.kernelPackages = pkgs.linuxPackages_latest;
+
+        services.openssh.publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID/jbAbzYqoFva8TUw8A27v0Tbe/GGImQriaKo/CcQ0h root@kb-fw13p";
       };
   };
 }
