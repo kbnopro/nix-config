@@ -44,15 +44,15 @@
     # dbus.implementation = "broker";
     # keyd.enable = true;
     # tpm-fido.enable = true;
-    fwupd.enable = true;
-    tailscale.enable = true;
+    # fwupd.enable = true;
+    # tailscale.enable = true;
     openssh.enable = true;
-    upower.enable = true;
-    tlp.enable = true;
+    # upower.enable = true;
+    # tlp.enable = true;
   };
 
   programs = {
-    hyprland.enable = true;
+    # hyprland.enable = true;
     fish.enable = true;
     unimelb-vpn.enable = true;
   };
@@ -62,7 +62,7 @@
     isNormalUser = true;
     extraGroups = [
       "wheel" # Enable ‘sudo’ for the user.
-      "networkmanager" # Allow managing network
+      # "networkmanager" # Allow managing network
     ];
     shell = pkgs.fish;
   };

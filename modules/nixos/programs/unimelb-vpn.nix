@@ -6,6 +6,9 @@
   ...
 }:
 let
+  # TODO: this need some rewrite:
+  # First: don't make this unimelb specific. Instead, make it a global protect vpn flow
+  # Second, it might be nice to figure out auth flow WITHOUT browser
   cfg = config.programs.unimelb-vpn;
 
   currentSystem = pkgs.stdenv.hostPlatform.system;

@@ -37,6 +37,7 @@
           key = "base";
           imports = [ module ];
         };
+        default = { };
       };
 
       pc = lib.mkOption {
@@ -47,8 +48,8 @@
           key = "pc";
           imports = [ module ];
         };
+        default = { };
       };
-
     };
   };
 
