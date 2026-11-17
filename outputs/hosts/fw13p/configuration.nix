@@ -36,36 +36,36 @@
 
   # hardware.bluetooth.enable = true;
 
-  services = {
-    # autologin
-    # getty.autologinUser = "khanhbui";
+  # services = {
+  # autologin
+  # getty.autologinUser = "khanhbui";
 
-    #services
-    # dbus.implementation = "broker";
-    # keyd.enable = true;
-    # tpm-fido.enable = true;
-    # fwupd.enable = true;
-    # tailscale.enable = true;
-    # openssh.enable = true;
-    # upower.enable = true;
-    # tlp.enable = true;
-  };
+  #services
+  # dbus.implementation = "broker";
+  # keyd.enable = true;
+  # tpm-fido.enable = true;
+  # fwupd.enable = true;
+  # tailscale.enable = true;
+  # openssh.enable = true;
+  # upower.enable = true;
+  # tlp.enable = true;
+  # };
 
   programs = {
     # hyprland.enable = true;
     fish.enable = true;
-    unimelb-vpn.enable = true;
+    # unimelb-vpn.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.khanhbui = {
-    isNormalUser = true;
-    extraGroups = [
-      "wheel" # Enable ‘sudo’ for the user.
-      # "networkmanager" # Allow managing network
-    ];
-    shell = pkgs.fish;
-  };
+  # users.users.khanhbui = {
+  #   isNormalUser = true;
+  #   extraGroups = [
+  #     # "wheel" # Enable ‘sudo’ for the user.
+  #     # "networkmanager" # Allow managing network
+  #   ];
+  #   shell = pkgs.fish;
+  # };
 
   # networking.firewall.enable = true;
 

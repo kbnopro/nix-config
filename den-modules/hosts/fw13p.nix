@@ -14,6 +14,7 @@
             pc
             power-management
             aagl
+            unimelb-vpn
           ]
           |> lib.concat [
             (modulesPath + "/installer/scan/not-detected.nix")

@@ -4,8 +4,8 @@
 }:
 {
   home = {
-    username = "khanhbui";
-    homeDirectory = "/home/khanhbui";
+    # username = "khanhbui";
+    # homeDirectory = "/home/khanhbui";
     stateVersion = "25.05";
     sessionVariables = {
       EDITOR = "nvim";

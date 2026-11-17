@@ -7,7 +7,7 @@
 with lib;
 let
   cfg = config.programs.ghostty;
-  colors = config.background.colors;
+  colors = config.colors;
 in
 {
   config = mkIf cfg.enable {
@@ -26,7 +26,7 @@ in
         app-notifications = "no-clipboard-copy";
         background = surface;
         foreground = onSurface;
-        background-opacity = colors.opacity;
+        background-opacity = 0.9;
         font-size = 10;
         window-padding-x = 16;
         window-padding-y = 16;

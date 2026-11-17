@@ -19,6 +19,7 @@
               default = name;
             };
             config = {
+              # where to set nixpkgs version (stable, unstable, etc.)
               fn = import "${inputs.nixpkgs}/nixos/lib/eval-config.nix";
               args = {
                 # system = null;
