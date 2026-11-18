@@ -6,7 +6,7 @@
   home = {
     # username = "khanhbui";
     # homeDirectory = "/home/khanhbui";
-    stateVersion = "25.05";
+    # stateVersion = "25.05";
     sessionVariables = {
       EDITOR = "nvim";
       VISUAL = "nvim";
@@ -14,7 +14,7 @@
     packages = with pkgs; [
       nerd-fonts.space-mono
       gnome-control-center
-      blueman
+      # blueman
     ];
   };
 
