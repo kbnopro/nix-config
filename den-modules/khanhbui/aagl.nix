@@ -8,10 +8,18 @@
       };
     };
   };
-  config.nixos.modules.aagl = {
-    imports = [ inputs.aagl.nixosModules.default ];
-    boot.kernelModules = [ "ntsync" ];
-    programs.anime-game-launcher.enable = true;
-    nix.settings = inputs.aagl.nixConfig;
+  config = {
+    nixos.modules.aagl = {
+      imports = [ inputs.aagl.nixosModules.default ];
+      boot.kernelModules = [ "ntsync" ];
+      programs.anime-game-launcher.enable = true;
+      nix.settings = inputs.aagl.nixConfig;
+    };
+
+    perSystem = {
+      nixpkgs.config.allowUnfreePackages = [
+        "steam-unwrapped"
+      ];
+    };
   };
 }

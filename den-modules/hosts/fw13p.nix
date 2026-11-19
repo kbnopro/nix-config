@@ -1,4 +1,10 @@
 { config, ... }: {
+  perSystem = {
+    nixpkgs.config.allowUnfreePackages = [
+      "intel-ocl"
+    ];
+  };
+
   nixos.configurations.fw13p = {
     module =
       nixosArgs@{

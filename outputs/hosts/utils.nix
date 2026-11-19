@@ -31,16 +31,16 @@ let
         applyOverlays
         ../../modules/background
       ];
-      nixpkgs.config.allowUnfree = true;
+      # nixpkgs.config.allowUnfree = true;
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"
         "pipe-operators"
       ];
       # temporary workaround for electron 38.8.4, which is required by rstudio
-      nixpkgs.config.permittedInsecurePackages = [
-        "electron-38.8.4"
-      ];
+      # nixpkgs.config.permittedInsecurePackages = [
+      #   "electron-38.8.4"
+      # ];
     };
 
 in

@@ -11,6 +11,7 @@
       ];
     };
     programs.ghostty = with config.colors.withHashtag; {
+      enable = true;
       settings = {
         app-notifications = "no-clipboard-copy";
         background = surface;

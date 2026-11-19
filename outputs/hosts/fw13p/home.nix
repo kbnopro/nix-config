@@ -21,12 +21,12 @@
   programs = {
     # GUI programs
     # foot.enable = true;
-    ghostty.enable = true;
-    fuzzel.enable = true;
+    # ghostty.enable = true;
+    # fuzzel.enable = true;
     # quickshell.enable = true;
 
     # Apps programs
-    edge.enable = true;
+    # edge.enable = true;
     firefox.enable = true;
     discord.enable = true;
     zathura.enable = true;
