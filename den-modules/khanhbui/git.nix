@@ -45,10 +45,6 @@
           user.email = lib.mkDefault "tuankhanhb00@gmail.com";
           commit.gpgsign = true;
         };
-        ignores = [
-          ".envrc"
-          ".direnv/"
-        ];
       };
     };
 }

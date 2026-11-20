@@ -56,7 +56,7 @@
     # gh.enable = true;
     nvf.enable = true;
     # fish.enable = true;
-    ssh.enable = true;
+    # ssh.enable = true;
 
     zoxide = {
       enable = true;
@@ -68,10 +68,10 @@
       enableFishIntegration = true;
     };
 
-    direnv = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    # direnv = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    # };
 
     # Gpg
     # gpg.enable = true;
