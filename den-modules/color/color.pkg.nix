@@ -83,4 +83,5 @@ in
 trimmedColor
 // {
   withHashtag = hashtagColor;
+  opacity = 0.90;
 }

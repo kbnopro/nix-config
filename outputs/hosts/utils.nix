@@ -100,7 +100,6 @@ rec {
         {
           home-manager = {
             sharedModules = [
-              spicetify-nix.homeManagerModules.spicetify
               ../../modules/home
             ];
             extraSpecialArgs = specialArgs;

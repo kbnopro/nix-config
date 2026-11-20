@@ -27,36 +27,35 @@
 
     # Apps programs
     # edge.enable = true;
-    firefox.enable = true;
-    discord.enable = true;
-    zathura.enable = true;
-    spicetify.enable = true;
+    # firefox.enable = true;
+    # discord.enable = true;
+    # zathura.enable = true;
+    # spicetify.enable = true;
 
     # Uni apps
     # rstudio.enable = true;
     # intellij.enable = true;
 
     # TUI programs
-    starship = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    btop = {
-      enable = true;
-    };
+    # starship = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    # };
+    # btop = {
+    #   enable = true;
+    # };
 
     # Shell programs
-    lazygit.enable = true;
-    git = {
-      enable = true;
-      settings = {
-        user.signingkey = "3C16B9C5884214F1";
-        commit.gpgsign = true;
-      };
-    };
-    gh.enable = true;
+    # lazygit.enable = true;
+    # git = {
+    #   settings = {
+    #     user.signingkey = "3C16B9C5884214F1";
+    #     commit.gpgsign = true;
+    #   };
+    # };
+    # gh.enable = true;
     nvf.enable = true;
-    fish.enable = true;
+    # fish.enable = true;
     ssh.enable = true;
 
     zoxide = {
@@ -75,19 +74,19 @@
     };
 
     # Gpg
-    gpg.enable = true;
+    # gpg.enable = true;
   };
 
   services = {
     awww.enable = true;
     ssh-agent.enable = true;
-    gpg-agent = {
-      enable = true;
-      enableFishIntegration = true;
-    };
-    easyeffects = {
-      enable = true;
-    };
+    # gpg-agent = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    # };
+    # easyeffects = {
+    #   enable = true;
+    # };
   };
 
   wayland.windowManager.hyprland.settings = {

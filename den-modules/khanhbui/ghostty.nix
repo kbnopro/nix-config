@@ -16,7 +16,7 @@
         app-notifications = "no-clipboard-copy";
         background = surface;
         foreground = onSurface;
-        background-opacity = 0.9;
+        background-opacity = config.colors.opacity;
         font-size = 10;
         window-padding-x = 16;
         window-padding-y = 16;
