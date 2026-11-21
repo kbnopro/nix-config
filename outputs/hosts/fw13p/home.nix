@@ -58,15 +58,15 @@
     # fish.enable = true;
     # ssh.enable = true;
 
-    zoxide = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    # zoxide = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    # };
 
-    zellij = {
-      enable = true;
-      enableFishIntegration = true;
-    };
+    # zellij = {
+    #   enable = true;
+    #   enableFishIntegration = true;
+    # };
 
     # direnv = {
     #   enable = true;

@@ -74,5 +74,4 @@ rec {
   };
 
   addModifier = modifier: input: input // { key = "${modifier} + ${lib.toString input.key}"; };
-
 }

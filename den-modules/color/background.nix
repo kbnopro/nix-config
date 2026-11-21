@@ -13,6 +13,10 @@
           type = lib.types.path;
           default = ../../background-images/cute-anime-thingy.png;
         };
+        backgroundCropGravity = lib.mkOption {
+          type = lib.types.str;
+          default = "right";
+        };
         colors = lib.mkOption {
           type = lib.types.attrs;
           default = colors;
@@ -29,6 +33,16 @@
                 colors = lib.mkOption {
                   type = lib.types.attrs;
                   default = colors;
+                  readOnly = true;
+                };
+                backgroundPath = lib.mkOption {
+                  type = lib.types.path;
+                  default = ../../background-images/cute-anime-thingy.png;
+                  readOnly = true;
+                };
+                backgroundCropGravity = lib.mkOption {
+                  type = lib.types.str;
+                  default = "right";
                   readOnly = true;
                 };
               };
