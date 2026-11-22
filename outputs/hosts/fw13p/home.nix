@@ -78,8 +78,8 @@
   };
 
   services = {
-    awww.enable = true;
-    ssh-agent.enable = true;
+    # awww.enable = true;
+    # ssh-agent.enable = true;
     # gpg-agent = {
     #   enable = true;
     #   enableFishIntegration = true;

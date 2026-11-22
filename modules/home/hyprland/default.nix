@@ -22,7 +22,6 @@ in
       configType = "lua";
     };
     home.packages = with pkgs; [
-      brightnessctl
       playerctl
       grimblast
       rose-pine-hyprcursor

@@ -24,10 +24,13 @@
     in
     {
       gtk.colorScheme = if colors.darkmode == true then "dark" else "light";
-      services.awww.extraArgs = [
-        "--format"
-        "xrgb"
-      ];
+      services.awww = {
+        enable = true;
+        extraArgs = [
+          "--format"
+          "xrgb"
+        ];
+      };
       home.activation.setWallpaper = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         ${myScript}/bin/set-wallpaper || true
       '';

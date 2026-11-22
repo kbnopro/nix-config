@@ -21,6 +21,10 @@
         };
       };
     };
+
+    # This is needed for AddKeysToAgent to work
+    # TODO: Might want to setup ssh forwarding
+    services.ssh-agent.enable = true;
   };
 
   nixos.modules.base = {
