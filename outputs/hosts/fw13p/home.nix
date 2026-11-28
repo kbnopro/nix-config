@@ -77,28 +77,28 @@
     # gpg.enable = true;
   };
 
-  services = {
-    # awww.enable = true;
-    # ssh-agent.enable = true;
-    # gpg-agent = {
-    #   enable = true;
-    #   enableFishIntegration = true;
-    # };
-    # easyeffects = {
-    #   enable = true;
-    # };
-  };
+  # services = {
+  # awww.enable = true;
+  # ssh-agent.enable = true;
+  # gpg-agent = {
+  #   enable = true;
+  #   enableFishIntegration = true;
+  # };
+  # easyeffects = {
+  #   enable = true;
+  # };
+  # };
 
-  wayland.windowManager.hyprland.settings = {
-    monitor = [
-      {
-        output = "eDP-1";
-        mode = "2880x1920@120.00000";
-        position = "0x0";
-        scale = 1.67;
-        bitdepth = 10;
-        vrr = 1;
-      }
-    ];
-  };
+  # wayland.windowManager.hyprland.settings = {
+  #   monitor = [
+  #     {
+  #       output = "eDP-1";
+  #       mode = "2880x1920@120.00000";
+  #       position = "0x0";
+  #       scale = 1.67;
+  #       bitdepth = 10;
+  #       vrr = 1;
+  #     }
+  #   ];
+  # };
 }

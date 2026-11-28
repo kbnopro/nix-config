@@ -8,7 +8,10 @@
     };
 
     home.gui = {
-      wayland.windowManager.hyprland.enable = true;
+      wayland.windowManager.hyprland = {
+        enable = true;
+        configType = "lua";
+      };
       programs.fish.loginShellInit = ''
         if uwsm check may-start -q
           exec start-hyprland

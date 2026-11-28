@@ -14,6 +14,19 @@
       boot.kernelModules = [ "ntsync" ];
       programs.anime-game-launcher.enable = true;
       nix.settings = inputs.aagl.nixConfig;
+
+      home-manager.sharedModules = [
+        {
+          wayland.windowManager.hyprland.settings = {
+            window_rule = [
+              {
+                match.title = "Genshin Impact";
+                idle_inhibit = "always";
+              }
+            ];
+          };
+        }
+      ];
     };
 
     perSystem = {

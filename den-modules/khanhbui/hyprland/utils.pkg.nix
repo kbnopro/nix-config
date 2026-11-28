@@ -54,7 +54,9 @@ rec {
     input:
     let
       # Wrap single items into a list so we can process everything uniformly
-      argsList = if builtins.isList input then input else [ input ];
+      argsList =
+        if builtins.isList input then input else (if builtins.isNull input then [ ] else [ input ]);
+
     in
     builtins.concatStringsSep ", " (map (lib.generators.toLua { }) argsList);
 

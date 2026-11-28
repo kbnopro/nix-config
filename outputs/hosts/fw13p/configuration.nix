@@ -57,6 +57,11 @@
   # unimelb-vpn.enable = true;
   # };
 
+  # environment.systemPackages = with pkgs; [
+  #   android-tools
+  #   scrcpy
+  # ];
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   # users.users.khanhbui = {
   #   isNormalUser = true;

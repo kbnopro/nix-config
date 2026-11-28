@@ -49,6 +49,11 @@
           { SwitchToMode = [ "locked" ]; }
         ])
 
+        (mkBind "Shift z" [
+          { ToggleBars = [ ]; }
+          { SwitchToMode = [ "locked" ]; }
+        ])
+
         (mkBind "h" [
           { MoveFocus = [ "left" ]; }
         ])
@@ -558,9 +563,11 @@
 
     in
     {
+      # TODO: Configure terminal, check if that replace ghostty
       programs.zellij = {
         enable = true;
         enableFishIntegration = true;
+        exitShellOnExit = true;
 
         settings = {
           mirror_session = [ false ];
@@ -571,6 +578,7 @@
           theme = [ "custom" ];
           pane_frame_style = [ "full" ];
           stacked_pane_list = false;
+          bars_hidden_on_start = "all";
 
           themes.custom = with colors.withHashtag; {
             # We use the default ansi16, and then custom it to our will

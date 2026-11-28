@@ -1,0 +1,30 @@
+{
+  users.khanhbui.home.gui =
+    _homeArgs@{ pkgs, ... }:
+    let
+      inherit (pkgs.callPackage ./utils.pkg.nix { }) mkBind;
+    in
+    {
+      wayland.windowManager.hyprland.settings = {
+        config = {
+          general.layout = "scrolling"; # default layout
+          scrolling = {
+            fullscreen_on_one_column = false;
+          };
+          dwindle = {
+            preserve_split = true;
+            smart_split = false;
+            smart_resizing = false;
+          };
+        };
+        bind = [
+          # Resizing
+          (mkBind "SUPER + APOSTROPHE" "layout" "colresize +conf")
+          (mkBind "SUPER + SEMICOLON" "layout" "colresize -conf")
+          # Expel, promote, consume
+          (mkBind "SUPER + EQUAL" "layout" "expel")
+          (mkBind "SUPER + MINUS" "layout" "consume")
+        ];
+      };
+    };
+}
